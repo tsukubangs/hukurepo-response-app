@@ -9,7 +9,7 @@
 import CustomToolbar from './CustomToolbar';
 
 export default {
-  name: 'top-page',
+  name: 'camera-page',
   components: {
     CustomToolbar,
   },
