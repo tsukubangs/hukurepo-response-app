@@ -10,16 +10,18 @@
 
 <script>
 import CustomToolbar from './CustomToolbar';
+import CameraPage from './CameraPage';
 
 export default {
-  name: 'hello',
+  name: 'top-page',
   components: {
     CustomToolbar,
   },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-    };
+  methods: {
+    push() {
+      this.pageStack.push(CameraPage);
+    },
   },
+  props: ['pageStack'],
 };
 </script>

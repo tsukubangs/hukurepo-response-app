@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <top-page></top-page>
+    <v-ons-navigator :page-stack="pageStack">
+      <component :is="page" v-for="page in pageStack" :page-stack="pageStack"></component>
+    </v-ons-navigator>
   </div>
 </template>
 
@@ -9,8 +11,10 @@ import TopPage from './components/TopPage';
 
 export default {
   name: 'app',
-  components: {
-    TopPage,
+  data() {
+    return {
+      pageStack: [TopPage],
+    };
   },
 };
 </script>
