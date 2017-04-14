@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <v-ons-navigator :page-stack="pageStack">
+      <component :is="page" v-for="page in pageStack" :page-stack="pageStack"></component>
+    </v-ons-navigator>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import TopPage from './components/TopPage';
 
 export default {
   name: 'app',
-  components: {
-    Hello,
+  data() {
+    return {
+      pageStack: [TopPage],
+    };
   },
 };
 </script>
