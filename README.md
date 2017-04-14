@@ -30,5 +30,9 @@ npm run e2e
 # run all tests
 npm test
 ```
+## Plugins
+### cordova
+- for camera
+'cordova plugin add cordova-plugin-camera'
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
