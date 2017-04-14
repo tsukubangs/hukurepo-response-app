@@ -1,0 +1,15 @@
+.DS_Store
+node_modules/
+www/
+npm-debug.log
+test/unit/coverage
+test/e2e/reports
+selenium-debug.log
+
+# Apache Cordova generated files and directories
+bin/*
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+plugins/*
+platforms/*
