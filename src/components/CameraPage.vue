@@ -4,32 +4,35 @@
     <p style="text-align: center">This is the second page</p>
     <p style="text-align: center">
       This is the camera open
-      <v-ons-button @click="takePictures">camera</v-ons-button>
+      <v-ons-button @click="takePictures">Camera</v-ons-button>
     </p>
+    <img :src="image" style="width:100%;"/>
   </v-ons-page>
 </template>
 
 <script>
 import CustomToolbar from './CustomToolbar';
 
-function cameraSuccess() {
-  // const img = document.getElementById('image');
-  // img.src = 'data:image/jpeg;base64,' + image;
-  alert('Succes!');
-}
-
 function cameraError() {
   alert('Failed!:');
 }
 
 function takePictures() {
-  navigator.camera.getPicture(cameraSuccess, cameraError, { quality: 80 });
+  navigator.camera.getPicture((image) => {
+    this.image = image;
+    alert('Succes!');
+  }, cameraError, { quality: 80 });
 }
 
 export default {
   name: 'camera-page',
   components: {
     CustomToolbar,
+  },
+  data() {
+    return {
+      image: '',
+    };
   },
   methods: {
     takePictures,
