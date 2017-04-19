@@ -4,15 +4,13 @@
     <p style="text-align: center">This is the second page</p>
     <p style="text-align: center">
       This is the camera open
-      <v-ons-button @click="takePictures">Camera</v-ons-button>
+      <v-ons-button @click="takePhoto">Camera</v-ons-button>
     </p>
-    <img :src="image" style="width:100%;"/>
-
     <p style="text-align: center">
       Get an image from a photo album of the device
       <v-ons-button @click="getPhoto">from devise</v-ons-button>
-    <img style="display:none;" id="picture" src="" width="150" height="150" />
     </p>
+    <img style="display:none;" id="picture" src="" width="80%" />
 
   </v-ons-page>
 </template>
@@ -20,20 +18,9 @@
 <script>
 import CustomToolbar from './CustomToolbar';
 
-function cameraError() {
-  alert('Failed!:');
+function onFail(message) {
+  alert(`An error occured: ${message}`);
 }
-
-function takePictures() {
-  navigator.camera.getPicture((image) => {
-    this.image = image;
-    alert('Succes!');
-  }, cameraError, { quality: 80 });
-}
-
-// function onDeviceReady() {
-//  window.alert('Loading Cordova is completed');
-// }
 
 function onSuccess(imageURI) {
   const largeImage = document.getElementById('picture');
@@ -41,8 +28,12 @@ function onSuccess(imageURI) {
   largeImage.src = imageURI;
 }
 
-function onFail(message) {
-  alert(`An error occured: ${message}`);
+function takePhoto() {
+  navigator.camera.getPicture(onSuccess, onFail,
+    { quality: 50,
+      correctOrientation: true,
+    },
+  );
 }
 
 function getPhoto() {
@@ -50,7 +41,10 @@ function getPhoto() {
   navigator.camera.getPicture(onSuccess, onFail,
     { quality: 50,
       destinationType: navigator.camera.DestinationType.FILE_URI,
-      sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM });
+      sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
+      correctOrientation: true,
+    },
+  );
 }
 
 export default {
@@ -64,7 +58,7 @@ export default {
     };
   },
   methods: {
-    takePictures,
+    takePhoto,
     getPhoto,
   },
 };
