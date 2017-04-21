@@ -12,6 +12,10 @@
     </p>
     <img style="display:none;" id="picture" src="" width="80%" />
 
+    <form id="text-form">
+      <p>description:<textarea name='description' value=''></textarea></p>
+    </form>
+
   </v-ons-page>
 </template>
 
@@ -47,6 +51,10 @@ function getPhoto() {
   );
 }
 
+function addEvent() {
+  console.log('test');
+}
+
 export default {
   name: 'camera-page',
   components: {
@@ -55,6 +63,7 @@ export default {
   methods: {
     takePhoto,
     getPhoto,
+    addEvent,
   },
 };
 
