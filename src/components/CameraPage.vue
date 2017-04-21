@@ -2,22 +2,20 @@
   <v-ons-page>
     <custom-toolbar>Camera Page</custom-toolbar>
     <p style="text-align: center">This is the second page</p>
-    <p style="text-align: center">
-      This is the camera open
-      <v-ons-button @click="takePhoto">Camera</v-ons-button>
-    </p>
-    <p style="text-align: center">
-      Get an image from a photo album of the device
-      <v-ons-button @click="getPhoto">from devise</v-ons-button>
-    </p>
+
+    <form id="text-form">
+      <textarea v-model="postComment" name='description'  placeholder="text here..."></textarea>
+      <p style="text-align: center">
+        <v-ons-button @click="takePhoto">Camera</v-ons-button>
+        <v-ons-button @click="getPhoto">Devise</v-ons-button>
+      </p>
+      <v-ons-button @click="postProblem">Post</v-ons-button>
+    </form>
+
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
     <img style="display:none;" id="picture" src="" width="80%" />
-
-    <form id="text-form">
-      <p>description:<textarea name='description' value=''></textarea></p>
-    </form>
 
   </v-ons-page>
 </template>
@@ -55,8 +53,8 @@ function getPhoto() {
   );
 }
 
-function addEvent() {
-  console.log('test');
+function postProblem() {
+  console.log(this.postComment);
 }
 
 export default {
@@ -70,12 +68,13 @@ export default {
       latitude: '',
       longitude: '',
       address: '',
+      postComment: '',
     };
   },
   methods: {
     takePhoto,
     getPhoto,
-    addEvent,
+    postProblem,
   },
   created() {
     navigator.geolocation.getCurrentPosition(
@@ -102,3 +101,8 @@ export default {
 };
 
 </script>
+
+<style scoped >
+  .text-form{
+  }
+</style>
