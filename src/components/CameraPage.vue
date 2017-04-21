@@ -52,11 +52,6 @@ export default {
   components: {
     CustomToolbar,
   },
-  data() {
-    return {
-      image: '',
-    };
-  },
   methods: {
     takePhoto,
     getPhoto,
