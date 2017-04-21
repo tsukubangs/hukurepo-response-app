@@ -10,12 +10,15 @@
       Get an image from a photo album of the device
       <v-ons-button @click="getPhoto">from devise</v-ons-button>
     </p>
+    <p>lat:{{latitude}}</p>
+    <p>lng:{{longitude}}</p>
+    <p>address:{{address}}</p>
     <img style="display:none;" id="picture" src="" width="80%" />
-
   </v-ons-page>
 </template>
 
 <script>
+import axios from 'axios';
 import CustomToolbar from './CustomToolbar';
 
 function onFail(message) {
@@ -52,9 +55,39 @@ export default {
   components: {
     CustomToolbar,
   },
+  data() {
+    return {
+      image: '',
+      latitude: '',
+      longitude: '',
+      address: '',
+    };
+  },
   methods: {
     takePhoto,
     getPhoto,
+  },
+  created() {
+    navigator.geolocation.getCurrentPosition(
+    (position) => {
+      this.latitude = position.coords.latitude;
+      this.longitude = position.coords.longitude;
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          latlng: `${this.latitude},${this.longitude}`,
+          sensor: false,
+          language: 'en',
+        },
+      }).then((response) => {
+        const data = response.data;
+        this.address = data.results[0].formatted_address;
+      }).catch((error) => {
+        alert(error);
+      });
+    },
+    () => {
+      alert("can't get your position");
+    });
   },
 };
 
