@@ -32,8 +32,8 @@ npm test
 ```
 ## Plugins
 ### cordova
-- for camera
-'cordova plugin add cordova-plugin-camera'
+- to use camera  
+` cordova plugin add cordova-plugin-camera `
 
 - for geolocation
 'cordova plugin add cordova-plugin-geolocation'
