@@ -1,21 +1,18 @@
 <template id="camera-page">
   <v-ons-page>
     <custom-toolbar>Camera Page</custom-toolbar>
-    <p style="text-align: center">This is the second page</p>
+    <v-ons-button id="post-btn" @click="postProblem">Post</v-ons-button>
 
-    <form id="text-form">
-      <textarea v-model="postComment" name='description'  placeholder="text here..."></textarea>
-      <p style="text-align: center">
-        <v-ons-button @click="takePhoto">Camera</v-ons-button>
-        <v-ons-button @click="getPhoto">Devise</v-ons-button>
-      </p>
-      <v-ons-button @click="postProblem">Post</v-ons-button>
-    </form>
+    <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
+    <img style="display:none;" id="picture" src="" width="80%" />
+    <p style="text-align: center">
+      <v-ons-button @click="getPhoto">Devise</v-ons-button>
+      <v-ons-button @click="takePhoto">Camera</v-ons-button>
+    </p>
 
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
-    <img style="display:none;" id="picture" src="" width="80%" />
 
   </v-ons-page>
 </template>
@@ -28,15 +25,18 @@ function onFail(message) {
   alert(`An error occured: ${message}`);
 }
 
-function onSuccess(imageURI) {
+function onSuccess(imageData) {
   const largeImage = document.getElementById('picture');
   largeImage.style.display = 'block';
-  largeImage.src = imageURI;
+  const head = 'data:image/jpeg;base64,';
+  largeImage.src = head + imageData;
 }
 
 function takePhoto() {
   navigator.camera.getPicture(onSuccess, onFail,
     { quality: 50,
+      destinationType: navigator.camera.DestinationType.DATA_URL,
+      sourceType: navigator.camera.PictureSourceType.CAMERA,
       correctOrientation: true,
     },
   );
@@ -46,7 +46,7 @@ function getPhoto() {
 // Specify the source to get the photos.
   navigator.camera.getPicture(onSuccess, onFail,
     { quality: 50,
-      destinationType: navigator.camera.DestinationType.FILE_URI,
+      destinationType: navigator.camera.DestinationType.DATA_URL,
       sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
       correctOrientation: true,
     },
@@ -64,7 +64,6 @@ export default {
   },
   data() {
     return {
-      image: '',
       latitude: '',
       longitude: '',
       address: '',
@@ -103,6 +102,21 @@ export default {
 </script>
 
 <style scoped >
-  .text-form{
-  }
+ #text-form {
+   width: 90%;
+   height: 150px;
+   margin-bottom: 10px;
+ }
+ #post-btn{
+   display: block;
+   width: 80px;
+   margin-left: auto;
+   margin-bottom: 10px;
+ }
+ #picture{
+   width: 90%;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+ }
 </style>
