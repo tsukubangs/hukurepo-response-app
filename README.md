@@ -35,4 +35,7 @@ npm test
 - to use camera  
 ` cordova plugin add cordova-plugin-camera `
 
+- for geolocation
+` cordova plugin add cordova-plugin-geolocation `
+
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
