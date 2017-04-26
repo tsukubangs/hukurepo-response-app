@@ -4,9 +4,14 @@
     <v-ons-button id="post-btn" @click="postProblem">Post</v-ons-button>
 
     <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
-    <div class="columbox">
-      <img id="picture" src="../assets/no-image.png" />
-      <img class="map-here" src="../assets/no-image.png" />
+
+    <div class="cover">
+      <div class="box">
+        <img class="" id="picture" src="../assets/no-image.png" />
+      </div>
+      <div class="box">
+        <img class="map-here" src="../assets/no-image.png" />
+      </div>
     </div>
 
     <p style="text-align: center">
@@ -36,6 +41,7 @@ function onFail(message) {
 function onSuccess(imageData) {
   const largeImage = document.getElementById('picture');
   largeImage.style.display = 'block';
+  largeImage.classList.add('picture-box');
   const head = 'data:image/jpeg;base64,';
   largeImage.src = head + imageData;
 }
@@ -128,16 +134,22 @@ export default {
    margin-bottom: 10px;
  }
  #picture{
-   width: 49%;
+   max-height: 150px;
+   max-width: 100%;
  }
- .map-here{
-   display: inline;
-   width: 49%;
- }
- .columbox{
+.cover {
+   display: table;
+   margin: auto;
    width: 90%;
-   margin-left: auto;
-   margin-right: auto;
-   text-align: center;
- }
+}
+.box {
+   display: table-cell;
+   width: 50%;
+   height: 150px;
+}
+.picture-box {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+}
 </style>
