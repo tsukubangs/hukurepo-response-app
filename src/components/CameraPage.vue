@@ -23,10 +23,14 @@
 
 <script>
 import axios from 'axios';
+import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 
 function onFail(message) {
-  alert(`An error occured: ${message}`);
+  ons.notification.alert({
+    title: '',
+    message: `An error occured: ${message}`,
+  });
 }
 
 function onSuccess(imageData) {
@@ -94,11 +98,17 @@ export default {
         const data = response.data;
         this.address = data.results[0].formatted_address;
       }).catch((error) => {
-        alert(error);
+        ons.notification.alert({
+          title: '',
+          message: error,
+        });
       });
     },
     () => {
-      alert("can't get your position");
+      ons.notification.alert({
+        title: '',
+        message: "can't get your position",
+      });
     });
   },
 };
