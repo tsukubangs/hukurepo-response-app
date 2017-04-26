@@ -4,7 +4,11 @@
     <v-ons-button id="post-btn" @click="postProblem">Post</v-ons-button>
 
     <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
-    <img style="display:none;" id="picture" src="" width="80%" />
+    <div class="columbox">
+      <img id="picture" src="../assets/no-image.png" />
+      <img class="map-here" src="../assets/no-image.png" />
+    </div>
+
     <p style="text-align: center">
       <v-ons-button @click="getPhoto">Devise</v-ons-button>
       <v-ons-button @click="takePhoto">Camera</v-ons-button>
@@ -114,9 +118,16 @@ export default {
    margin-bottom: 10px;
  }
  #picture{
+   width: 49%;
+ }
+ .map-here{
+   display: inline;
+   width: 49%;
+ }
+ .columbox{
    width: 90%;
-   display: block;
    margin-left: auto;
    margin-right: auto;
+   text-align: center;
  }
 </style>
