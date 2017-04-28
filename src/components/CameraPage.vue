@@ -18,10 +18,16 @@
     <p>address:{{address}}</p>
 
     <div class="bottom-bar">
-      <div class="toolbar__right">
-        <v-ons-button @click="getPhoto">Devise</v-ons-button>
-        <v-ons-button @click="takePhoto">Camera</v-ons-button>
-        <v-ons-button @click="postProblem">Post</v-ons-button>
+      <div class="toolbar">
+        <div class="toolbar__left">
+          <span class="toolbar-button toolbar-button--outline" @click="getPhoto">Devise</span>
+          <span class="toolbar-button toolbar-button--outline" @click="takePhoto">Camera</span>
+        </div>
+        <div class="toolbar__center">
+        </div>
+        <div class="toolbar__right">
+          <span class="toolbar-button toolbar-button--outline" @click="postProblem">Post</span>
+        </div>
       </div>
     </div>
 
