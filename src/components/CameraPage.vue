@@ -149,7 +149,7 @@ export default {
 }
 .picture-box {
     object-fit: cover;
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
 }
 </style>
