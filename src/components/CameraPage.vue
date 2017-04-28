@@ -1,7 +1,6 @@
 <template id="camera-page">
   <v-ons-page>
     <custom-toolbar>Camera Page</custom-toolbar>
-    <v-ons-button id="post-btn" @click="postProblem">Post</v-ons-button>
 
     <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
 
@@ -14,14 +13,17 @@
       </div>
     </div>
 
-    <p style="text-align: center">
-      <v-ons-button @click="getPhoto">Devise</v-ons-button>
-      <v-ons-button @click="takePhoto">Camera</v-ons-button>
-    </p>
-
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
+
+    <div class="bottom-bar">
+      <div class="toolbar__right">
+        <v-ons-button @click="getPhoto">Devise</v-ons-button>
+        <v-ons-button @click="takePhoto">Camera</v-ons-button>
+        <v-ons-button @click="postProblem">Post</v-ons-button>
+      </div>
+    </div>
 
   </v-ons-page>
 </template>
@@ -126,6 +128,7 @@ export default {
    width: 90%;
    height: 150px;
    margin-bottom: 10px;
+   margin-top: 10px;
  }
  #post-btn{
    display: block;
@@ -151,5 +154,8 @@ export default {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+.bottom-bar{
+  position: fixed;
 }
 </style>
