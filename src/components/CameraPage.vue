@@ -77,6 +77,8 @@ function getPhoto() {
 
 function postProblem() {
   console.log(this.postComment);
+  // post後にトップページに戻る
+  this.pageStack.splice(1, this.pageStack.length - 1);
 }
 
 export default {
@@ -84,6 +86,7 @@ export default {
   components: {
     CustomToolbar,
   },
+  props: ['pageStack'],
   data() {
     return {
       latitude: '',
