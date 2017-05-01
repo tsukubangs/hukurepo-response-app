@@ -14,6 +14,7 @@
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
     <img style="display:none;" id="picture" src="" width="80%" />
+    <google-map :latitude="latitude" :longitude="longitude"></google-map>
   </v-ons-page>
 </template>
 
@@ -21,6 +22,7 @@
 import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
+import GoogleMap from './GoogleMap';
 
 function onFail(message) {
   ons.notification.alert({
@@ -58,6 +60,7 @@ export default {
   name: 'camera-page',
   components: {
     CustomToolbar,
+    GoogleMap,
   },
   data() {
     return {
@@ -65,11 +68,18 @@ export default {
       latitude: '',
       longitude: '',
       address: '',
+      mapPosition: { lat: 10, lng: 10 },
     };
   },
   methods: {
     takePhoto,
     getPhoto,
+    updateStyle() {
+      this.centerPosition = {
+        lat: Number(this.latitude),
+        lng: Number(this.longitude),
+      };
+    },
   },
   created() {
     navigator.geolocation.getCurrentPosition(

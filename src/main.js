@@ -6,10 +6,18 @@ import ons from 'onsenui';
 
 import Vue from 'vue';
 import VueOnsen from 'vue-onsenui';
+import * as VueGoogleMaps from 'vue2-google-maps';
 import App from './App';
+import { GOOGLE_MAP_API } from '../.env';
 
 Vue.use(VueOnsen);
 ons.forcePlatformStyling('ios');
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: GOOGLE_MAP_API,
+  },
+});
 
 /* eslint-disable no-new */
 new Vue({
