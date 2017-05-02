@@ -1,18 +1,34 @@
 <template id="camera-page">
   <v-ons-page>
     <custom-toolbar>Camera Page</custom-toolbar>
-    <p style="text-align: center">This is the second page</p>
-    <p style="text-align: center">
-      This is the camera open
-      <v-ons-button @click="takePhoto">Camera</v-ons-button>
-    </p>
-    <p style="text-align: center">
-      Get an image from a photo album of the device
-      <v-ons-button @click="getPhoto">from devise</v-ons-button>
-    </p>
+
+    <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
+
+    <div class="cover">
+      <div class="box">
+        <img class="" id="picture" src="../assets/no-image.png" />
+      </div>
+      <div class="box">
+        <img class="map-here" src="../assets/no-image.png" />
+      </div>
+    </div>
+
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
+    <div class="bottom-bar">
+      <div class="toolbar">
+        <div class="toolbar__left">
+          <span class="toolbar-button toolbar-button--outline" @click="getPhoto">Devise</span>
+          <span class="toolbar-button toolbar-button--outline" @click="takePhoto">Camera</span>
+        </div>
+        <div class="toolbar__center">
+        </div>
+        <div class="toolbar__right">
+          <span class="toolbar-button toolbar-button--outline" @click="postProblem">Post</span>
+        </div>
+      </div>
+    </div>
     <img style="display:none;" id="picture" src="" width="80%" />
     <google-map :latitude="latitude" :longitude="longitude"></google-map>
   </v-ons-page>
@@ -31,15 +47,19 @@ function onFail(message) {
   });
 }
 
-function onSuccess(imageURI) {
+function onSuccess(imageData) {
   const largeImage = document.getElementById('picture');
   largeImage.style.display = 'block';
-  largeImage.src = imageURI;
+  largeImage.classList.add('picture-box');
+  const head = 'data:image/jpeg;base64,';
+  largeImage.src = head + imageData;
 }
 
 function takePhoto() {
   navigator.camera.getPicture(onSuccess, onFail,
     { quality: 50,
+      destinationType: navigator.camera.DestinationType.DATA_URL,
+      sourceType: navigator.camera.PictureSourceType.CAMERA,
       correctOrientation: true,
     },
   );
@@ -49,11 +69,17 @@ function getPhoto() {
 // Specify the source to get the photos.
   navigator.camera.getPicture(onSuccess, onFail,
     { quality: 50,
-      destinationType: navigator.camera.DestinationType.FILE_URI,
+      destinationType: navigator.camera.DestinationType.DATA_URL,
       sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
       correctOrientation: true,
     },
   );
+}
+
+function postProblem() {
+  console.log(this.postComment);
+  // post後にトップページに戻る
+  this.pageStack.splice(1, this.pageStack.length - 1);
 }
 
 export default {
@@ -62,13 +88,14 @@ export default {
     CustomToolbar,
     GoogleMap,
   },
+  props: ['pageStack'],
   data() {
     return {
-      image: '',
       latitude: '',
       longitude: '',
       address: '',
       mapPosition: { lat: 10, lng: 10 },
+      postComment: '',
     };
   },
   methods: {
@@ -80,6 +107,7 @@ export default {
         lng: Number(this.longitude),
       };
     },
+    postProblem,
   },
   created() {
     navigator.geolocation.getCurrentPosition(
@@ -112,3 +140,40 @@ export default {
 };
 
 </script>
+
+<style scoped >
+ #text-form {
+   width: 90%;
+   height: 150px;
+   margin-bottom: 10px;
+   margin-top: 10px;
+ }
+ #post-btn{
+   display: block;
+   width: 80px;
+   margin-left: auto;
+   margin-bottom: 10px;
+ }
+ #picture{
+   max-height: 150px;
+   max-width: 100%;
+ }
+.cover {
+   display: table;
+   margin: auto;
+   width: 90%;
+}
+.box {
+   display: table-cell;
+   width: 50%;
+   height: 150px;
+}
+.picture-box {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.bottom-bar{
+  position: fixed;
+}
+</style>
