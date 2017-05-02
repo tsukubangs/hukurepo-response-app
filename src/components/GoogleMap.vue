@@ -4,13 +4,6 @@
   </gmap-map>
 </template>
 
-<style scoped >
-.gmap-map {
-  width: 100%;
-  height: 150px;
-}
-</style>
-
 <script>
 export default {
   name: 'google-map',
@@ -28,3 +21,10 @@ export default {
   },
 };
 </script>
+
+<style scoped >
+.gmap-map {
+  width: 100%;
+  height: 150px;
+}
+</style>
