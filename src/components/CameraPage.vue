@@ -9,7 +9,7 @@
         <img class="" id="picture" src="../assets/no-image.png" />
       </div>
       <div class="box">
-        <img class="map-here" src="../assets/no-image.png" />
+        <google-map :latitude="latitude" :longitude="longitude"></google-map>
       </div>
     </div>
 
@@ -29,8 +29,6 @@
         </div>
       </div>
     </div>
-    <img style="display:none;" id="picture" src="" width="80%" />
-    <google-map :latitude="latitude" :longitude="longitude"></google-map>
   </v-ons-page>
 </template>
 
