@@ -9,14 +9,13 @@
         <img class="" id="picture" src="../assets/no-image.png" />
       </div>
       <div class="box">
-        <img class="map-here" src="../assets/no-image.png" />
+        <google-map :latitude="latitude" :longitude="longitude"></google-map>
       </div>
     </div>
 
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
-
     <div class="bottom-bar">
       <div class="toolbar">
         <div class="toolbar__left">
@@ -30,7 +29,6 @@
         </div>
       </div>
     </div>
-
   </v-ons-page>
 </template>
 
@@ -38,6 +36,7 @@
 import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
+import GoogleMap from './GoogleMap';
 
 function onFail(message) {
   ons.notification.alert({
@@ -85,6 +84,7 @@ export default {
   name: 'camera-page',
   components: {
     CustomToolbar,
+    GoogleMap,
   },
   props: ['pageStack'],
   data() {
@@ -92,6 +92,7 @@ export default {
       latitude: '',
       longitude: '',
       address: '',
+      mapPosition: { lat: 10, lng: 10 },
       postComment: '',
     };
   },
@@ -145,10 +146,6 @@ export default {
    margin-left: auto;
    margin-bottom: 10px;
  }
- #picture{
-   max-height: 150px;
-   max-width: 100%;
- }
 .cover {
    display: table;
    margin: auto;
@@ -157,7 +154,22 @@ export default {
 .box {
    display: table-cell;
    width: 50%;
-   height: 150px;
+   position: relative;
+   box-sizing: border-box;
+   border: transparent 2px solid;
+}
+.box:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.box > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
 }
 .picture-box {
     object-fit: cover;
