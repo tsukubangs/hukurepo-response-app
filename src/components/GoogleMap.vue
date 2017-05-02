@@ -1,5 +1,5 @@
 <template>
-  <gmap-map :center="position" :zoom="17" class="gmap-map">
+  <gmap-map :center="position" :zoom="17">
     <gmap-marker v-for="m in markers" :position="m.position" :clickable="true" :draggable="true"></gmap-marker>
   </gmap-map>
 </template>
@@ -21,10 +21,3 @@ export default {
   },
 };
 </script>
-
-<style scoped >
-.gmap-map {
-  width: 100%;
-  height: 150px;
-}
-</style>

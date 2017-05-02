@@ -152,10 +152,6 @@ export default {
    margin-left: auto;
    margin-bottom: 10px;
  }
- #picture{
-   max-height: 150px;
-   max-width: 100%;
- }
 .cover {
    display: table;
    margin: auto;
@@ -164,7 +160,22 @@ export default {
 .box {
    display: table-cell;
    width: 50%;
-   height: 150px;
+   position: relative;
+   box-sizing: border-box;
+   border: transparent 2px solid;
+}
+.box:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.box > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
 }
 .picture-box {
     object-fit: cover;
