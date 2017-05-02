@@ -99,12 +99,6 @@ export default {
   methods: {
     takePhoto,
     getPhoto,
-    updateStyle() {
-      this.centerPosition = {
-        lat: Number(this.latitude),
-        lng: Number(this.longitude),
-      };
-    },
     postProblem,
   },
   created() {
