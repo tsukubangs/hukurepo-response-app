@@ -11,6 +11,7 @@ var webpack = require('webpack')
 var HtmlAddScript = require('./plugins/html-add-script')
 var config = require('../config')
 var webpackConfig = require('./webpack.prod.conf')
+var modifyWwwCss = require('./modify-www-css.js')
 
 config.build.assetsPublicPath = ''
 webpackConfig.plugins.push(new HtmlAddScript({
@@ -43,4 +44,5 @@ webpack(webpackConfig, function (err, stats) {
     '  Tip: built files are meant to be served over an HTTP server.\n' +
     '  Opening index.html over file:// won\'t work.\n'
   ))
+  modifyWwwCss();
 })

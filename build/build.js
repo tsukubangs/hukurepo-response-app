@@ -10,6 +10,7 @@ var shell = require('shelljs')
 var webpack = require('webpack')
 var config = require('../config')
 var webpackConfig = require('./webpack.prod.conf')
+var modifyWwwCss = require('./modify-www-css.js')
 
 var spinner = ora('building for production...')
 spinner.start()
@@ -37,4 +38,5 @@ webpack(webpackConfig, function (err, stats) {
     '  Tip: built files are meant to be served over an HTTP server.\n' +
     '  Opening index.html over file:// won\'t work.\n'
   ))
+  modifyWwwCss();
 })
