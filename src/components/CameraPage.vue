@@ -19,13 +19,13 @@
     <div class="bottom-bar">
       <div class="toolbar">
         <div class="toolbar__left">
-          <span class="toolbar-button toolbar-button--outline" @click="getPhoto">Devise</span>
-          <span class="toolbar-button toolbar-button--outline" @click="takePhoto">Camera</span>
+          <span class="toolbar-button" @click="getPhoto"><ons-icon icon="ion-folder" size="30px"></ons-icon></span>
+          <span class="toolbar-button" @click="takePhoto"><ons-icon icon="ion-camera" size="30px"></ons-icon></span>
         </div>
         <div class="toolbar__center">
         </div>
         <div class="toolbar__right">
-          <span class="toolbar-button toolbar-button--outline" @click="postProblem">Post</span>
+          <span class="toolbar-button toolbar-button--outline" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
         </div>
       </div>
     </div>
