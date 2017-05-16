@@ -75,9 +75,25 @@ function getPhoto() {
 }
 
 function postProblem() {
-  console.log(this.postComment);
+  // axios.get('https://kaname-senpai.herokuapp.com/problems/1', config)
+  const param = { comment: 'test' };
+  axios.post('https://kaname-senpai.herokuapp.com/problems/', param)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        ons.notification.alert({
+          title: '',
+          message: data,
+        });
+      }).catch((error) => {
+        ons.notification.alert({
+          title: '',
+          message: error,
+        });
+      });
+
   // post後にトップページに戻る
-  this.pageStack.splice(1, this.pageStack.length - 1);
+  // this.pageStack.splice(1, this.pageStack.length - 1);
 }
 
 export default {
@@ -94,6 +110,7 @@ export default {
       address: '',
       mapPosition: { lat: 10, lng: 10 },
       postComment: '',
+      errors: [],
     };
   },
   methods: {
