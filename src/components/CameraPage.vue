@@ -50,6 +50,7 @@ function onSuccess(imageData) {
   largeImage.style.display = 'block';
   largeImage.classList.add('picture-box');
   const head = 'data:image/jpeg;base64,';
+  console.log(imageData);
   largeImage.src = head + imageData;
 }
 
@@ -75,12 +76,14 @@ function getPhoto() {
 }
 
 function postProblem() {
-  // axios.get('https://kaname-senpai.herokuapp.com/problems/1', config)
-  const param = { comment: 'test' };
-  axios.post('https://kaname-senpai.herokuapp.com/problems/', param)
+  const params = { comment: this.postComment,
+    image: this.postImage,
+    latitude: this.latitude,
+    longitude: this.longitude };
+
+  axios.post('https://kaname-senpai.herokuapp.com/problems/', params)
       .then((response) => {
         const data = response.data;
-        console.log(data);
         ons.notification.alert({
           title: '',
           message: data,
@@ -110,7 +113,7 @@ export default {
       address: '',
       mapPosition: { lat: 10, lng: 10 },
       postComment: '',
-      errors: [],
+      postImage: 'no-image',
     };
   },
   methods: {
