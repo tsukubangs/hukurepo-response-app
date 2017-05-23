@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!hasLatlng">
+  <div v-if="isError">
+    error
+  </div>
+  <div v-else-if="!hasLatlng">
     <ons-progress-circular indeterminate></ons-progress-circular>
   </div>
   <gmap-map :center="position" :zoom="17" v-else>
@@ -13,6 +16,7 @@ export default {
   props: [
     'latitude',
     'longitude',
+    'isError',
   ],
   computed: {
     position() {

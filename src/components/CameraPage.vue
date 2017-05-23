@@ -9,7 +9,7 @@
         <img class="" id="picture" src="../assets/no-image.png" />
       </div>
       <div class="box">
-        <google-map :latitude="latitude" :longitude="longitude"></google-map>
+        <google-map :latitude="latitude" :longitude="longitude" :isError="isMapError"></google-map>
       </div>
     </div>
 
@@ -132,7 +132,7 @@ export default {
       latitude: '',
       longitude: '',
       address: '',
-      mapPosition: { lat: 10, lng: 10 },
+      isMapError: false,
       postComment: '',
     };
   },
@@ -161,6 +161,7 @@ export default {
           title: '',
           message: error,
         });
+        this.isMapError = true;
       });
     },
     () => {
