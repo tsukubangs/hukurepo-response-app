@@ -37,6 +37,25 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import GoogleMap from './GoogleMap';
+import { WEB_API_URL } from '../../.env';
+
+// 引数はbase64形式の文字列
+function toBlob(base64) {
+  const bin = atob(base64.replace(/^.*,/, ''));
+  const buffer = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i += 1) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+    // Blobを作成
+  try {
+    const blob = new Blob([buffer.buffer], {
+      type: 'image/jpeg',
+    });
+    return blob;
+  } catch (e) {
+    return false;
+  }
+}
 
 function onFail(message) {
   ons.notification.alert({
@@ -75,9 +94,30 @@ function getPhoto() {
 }
 
 function postProblem() {
-  console.log(this.postComment);
-  // post後にトップページに戻る
-  this.pageStack.splice(1, this.pageStack.length - 1);
+  const data = new FormData();
+  data.append('problem[comment]', this.postComment);
+  data.append('problem[latitude]', this.latitude);
+  data.append('problem[longitude]', this.longitude);
+  const dataURL = document.getElementById('picture').src;
+  const head = 'data:image/jpeg;base64,';
+  const blob = toBlob(dataURL.substr(head.length));
+  data.append('problem[image]', blob, 'blob.jpg');
+
+  axios.post(`${WEB_API_URL}/problems`, data)
+      .then((response) => {
+        const res = response.data;
+        ons.notification.alert({
+          title: '',
+          message: res,
+        });
+        // post後にトップページに戻る
+        this.pageStack.splice(1, this.pageStack.length - 1);
+      }).catch((error) => {
+        ons.notification.alert({
+          title: '',
+          message: error,
+        });
+      });
 }
 
 export default {
@@ -100,6 +140,7 @@ export default {
     takePhoto,
     getPhoto,
     postProblem,
+    onSuccess,
   },
   created() {
     navigator.geolocation.getCurrentPosition(
