@@ -1,6 +1,6 @@
 <template>
   <gmap-map :center="position" :zoom="17">
-    <gmap-marker v-for="m in markers" :position="m.position" :clickable="true" :draggable="true"></gmap-marker>
+    <gmap-marker v-for="m in markers" :position="m.position" :clickable="false" :draggable="false"></gmap-marker>
   </gmap-map>
 </template>
 

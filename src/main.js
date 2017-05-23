@@ -16,6 +16,7 @@ ons.forcePlatformStyling('ios');
 Vue.use(VueGoogleMaps, {
   load: {
     key: GOOGLE_MAP_API,
+    language: 'en',
   },
 });
 
