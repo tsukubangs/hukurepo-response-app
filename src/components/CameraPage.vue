@@ -98,10 +98,15 @@ function postProblem() {
   data.append('problem[comment]', this.postComment);
   data.append('problem[latitude]', this.latitude);
   data.append('problem[longitude]', this.longitude);
-  const dataURL = document.getElementById('picture').src;
-  const head = 'data:image/jpeg;base64,';
-  const blob = toBlob(dataURL.substr(head.length));
-  data.append('problem[image]', blob, 'blob.jpg');
+
+  const checkImage = document.getElementsByClassName('picture-box');
+  if (checkImage.length > 0) {
+    const dataURL = document.getElementById('picture').src;
+    console.log(dataURL);
+    const head = 'data:image/jpeg;base64,';
+    const blob = toBlob(dataURL.substr(head.length));
+    data.append('problem[image]', blob, 'blob.jpg');
+  }
 
   axios.post(`${WEB_API_URL}/problems`, data)
       .then((response) => {
