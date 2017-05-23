@@ -105,17 +105,18 @@ function postProblem() {
 
   axios.post(`${WEB_API_URL}/problems`, data)
       .then((response) => {
-        const res = response.data;
+        console.log(response);
         ons.notification.alert({
           title: '',
-          message: res,
+          message: 'Post has been completed.',
         });
         // post後にトップページに戻る
         this.pageStack.splice(1, this.pageStack.length - 1);
       }).catch((error) => {
+        console.log(error);
         ons.notification.alert({
           title: '',
-          message: error,
+          message: 'Sorry, posting failed...',
         });
       });
 }
