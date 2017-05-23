@@ -38,6 +38,24 @@ import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import GoogleMap from './GoogleMap';
 
+// 引数はbase64形式の文字列
+function toBlob(base64) {
+  const bin = atob(base64.replace(/^.*,/, ''));
+  const buffer = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i += 1) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+    // Blobを作成
+  try {
+    const blob = new Blob([buffer.buffer], {
+      type: 'image/jpeg',
+    });
+    return blob;
+  } catch (e) {
+    return false;
+  }
+}
+
 function onFail(message) {
   ons.notification.alert({
     title: '',
@@ -50,7 +68,6 @@ function onSuccess(imageData) {
   largeImage.style.display = 'block';
   largeImage.classList.add('picture-box');
   const head = 'data:image/jpeg;base64,';
-  console.log(imageData);
   largeImage.src = head + imageData;
 }
 
@@ -76,27 +93,30 @@ function getPhoto() {
 }
 
 function postProblem() {
-  const params = { comment: this.postComment,
-    image: this.postImage,
-    latitude: this.latitude,
-    longitude: this.longitude };
+  const data = new FormData();
+  data.append('problem[comment]', this.postComment);
+  data.append('problem[latitude]', this.latitude);
+  data.append('problem[longitude]', this.longitude);
+  const dataURL = document.getElementById('picture').src;
+  const head = 'data:image/jpeg;base64,';
+  const blob = toBlob(dataURL.substr(head.length));
+  data.append('problem[image]', blob);
 
-  axios.post('https://kaname-senpai.herokuapp.com/problems/', params)
+  axios.post('https://kaname-senpai.herokuapp.com/problems', data)
       .then((response) => {
-        const data = response.data;
+        const res = response.data;
         ons.notification.alert({
           title: '',
-          message: data,
+          message: res,
         });
+        // post後にトップページに戻る
+        this.pageStack.splice(1, this.pageStack.length - 1);
       }).catch((error) => {
         ons.notification.alert({
           title: '',
           message: error,
         });
       });
-
-  // post後にトップページに戻る
-  // this.pageStack.splice(1, this.pageStack.length - 1);
 }
 
 export default {
@@ -113,13 +133,13 @@ export default {
       address: '',
       mapPosition: { lat: 10, lng: 10 },
       postComment: '',
-      postImage: 'no-image',
     };
   },
   methods: {
     takePhoto,
     getPhoto,
     postProblem,
+    onSuccess,
   },
   created() {
     navigator.geolocation.getCurrentPosition(
