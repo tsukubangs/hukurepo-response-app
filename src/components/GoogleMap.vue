@@ -1,6 +1,6 @@
 <template>
   <div v-if="isError">
-    error
+    can't get your position.
   </div>
   <div v-else-if="!hasLatlng">
     <ons-progress-circular indeterminate></ons-progress-circular>
