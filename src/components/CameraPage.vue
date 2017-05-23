@@ -37,6 +37,7 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import GoogleMap from './GoogleMap';
+import { WEB_API_URL } from '../../.env';
 
 // 引数はbase64形式の文字列
 function toBlob(base64) {
@@ -100,9 +101,9 @@ function postProblem() {
   const dataURL = document.getElementById('picture').src;
   const head = 'data:image/jpeg;base64,';
   const blob = toBlob(dataURL.substr(head.length));
-  data.append('problem[image]', blob);
+  data.append('problem[image]', blob, 'blob.jpg');
 
-  axios.post('https://kaname-senpai.herokuapp.com/problems', data)
+  axios.post(`${WEB_API_URL}/problems`, data)
       .then((response) => {
         const res = response.data;
         ons.notification.alert({
