@@ -161,7 +161,6 @@ export default {
           title: '',
           message: error,
         });
-        this.isMapError = true;
       });
     },
     () => {
@@ -169,6 +168,7 @@ export default {
         title: '',
         message: "can't get your position",
       });
+      this.isMapError = true;
     });
   },
 };
