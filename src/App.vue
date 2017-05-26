@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import router from './router';
+
 export default {
   name: 'app',
+  created() {
+    router.push('Login');
+  },
 };
 </script>
 
