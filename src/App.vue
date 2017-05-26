@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-    <v-ons-navigator :page-stack="pageStack">
-      <component :is="page" v-for="page in pageStack" :page-stack="pageStack"></component>
-    </v-ons-navigator>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TopPage from './components/TopPage';
-
 export default {
   name: 'app',
-  data() {
-    return {
-      pageStack: [TopPage],
-    };
-  },
 };
 </script>
 
