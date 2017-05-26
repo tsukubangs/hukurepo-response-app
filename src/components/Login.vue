@@ -11,11 +11,22 @@
 </template>
 
 <script>
+import axios from 'axios';
+import router from '../router';
+
 export default {
   name: 'login-page',
   methods: {
     login() {
-
+      const data = {
+        email: '',
+        password: '',
+      };
+      axios.post('', data)
+          .then(() => {
+            router.push('/');
+          }).catch(() => {
+          });
     },
   },
 };
