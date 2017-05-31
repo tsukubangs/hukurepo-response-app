@@ -13,8 +13,6 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
-    </v-ons-list>
-    <v-ons-list>
       <v-ons-list-header>
           Password
       </v-ons-list-header>
@@ -24,8 +22,6 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
-    </v-ons-list>
-    <v-ons-list>
       <v-ons-list-header>
           Confirm Password
       </v-ons-list-header>
