@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <div id="login-form">
-      <p><ons-input id="username" modifier="underbar" placeholder="Username" v-model="email" float></ons-input></p>
+      <p><ons-input id="email" modifier="underbar" placeholder="Email" v-model="email" float></ons-input></p>
       <p><ons-input id="password" modifier="underbar" type="password" placeholder="Password" v-model="password" float></ons-input></p>
       <p style="margin-top: 30px;">
         <ons-button @click="login()">Login</ons-button>
