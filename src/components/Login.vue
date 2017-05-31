@@ -1,5 +1,9 @@
 <template>
   <v-ons-page>
+    <div>
+      <img id="icon" src="../../res/icon.png">
+      <!-- img id="icon" src="../assets/welcome.png"-->
+    </div>
     <div id="login-form">
       <p><v-ons-input id="email" modifier="underbar" placeholder="Email" v-ons-model="email" float></v-ons-input></p>
       <p><v-ons-input id="password" modifier="underbar" type="password" placeholder="Password" v-ons-model="password" float></v-ons-input></p>
@@ -57,5 +61,12 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+#cover{
+  background-image: url("../assets/welcome.png");
+}
+#icon{
+  width: 150px;
+  height: auto;
 }
 </style>
