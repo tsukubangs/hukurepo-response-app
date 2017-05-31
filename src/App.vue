@@ -10,7 +10,12 @@ import router from './router';
 export default {
   name: 'app',
   created() {
-    router.push('login');
+    const hasToken = window.localStorage.getItem('access_token');
+    if (!hasToken) {
+      router.push('login');
+    } else {
+      router.push('/');
+    }
   },
 };
 </script>
