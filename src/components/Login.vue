@@ -6,6 +6,7 @@
       <p style="margin-top: 30px;">
         <ons-button @click="login()">Login</ons-button>
       </p>
+      <p><ons-button modifier="quiet">sign up</ons-button></p>
     </div>
   </v-ons-page>
 </template>
