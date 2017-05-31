@@ -30,12 +30,14 @@ export default {
   created() {
     const token = window.localStorage.getItem('access_token');
     const config = {
-      headers: { Authorization: token },
+      // headers: { Authorization: token },
+      headers: { Authorization: `${token}2` },
     };
     axios.get(`${WEB_API_URL}/v1/users`, config)
           .then((response) => {
             this.email = response.data[0].email;
-          }).catch(() => {
+          }).catch((error) => {
+            console.log(error);
             ons.notification.alert({
               title: 'failed',
               message: 'Sorry, Pleas Sign in again.',
