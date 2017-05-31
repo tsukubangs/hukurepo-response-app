@@ -1,20 +1,16 @@
 <template>
   <div id="app">
-    <v-ons-navigator :page-stack="pageStack">
-      <component :is="page" v-for="page in pageStack" :page-stack="pageStack"></component>
-    </v-ons-navigator>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TopPage from './components/TopPage';
+import router from './router';
 
 export default {
   name: 'app',
-  data() {
-    return {
-      pageStack: [TopPage],
-    };
+  created() {
+    router.push('login');
   },
 };
 </script>
