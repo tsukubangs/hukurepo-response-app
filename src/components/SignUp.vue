@@ -42,6 +42,16 @@
         <label :for="'radio-' + $index" class="center">{{ gender }}</label>
       </v-ons-list-item>
       <v-ons-list-header>
+        Age
+      </v-ons-list-header>
+      <v-ons-list-item>
+        <div class="center">
+          <v-ons-select class="width100" v-ons-model="selectedAge">
+            <option v-for="age in ages" :value="age.value">{{ age.key }}</option>
+          </v-ons-select>
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-header>
         Nationality
       </v-ons-list-header>
       <v-ons-list-item>
@@ -60,6 +70,7 @@
 
 <script>
 import countries from '../assets/countries';
+import ages from '../assets/ages';
 import router from '../router';
 
 export default {
@@ -70,6 +81,8 @@ export default {
       genders: ['male', 'female'],
       countries,
       selectedNationality: 'Japan',
+      ages,
+      selectedAge: ages[0].value,
     };
   },
   methods: {
