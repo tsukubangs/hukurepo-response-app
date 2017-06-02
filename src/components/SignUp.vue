@@ -2,6 +2,7 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="center">Sign up</div>
+      <div class="right"><v-ons-toolbar-button modifier="outline" @click="toLogin">Log in</v-ons-toolbar-button></div>
     </v-ons-toolbar>
     <v-ons-list>
       <v-ons-list-header>
@@ -51,11 +52,15 @@
         </div>
       </v-ons-list-item>
     </v-ons-list>
+    <section style="margin: 16px">
+      <v-ons-button modifier="large">Sign up</v-ons-button>
+    </section>
   </v-ons-page>
 </template>
 
 <script>
 import countries from '../assets/countries';
+import router from '../router';
 
 export default {
   name: 'sign-up',
@@ -66,6 +71,11 @@ export default {
       countries,
       selectedNationality: 'Japan',
     };
+  },
+  methods: {
+    toLogin() {
+      router.push('login');
+    },
   },
 };
 </script>
