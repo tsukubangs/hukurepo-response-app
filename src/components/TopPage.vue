@@ -5,7 +5,7 @@
       This is the first page
       <v-ons-button @click="push">POST</v-ons-button>
     </p>
-    <p>{{email}}</p>
+    <p>Log in!</p>
   </v-ons-page>
 </template>
 
@@ -14,8 +14,29 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
-import router from '../router';
+// import router from '../router';
 import { WEB_API_URL } from '../../.env';
+
+function getUser() {
+  const token = window.localStorage.getItem('access_token');
+  const config = {
+    headers: { Authorization: token },
+  };
+  console.log(token);
+  axios.get(`${WEB_API_URL}/v1/users`, config)
+          .then((response) => {
+            console.log(response);
+            const email = response.data[0].email;
+            console.log(email);
+          }).catch((error) => {
+            console.log(error);
+            ons.notification.alert({
+              title: 'failed',
+              message: 'Sorry, conneting again?.',
+              callback: getUser,
+            });
+          });
+}
 
 export default {
   name: 'top-page',
@@ -24,31 +45,16 @@ export default {
   },
   data() {
     return {
-      email: '',
     };
   },
   created() {
-    const token = window.localStorage.getItem('access_token');
-    const config = {
-      // headers: { Authorization: token },
-      headers: { Authorization: `${token}2` },
-    };
-    axios.get(`${WEB_API_URL}/v1/users`, config)
-          .then((response) => {
-            this.email = response.data[0].email;
-          }).catch((error) => {
-            console.log(error);
-            ons.notification.alert({
-              title: 'failed',
-              message: 'Sorry, Pleas Sign in again.',
-            });
-            router.push('login');
-          });
+    getUser();
   },
   methods: {
     push() {
       this.pageStack.push(CameraPage);
     },
+    getUser,
   },
   props: ['pageStack'],
 };
