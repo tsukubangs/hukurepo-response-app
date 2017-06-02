@@ -40,18 +40,41 @@
         </label>
         <label :for="'radio-' + $index" class="center">{{ gender }}</label>
       </v-ons-list-item>
+      <v-ons-list-header>
+        Nationality
+      </v-ons-list-header>
+      <v-ons-list-item>
+        <div class="center">
+          <v-ons-select class="form-select" v-ons-model="selectedNationality">
+            <option v-for="Nationality in countries" :value="Nationality.name">{{ Nationality.name }}</option>
+          </v-ons-select>
+        </div>
+      </v-ons-list-item>
     </v-ons-list>
   </v-ons-page>
 </template>
 
 <script>
+import countries from '../assets/countries';
+
 export default {
   name: 'sign-up',
   data() {
     return {
       selectedGender: 'male',
       genders: ['male', 'female'],
+      countries,
+      selectedNationality: 'Japan',
     };
   },
 };
 </script>
+
+<style>
+.form-select {
+  width: 100%;
+}
+.select-input {
+  color: #1f1f21;
+}
+</style>
