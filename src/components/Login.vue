@@ -33,7 +33,7 @@ export default {
       };
       axios.post(`${WEB_API_URL}/v1/login`, data)
           .then((response) => {
-            console.log(response);
+            window.localStorage.setItem('access_token', response.data.access_token);
             router.push('/');
           }).catch(() => {
             ons.notification.alert({
