@@ -970,4 +970,7 @@ export default [{
   name: 'Zimbabwe',
   code: 'ZW',
 },
+{
+  name: 'Others',
+},
 ];
