@@ -82,7 +82,7 @@ export default {
       countries,
       selectedNationality: 'Japan',
       ages,
-      selectedAge: ages[0].value,
+      selectedAge: ages[2].value,
     };
   },
   methods: {
