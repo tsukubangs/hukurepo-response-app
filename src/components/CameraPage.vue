@@ -118,9 +118,11 @@ function postProblem() {
         ons.notification.alert({
           title: '',
           message: 'Post has been completed.',
+          callback: () => {
+            // post後にトップページに戻る
+            this.pageStack.splice(1, this.pageStack.length - 1);
+          },
         });
-        // post後にトップページに戻る
-        this.pageStack.splice(1, this.pageStack.length - 1);
       }).catch((error) => {
         console.log(error);
         ons.notification.alert({
