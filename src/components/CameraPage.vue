@@ -108,7 +108,11 @@ function postProblem() {
     data.append('problem[image]', blob, 'blob.jpg');
   }
 
-  axios.post(`${WEB_API_URL}/problems`, data)
+  const token = window.localStorage.getItem('access_token');
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios.post(`${WEB_API_URL}/v1/problems`, data, config)
       .then((response) => {
         console.log(response);
         ons.notification.alert({
