@@ -14,7 +14,6 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
-// import router from '../router';
 import { WEB_API_URL } from '../../.env';
 
 function getUser() {
@@ -31,8 +30,8 @@ function getUser() {
           }).catch((error) => {
             console.log(error);
             ons.notification.alert({
-              title: 'failed',
-              message: 'Sorry, conneting again?.',
+              title: 'Can\'t connect to server',
+              message: 'Try again?',
               callback: getUser,
             });
           });
@@ -42,10 +41,6 @@ export default {
   name: 'top-page',
   components: {
     CustomToolbar,
-  },
-  data() {
-    return {
-    };
   },
   created() {
     getUser();
