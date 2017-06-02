@@ -10,7 +10,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input placeholder="Email" float>
+          <v-ons-input class="width100" placeholder="Email" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -19,7 +19,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input placeholder="Password" type="password" float>
+          <v-ons-input class="width100" placeholder="Password" type="password" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -28,7 +28,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input placeholder="Confirm Password" type="password" float>
+          <v-ons-input class="width100" placeholder="Confirm Password" type="password" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -46,7 +46,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-select class="form-select" v-ons-model="selectedNationality">
+          <v-ons-select class="width100" v-ons-model="selectedNationality">
             <option v-for="Nationality in countries" :value="Nationality.name">{{ Nationality.name }}</option>
           </v-ons-select>
         </div>
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style>
-.form-select {
+.width100 {
   width: 100%;
 }
 .select-input {
