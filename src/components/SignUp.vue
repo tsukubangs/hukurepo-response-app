@@ -14,12 +14,12 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message">
+      <v-ons-list-item class="error-message" v-if="this.emailIsInputted && !validation.emailRequired">
         <div class="right">
           The email field is required
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message">
+      <v-ons-list-item class="error-message" v-else-if="this.emailIsInputted && !validation.emailValid">
         <div class="right">
           Invalid email address
         </div>
@@ -33,7 +33,7 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message">
+      <v-ons-list-item class="error-message" >
         <div class="right">
           The password field is required
         </div>
@@ -98,6 +98,8 @@ import countries from '../assets/countries';
 import ages from '../assets/ages';
 import router from '../router';
 
+const emailRegExp = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/;
+
 export default {
   name: 'sign-up',
   data() {
@@ -114,6 +116,14 @@ export default {
       emailIsInputted: false,
       passwordIsInputted: false,
     };
+  },
+  computed: {
+    validation() {
+      return {
+        emailRequired: this.email !== '',
+        emailValid: emailRegExp.test(this.email),
+      };
+    },
   },
   methods: {
     toLogin() {
