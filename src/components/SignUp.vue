@@ -88,7 +88,7 @@
       </v-ons-list-item>
     </v-ons-list>
     <section style="margin: 16px">
-      <v-ons-button modifier="large">Sign up</v-ons-button>
+      <v-ons-button modifier="large" v-bind:disabled="!signUpIsPermitted" @click="signUp()">Sign up</v-ons-button>
     </section>
   </v-ons-page>
 </template>
@@ -131,10 +131,18 @@ export default {
         confirmPasswordMatch: this.confirmPassword === this.password,
       };
     },
+    signUpIsPermitted() {
+      return this.validation.emailRequired && this.validation.emailFormat
+             && this.validation.passwordRequired && this.validation.emailLength
+             && this.validation.confirmPasswordMatch;
+    },
   },
   methods: {
     toLogin() {
       router.push('login');
+    },
+    signUp() {
+      console.log('sign up');
     },
   },
   created() {
