@@ -94,13 +94,39 @@
 </template>
 
 <script>
+import axios from 'axios';
+import ons from 'onsenui';
 import countries from '../assets/countries';
 import ages from '../assets/ages';
 import router from '../router';
+import { WEB_API_URL } from '../../.env';
 
 const emailRegExp = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/;
 const passwordMinLength = 6;
 const passwordMaxLength = 29;
+
+function postSignUp(component) {
+  const data = {
+    email: component.email,
+    password: component.password,
+    gender: component.selectedGender,
+    nationality: component.selectedNationality,
+    age: component.selectedAge.slice(1),
+  };
+  axios.post(`${WEB_API_URL}/v1/users`, data)
+        .then((response) => {
+          console.log(response);
+          const email = response.data[0].email;
+          console.log(email);
+        }).catch((error) => {
+          console.log(error);
+          ons.notification.alert({
+            title: 'Can\'t connect to server',
+            message: 'Try again?',
+            callback: postSignUp,
+          });
+        });
+}
 
 export default {
   name: 'sign-up',
@@ -142,7 +168,7 @@ export default {
       router.push('login');
     },
     signUp() {
-      console.log('sign up');
+      postSignUp(this);
     },
   },
   created() {
