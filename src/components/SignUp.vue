@@ -33,12 +33,12 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message" >
+      <v-ons-list-item class="error-message" v-if="this.passwordIsInputted && !validation.passwordRequired">
         <div class="right">
           The password field is required
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message">
+      <v-ons-list-item class="error-message" v-else-if="this.passwordIsInputted && !validation.passwordValid">
         <div class="right">
           Password length must be between 6 and 29
         </div>
@@ -99,6 +99,8 @@ import ages from '../assets/ages';
 import router from '../router';
 
 const emailRegExp = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/;
+const passwordMinLength = 6;
+const passwordMaxLength = 29;
 
 export default {
   name: 'sign-up',
@@ -122,6 +124,9 @@ export default {
       return {
         emailRequired: this.email !== '',
         emailValid: emailRegExp.test(this.email),
+        passwordRequired: this.password !== '',
+        passwordValid: passwordMinLength <= this.password.length
+                        && this.password.length <= passwordMaxLength,
       };
     },
   },
