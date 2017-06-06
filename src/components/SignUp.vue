@@ -14,6 +14,16 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item class="error-message">
+        <div class="right">
+          The email field is required
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item class="error-message">
+        <div class="right">
+          Invalid email address
+        </div>
+      </v-ons-list-item>
       <v-ons-list-header>
           Password
       </v-ons-list-header>
@@ -23,6 +33,16 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item class="error-message">
+        <div class="right">
+          The password field is required
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item class="error-message">
+        <div class="right">
+          Password length must be between 6 and 29
+        </div>
+      </v-ons-list-item>
       <v-ons-list-header>
           Confirm Password
       </v-ons-list-header>
@@ -30,6 +50,11 @@
         <div class="center">
           <v-ons-input class="width100" placeholder="Confirm Password" type="password" float>
           </v-ons-input>
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item class="error-message">
+        <div class="right">
+          Password and Confirm Password don't match
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
@@ -99,5 +124,9 @@ export default {
 }
 .select-input {
   color: #1f1f21;
+}
+.error-message {
+  color: red;
+  font-size: 13px;
 }
 </style>
