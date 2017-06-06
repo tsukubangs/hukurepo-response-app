@@ -48,11 +48,11 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Confirm Password" type="password" float>
+          <v-ons-input class="width100" placeholder="Confirm Password" type="password" v-ons-model="confirmPassword" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message">
+      <v-ons-list-item class="error-message" v-if="this.confirmPasswordIsInputted && !validation.confirmPasswordValid">
         <div class="right">
           Password and Confirm Password don't match
         </div>
@@ -114,9 +114,10 @@ export default {
       selectedAge: ages[2].value,
       email: '',
       password: '',
-      confirmPasswordField: '',
+      confirmPassword: '',
       emailIsInputted: false,
       passwordIsInputted: false,
+      confirmPasswordIsInputted: false,
     };
   },
   computed: {
@@ -127,6 +128,7 @@ export default {
         passwordRequired: this.password !== '',
         passwordValid: passwordMinLength <= this.password.length
                         && this.password.length <= passwordMaxLength,
+        confirmPasswordValid: this.confirmPassword === this.password,
       };
     },
   },
@@ -144,6 +146,11 @@ export default {
     this.$watch('password', () => {
       if (!this.passwordIsInputted) {
         this.passwordIsInputted = true;
+      }
+    });
+    this.$watch('confirmPassword', () => {
+      if (!this.confirmPasswordIsInputted) {
+        this.confirmPasswordIsInputted = true;
       }
     });
   },
