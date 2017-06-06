@@ -108,15 +108,21 @@ function postProblem() {
     data.append('problem[image]', blob, 'blob.jpg');
   }
 
-  axios.post(`${WEB_API_URL}/problems`, data)
+  const token = window.localStorage.getItem('access_token');
+  const config = {
+    headers: { Authorization: token },
+  };
+  axios.post(`${WEB_API_URL}/v1/problems`, data, config)
       .then((response) => {
         console.log(response);
         ons.notification.alert({
           title: '',
           message: 'Post has been completed.',
+          callback: () => {
+            // post後にトップページに戻る
+            this.pageStack.splice(1, this.pageStack.length - 1);
+          },
         });
-        // post後にトップページに戻る
-        this.pageStack.splice(1, this.pageStack.length - 1);
       }).catch((error) => {
         console.log(error);
         ons.notification.alert({
