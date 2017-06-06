@@ -124,12 +124,17 @@ function postSignUp(component) {
             },
           });
         }).catch((error) => {
-          console.log(error);
-          ons.notification.alert({
-            title: 'Can\'t connect to server',
-            message: 'Try again?',
-            callback: postSignUp,
-          });
+          if (error.response.data.status === 422) {
+            ons.notification.alert({
+              title: 'Email error',
+              message: 'This email address is already registered.',
+            });
+          } else {
+            ons.notification.alert({
+              title: 'Connect error',
+              message: 'Can\'t connect to server',
+            });
+          }
         });
 }
 
