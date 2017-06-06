@@ -19,7 +19,7 @@
           The email field is required
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-else-if="this.emailIsInputted && !validation.emailValid">
+      <v-ons-list-item class="error-message" v-else-if="this.emailIsInputted && !validation.emailFormat">
         <div class="right">
           Invalid email address
         </div>
@@ -38,7 +38,7 @@
           The password field is required
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-else-if="this.passwordIsInputted && !validation.passwordValid">
+      <v-ons-list-item class="error-message" v-else-if="this.passwordIsInputted && !validation.passwordLength">
         <div class="right">
           Password length must be between 6 and 29
         </div>
@@ -52,7 +52,7 @@
           </v-ons-input>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-if="this.confirmPasswordIsInputted && !validation.confirmPasswordValid">
+      <v-ons-list-item class="error-message" v-if="this.confirmPasswordIsInputted && !validation.confirmPasswordMatch">
         <div class="right">
           Password and Confirm Password don't match
         </div>
@@ -124,11 +124,11 @@ export default {
     validation() {
       return {
         emailRequired: this.email !== '',
-        emailValid: emailRegExp.test(this.email),
+        emailFormat: emailRegExp.test(this.email),
         passwordRequired: this.password !== '',
-        passwordValid: passwordMinLength <= this.password.length
+        passwordLength: passwordMinLength <= this.password.length
                         && this.password.length <= passwordMaxLength,
-        confirmPasswordValid: this.confirmPassword === this.password,
+        confirmPasswordMatch: this.confirmPassword === this.password,
       };
     },
   },
