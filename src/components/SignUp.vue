@@ -115,9 +115,14 @@ function postSignUp(component) {
   };
   axios.post(`${WEB_API_URL}/v1/users`, data)
         .then((response) => {
-          console.log(response);
-          const email = response.data[0].email;
-          console.log(email);
+          window.localStorage.setItem('access_token', response.data.access_token);
+          ons.notification.alert({
+            title: '',
+            message: 'The sign up has been completed.',
+            callback: () => {
+              router.push('/');
+            },
+          });
         }).catch((error) => {
           console.log(error);
           ons.notification.alert({
