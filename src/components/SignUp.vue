@@ -124,17 +124,19 @@ function postSignUp(component) {
             },
           });
         }).catch((error) => {
-          if (error.response.data.status === 422) {
-            ons.notification.alert({
-              title: 'Email error',
-              message: 'This email address is already registered.',
-            });
-          } else {
-            ons.notification.alert({
-              title: 'Connect error',
-              message: 'Can\'t connect to server',
-            });
+          let title;
+          let message;
+          if (!error.response) {
+            title = 'Connection error';
+            message = 'Can\'t connect to server';
+          } else if (error.response.data.status === 422) {
+            title = 'Email error';
+            message = 'This email address is already registered.';
           }
+          ons.notification.alert({
+            title,
+            message,
+          });
         });
 }
 
