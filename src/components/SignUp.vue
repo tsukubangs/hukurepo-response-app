@@ -10,7 +10,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Email" float>
+          <v-ons-input class="width100" placeholder="Email" v-ons-model="email" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -29,7 +29,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Password" type="password" float>
+          <v-ons-input class="width100" placeholder="Password" type="password" v-ons-model="password" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -108,12 +108,29 @@ export default {
       selectedNationality: 'Japan',
       ages,
       selectedAge: ages[2].value,
+      email: '',
+      password: '',
+      confirmPasswordField: '',
+      emailIsInputted: false,
+      passwordIsInputted: false,
     };
   },
   methods: {
     toLogin() {
       router.push('login');
     },
+  },
+  created() {
+    this.$watch('email', () => {
+      if (!this.emailIsInputted) {
+        this.emailIsInputted = true;
+      }
+    });
+    this.$watch('password', () => {
+      if (!this.passwordIsInputted) {
+        this.passwordIsInputted = true;
+      }
+    });
   },
 };
 </script>
