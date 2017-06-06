@@ -10,18 +10,8 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Email" v-ons-model="email" float>
+          <v-ons-input class="width100" placeholder="Email" float>
           </v-ons-input>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-if="this.emailIsInputted && !validation.emailRequired">
-        <div class="right">
-          The email field is required
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-else-if="this.emailIsInputted && !validation.emailFormat">
-        <div class="right">
-          Invalid email address
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
@@ -29,18 +19,8 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Password" type="password" v-ons-model="password" float>
+          <v-ons-input class="width100" placeholder="Password" type="password" float>
           </v-ons-input>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-if="this.passwordIsInputted && !validation.passwordRequired">
-        <div class="right">
-          The password field is required
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-else-if="this.passwordIsInputted && !validation.passwordLength">
-        <div class="right">
-          Password length must be between 6 and 29
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
@@ -48,13 +28,8 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Confirm Password" type="password" v-ons-model="confirmPassword" float>
+          <v-ons-input class="width100" placeholder="Confirm Password" type="password" float>
           </v-ons-input>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item class="error-message" v-if="this.confirmPasswordIsInputted && !validation.confirmPasswordMatch">
-        <div class="right">
-          Password and Confirm Password don't match
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
@@ -88,7 +63,7 @@
       </v-ons-list-item>
     </v-ons-list>
     <section style="margin: 16px">
-      <v-ons-button modifier="large" v-bind:disabled="!signUpIsPermitted" @click="signUp()">Sign up</v-ons-button>
+      <v-ons-button modifier="large">Sign up</v-ons-button>
     </section>
   </v-ons-page>
 </template>
@@ -97,10 +72,6 @@
 import countries from '../assets/countries';
 import ages from '../assets/ages';
 import router from '../router';
-
-const emailRegExp = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/;
-const passwordMinLength = 6;
-const passwordMaxLength = 29;
 
 export default {
   name: 'sign-up',
@@ -112,55 +83,12 @@ export default {
       selectedNationality: 'Japan',
       ages,
       selectedAge: ages[2].value,
-      email: '',
-      password: '',
-      confirmPassword: '',
-      emailIsInputted: false,
-      passwordIsInputted: false,
-      confirmPasswordIsInputted: false,
     };
-  },
-  computed: {
-    validation() {
-      return {
-        emailRequired: this.email !== '',
-        emailFormat: emailRegExp.test(this.email),
-        passwordRequired: this.password !== '',
-        passwordLength: passwordMinLength <= this.password.length
-                        && this.password.length <= passwordMaxLength,
-        confirmPasswordMatch: this.confirmPassword === this.password,
-      };
-    },
-    signUpIsPermitted() {
-      return this.validation.emailRequired && this.validation.emailFormat
-             && this.validation.passwordRequired && this.validation.emailLength
-             && this.validation.confirmPasswordMatch;
-    },
   },
   methods: {
     toLogin() {
       router.push('login');
     },
-    signUp() {
-      console.log('sign up');
-    },
-  },
-  created() {
-    this.$watch('email', () => {
-      if (!this.emailIsInputted) {
-        this.emailIsInputted = true;
-      }
-    });
-    this.$watch('password', () => {
-      if (!this.passwordIsInputted) {
-        this.passwordIsInputted = true;
-      }
-    });
-    this.$watch('confirmPassword', () => {
-      if (!this.confirmPasswordIsInputted) {
-        this.confirmPasswordIsInputted = true;
-      }
-    });
   },
 };
 </script>
@@ -171,9 +99,5 @@ export default {
 }
 .select-input {
   color: #1f1f21;
-}
-.error-message {
-  color: red;
-  font-size: 13px;
 }
 </style>
