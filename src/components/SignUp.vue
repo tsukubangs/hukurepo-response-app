@@ -94,13 +94,51 @@
 </template>
 
 <script>
+import axios from 'axios';
+import ons from 'onsenui';
 import countries from '../assets/countries';
 import ages from '../assets/ages';
 import router from '../router';
+import { WEB_API_URL } from '../../.env';
 
 const emailRegExp = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/;
 const passwordMinLength = 6;
 const passwordMaxLength = 29;
+
+function postSignUp(component) {
+  const data = {
+    email: component.email,
+    password: component.password,
+    gender: component.selectedGender,
+    nationality: component.selectedNationality,
+    age: component.selectedAge.slice(1),
+  };
+  axios.post(`${WEB_API_URL}/v1/users`, data)
+        .then((response) => {
+          window.localStorage.setItem('access_token', response.data.access_token);
+          ons.notification.alert({
+            title: '',
+            message: 'The sign up has been completed.',
+            callback: () => {
+              router.push('/');
+            },
+          });
+        }).catch((error) => {
+          let title;
+          let message;
+          if (!error.response) {
+            title = 'Connection error';
+            message = 'Can\'t connect to server';
+          } else if (error.response.data.status === 422) {
+            title = 'Email error';
+            message = 'This email address is already registered.';
+          }
+          ons.notification.alert({
+            title,
+            message,
+          });
+        });
+}
 
 export default {
   name: 'sign-up',
@@ -142,7 +180,7 @@ export default {
       router.push('login');
     },
     signUp() {
-      console.log('sign up');
+      postSignUp(this);
     },
   },
   created() {
