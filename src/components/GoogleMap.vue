@@ -2,8 +2,8 @@
   <div v-if="isError">
     can't get your position.
   </div>
-  <div v-else-if="!hasLatlng">
-    <ons-progress-circular indeterminate></ons-progress-circular>
+  <div class="centering" v-else-if="!hasLatlng">
+    <v-ons-icon icon="md-spinner" size="30px" spin></v-ons-icon>
   </div>
   <gmap-map :center="position" :zoom="17" v-else>
     <gmap-marker v-for="m in markers" :position="m.position" :clickable="false" :draggable="false"></gmap-marker>
@@ -33,9 +33,9 @@ export default {
 </script>
 
 <style scoped >
-  ons-progress-circular {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  .centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
