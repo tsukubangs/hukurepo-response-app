@@ -8,7 +8,7 @@ Vue.use(Vuex);
 const state = {
   problems: [],
   fetchProblemsStatus: {
-    isLoding: false,
+    isError: false,
     idCompleted: false,
   },
 };
