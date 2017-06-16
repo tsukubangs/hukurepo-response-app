@@ -8,7 +8,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     problems: [],
-    fetchProblemsStatus: 'init',
+    fetchProblemsStatus: {
+      isLoding: false,
+      isCompleted: false,
+    },
   },
   getters: {
     problems: state => state.problems,

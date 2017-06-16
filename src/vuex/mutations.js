@@ -3,13 +3,22 @@ import { FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR } fro
 /* eslint-disable no-param-reassign */
 export default {
   [FETCH_PROBLEMS_START](state) {
-    state.fetchProblemsStatus = 'loading';
+    state.fetchProblemsStatus = {
+      isError: false,
+      idCompleted: false,
+    };
   },
   [FETCH_PROBLEMS_FINISH](state, problems) {
     state.problems = problems;
-    state.fetchProblemsStatus = 'finish';
+    state.fetchProblemsStatus = {
+      isError: false,
+      idCompleted: true,
+    };
   },
   [FETCH_PROBLEMS_ERROR](state) {
-    state.fetchProblemsStatus = 'error';
+    state.fetchProblemsStatus = {
+      isError: true,
+      idCompleted: false,
+    };
   },
 };
