@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
 import { FETCH_PROBLEMS } from '../vuex/mutation-types';
@@ -22,6 +22,12 @@ export default {
   },
   created() {
     this.FETCH_PROBLEMS();
+  },
+  computed: {
+    ...mapGetters([
+      'problems',
+      'fetchProblemsStatus',
+    ]),
   },
   methods: {
     ...mapActions([
