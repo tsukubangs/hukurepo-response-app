@@ -7,10 +7,7 @@ Vue.use(Vuex);
 
 const state = {
   problems: [],
-  fetchProblemsStatus: {
-    isError: false,
-    idCompleted: false,
-  },
+  fetchProblemsStatus: 'init',
 };
 
 const getters = {};
