@@ -11,6 +11,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
 import { FETCH_PROBLEMS } from '../vuex/mutation-types';
@@ -21,6 +22,16 @@ export default {
     CustomToolbar,
   },
   created() {
+    this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
+      if (isError) {
+        ons.notification.alert({
+          title: 'Can\'t connect to server',
+          message: 'Try again?',
+          callback: this.FETCH_PROBLEMS,
+        });
+      }
+    });
+
     this.FETCH_PROBLEMS();
   },
   computed: {
