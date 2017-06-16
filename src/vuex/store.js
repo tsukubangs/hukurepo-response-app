@@ -5,16 +5,15 @@ import mutations from './mutations';
 
 Vue.use(Vuex);
 
-const state = {
-  problems: [],
-  fetchProblemsStatus: 'init',
-};
-
-const getters = {};
-
 export default new Vuex.Store({
-  state,
-  getters,
+  state: {
+    problems: [],
+    fetchProblemsStatus: 'init',
+  },
+  getters: {
+    problems: state => state.problems,
+    fetchProblemsStatus: state => state.fetchProblemsStatus,
+  },
   actions,
   mutations,
 });
