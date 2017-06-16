@@ -9,8 +9,8 @@ export default new Vuex.Store({
   state: {
     problems: [],
     fetchProblemsStatus: {
-      isLoding: false,
       isError: false,
+      isCompleted: false,
     },
   },
   getters: {

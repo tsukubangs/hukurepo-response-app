@@ -1,11 +1,15 @@
 <template id="top-page">
   <v-ons-page>
     <custom-toolbar>Top Page</custom-toolbar>
-    <p style="text-align: center">
-      This is the first page
-      <v-ons-button @click="push">POST</v-ons-button>
-    </p>
-    <p>Log in!</p>
+    <div class="h100 pt5">
+        <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
+            <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
+        </div>
+        <p style="text-align: center" v-else>
+          This is the first page
+          <v-ons-button @click="push">POST</v-ons-button>
+        </p>
+    </div>
   </v-ons-page>
 </template>
 
@@ -51,3 +55,18 @@ export default {
   props: ['pageStack'],
 };
 </script>
+
+<style scoped>
+.h100 {
+  height:100%;
+}
+.pt5 {
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

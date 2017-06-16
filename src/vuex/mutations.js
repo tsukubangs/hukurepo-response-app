@@ -5,20 +5,20 @@ export default {
   [FETCH_PROBLEMS_START](state) {
     state.fetchProblemsStatus = {
       isError: false,
-      idCompleted: false,
+      isCompleted: false,
     };
   },
   [FETCH_PROBLEMS_FINISH](state, problems) {
     state.problems = problems;
     state.fetchProblemsStatus = {
       isError: false,
-      idCompleted: true,
+      isCompleted: true,
     };
   },
   [FETCH_PROBLEMS_ERROR](state) {
     state.fetchProblemsStatus = {
       isError: true,
-      idCompleted: false,
+      isCompleted: false,
     };
   },
 };
