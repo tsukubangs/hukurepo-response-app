@@ -1,15 +1,16 @@
 <template id="top-page">
   <v-ons-page>
     <custom-toolbar>Top Page</custom-toolbar>
-    <div class="h100 pt5">
+    <main class="h100">
         <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
         </div>
-        <p style="text-align: center" v-else>
+        <problem-card v-for="problem in problems"></problem-card>
+        <!-- <p style="text-align: center" v-else>
           This is the first page
           <v-ons-button @click="push">POST</v-ons-button>
-        </p>
-    </div>
+        </p> -->
+    </main>
   </v-ons-page>
 </template>
 
@@ -18,12 +19,14 @@ import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
+import ProblemCard from './ProblemCard';
 import { FETCH_PROBLEMS } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
   components: {
     CustomToolbar,
+    ProblemCard,
   },
   created() {
     this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
@@ -60,8 +63,8 @@ export default {
 .h100 {
   height:100%;
 }
-.pt5 {
-  padding-top: 5px;
+main {
+  padding: 10px 10px 0;
   box-sizing: border-box;
 }
 .centering {
