@@ -1,12 +1,13 @@
 <template>
   <v-ons-card>
       <div class="thumbnail">
+          <div></div>
       </div>
       <div class="content">
           <div class="comment">
-              aaaaa
+              <p>{{problem.comment}}</p>
           </div>
-          <div class="date">aaa</div>
+          <div class="date">{{problem.created_at}}</div>
       </div>
   </v-ons-card>
 </template>
@@ -22,11 +23,13 @@ export default {
 
 <style>
 v-ons-card {
+  position: relative;
   display: flex;
 }
 .thumbnail {
+  position: relative;
   background-color: red;
-  flex-grow: 5;
+  width: 40%;
 }
 .thumbnail:before {
     content: "";
@@ -41,13 +44,15 @@ v-ons-card {
     right: 0;
     height: 100%;
 }
-
 .content {
   display: flex;
   flex-direction: column;
-  flex-grow: 6;
+  width: 60%;
 }
 .comment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-grow: 9
 }
 .date {
