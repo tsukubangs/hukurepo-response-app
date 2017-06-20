@@ -5,7 +5,7 @@
         <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
         </div>
-        <problem-card v-for="problem in problems"></problem-card>
+        <problem-card v-for="problem in problems" class="card"></problem-card>
         <!-- <p style="text-align: center" v-else>
           This is the first page
           <v-ons-button @click="push">POST</v-ons-button>
@@ -64,12 +64,15 @@ export default {
   height:100%;
 }
 main {
-  padding: 10px 10px 0;
+  padding: 5px;
   box-sizing: border-box;
 }
 .centering {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.card {
+  margin: 10px 5px;
 }
 </style>
