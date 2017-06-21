@@ -6,7 +6,7 @@
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
         </div>
         <problem-card v-for="problem in problems" :problem="problem" class="card"></problem-card>
-        <v-ons-fab position="bottom right" class="post-btn" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
+        <v-ons-fab position="bottom right" class="post-btn" :style="{ backgroundColor: '#4282cc'}"  @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
     </main>
   </v-ons-page>
 </template>
@@ -75,5 +75,6 @@ main {
 }
 .post-btn {
   position: fixed;
+  background-color: "#4282cc";
 }
 </style>
