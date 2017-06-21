@@ -10,8 +10,8 @@
                 <problem-card :problem="problem" class="card"></problem-card>
             </li>
         </ul>
-        <v-ons-fab position="bottom right" class="post-btn" :style="{ backgroundColor: '#4282cc'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
     </main>
+    <v-ons-fab class="post-btn" :style="{ backgroundColor: '#4282cc'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
   </v-ons-page>
 </template>
 
@@ -78,7 +78,8 @@ main {
 }
 .post-btn {
   position: fixed;
-  background-color: "#4282cc";
+  bottom: 10px;
+  right: 10px;
 }
 .card-list {
   margin: 0;
