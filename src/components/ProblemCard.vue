@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 v-ons-card {
   position: relative;
   display: flex;
