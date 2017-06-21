@@ -11,7 +11,7 @@
             </li>
         </ul>
     </main>
-    <v-ons-fab class="post-btn" :style="{ backgroundColor: '#4282cc'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
+    <v-ons-fab position="bottom right" :style="{ backgroundColor: '#4282cc'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
   </v-ons-page>
 </template>
 
@@ -75,11 +75,6 @@ main {
 }
 .card {
   width: 100%;
-}
-.post-btn {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
 }
 .card-list {
   margin: 0;
