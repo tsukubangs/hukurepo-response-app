@@ -1,7 +1,7 @@
 <template>
   <v-ons-card>
       <div class="thumbnail">
-          <div></div>
+        <img :src="thumbnailUrl">
       </div>
       <div class="content">
           <div class="comment">
@@ -13,11 +13,18 @@
 </template>
 
 <script>
+import { WEB_API_URL } from '../../.env';
+
 export default {
   name: 'google-map',
   props: [
     'problem',
   ],
+  computed: {
+    thumbnailUrl() {
+      return WEB_API_URL + this.problem.image_url;
+    },
+  },
 };
 </script>
 
@@ -57,5 +64,14 @@ v-ons-card {
 }
 .date {
   flex-grow: 1
+}
+.cover {
+  width: 100%;
+  height: 100%;
+}
+img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
 }
 </style>
