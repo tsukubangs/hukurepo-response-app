@@ -55,6 +55,8 @@ v-ons-card {
   display: flex;
   flex-direction: column;
   width: 60%;
+  padding: 0 10px;
+  text-align: left;
 }
 .comment {
   display: flex;
@@ -65,16 +67,19 @@ v-ons-card {
 .date {
   flex-grow: 1;
   text-align: right;
-  padding: 0 10px;
   font-size: x-small;
 }
 .cover {
   width: 100%;
   height: 100%;
 }
+p {
+  padding: 0.5em 0;
+  margin: 0;
+  font-size: initial;
+}
 img {
   width: 100%;
-  height: 400px;
   object-fit: cover;
 }
 </style>
