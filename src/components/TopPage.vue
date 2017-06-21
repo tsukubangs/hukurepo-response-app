@@ -6,10 +6,7 @@
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
         </div>
         <problem-card v-for="problem in problems" :problem="problem" class="card"></problem-card>
-        <!-- <p style="text-align: center" v-else>
-          This is the first page
-          <v-ons-button @click="push">POST</v-ons-button>
-        </p> -->
+        <v-ons-fab position="bottom right" class="post-btn" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
     </main>
   </v-ons-page>
 </template>
@@ -75,5 +72,8 @@ main {
 .card {
   width: 100%;
   margin: 10px 0;
+}
+.post-btn {
+  position: fixed;
 }
 </style>
