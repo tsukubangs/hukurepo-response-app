@@ -35,7 +35,6 @@ v-ons-card {
 }
 .thumbnail {
   position: relative;
-  background-color: red;
   width: 40%;
 }
 .thumbnail:before {
@@ -60,10 +59,13 @@ v-ons-card {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-grow: 9
+  flex-grow: 9;
 }
 .date {
-  flex-grow: 1
+  flex-grow: 1;
+  text-align: right;
+  padding: 0 10px;
+  font-size: x-small;
 }
 .cover {
   width: 100%;
