@@ -5,7 +5,11 @@
         <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
         </div>
-        <problem-card v-for="problem in problems" :problem="problem" class="card"></problem-card>
+        <ul class="card-list">
+            <li v-for="problem in problems">
+                <problem-card :problem="problem" class="card"></problem-card>
+            </li>
+        </ul>
         <v-ons-fab position="bottom right" class="post-btn" :style="{ backgroundColor: '#4282cc'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
     </main>
   </v-ons-page>
@@ -71,10 +75,18 @@ main {
 }
 .card {
   width: 100%;
-  margin: 10px 0;
 }
 .post-btn {
   position: fixed;
   background-color: "#4282cc";
+}
+.card-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding-bottom: 100px;
+}
+.card-list > li {
+  margin: 10px 0;
 }
 </style>
