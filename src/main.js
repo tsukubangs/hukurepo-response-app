@@ -10,6 +10,7 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 import router from './router';
 import App from './App';
 import { GOOGLE_MAP_API } from '../.env';
+import store from './vuex/store';
 
 Vue.use(VueOnsen);
 ons.forcePlatformStyling('ios');
@@ -25,6 +26,7 @@ Vue.use(VueGoogleMaps, {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App },
 });

@@ -1,56 +1,88 @@
 <template id="top-page">
   <v-ons-page>
     <custom-toolbar>Top Page</custom-toolbar>
-    <p style="text-align: center">
-      This is the first page
-      <v-ons-button @click="push">POST</v-ons-button>
-    </p>
-    <p>Log in!</p>
+    <main class="h100">
+        <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
+            <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
+        </div>
+        <ul class="card-list">
+            <li v-for="problem in problems">
+                <problem-card :problem="problem" class="card"></problem-card>
+            </li>
+        </ul>
+    </main>
+    <v-ons-fab position="bottom right" :style="{ backgroundColor: '#4282cc'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
   </v-ons-page>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
-import { WEB_API_URL } from '../../.env';
-
-function getUser() {
-  const token = window.localStorage.getItem('access_token');
-  const config = {
-    headers: { Authorization: token },
-  };
-  console.log(token);
-  axios.get(`${WEB_API_URL}/v1/users`, config)
-          .then((response) => {
-            console.log(response);
-            const email = response.data[0].email;
-            console.log(email);
-          }).catch((error) => {
-            console.log(error);
-            ons.notification.alert({
-              title: 'Can\'t connect to server',
-              message: 'Try again?',
-              callback: getUser,
-            });
-          });
-}
+import ProblemCard from './ProblemCard';
+import { FETCH_PROBLEMS } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
   components: {
     CustomToolbar,
+    ProblemCard,
   },
   created() {
-    getUser();
+    this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
+      if (isError) {
+        ons.notification.alert({
+          title: 'Can\'t connect to server',
+          message: 'Try again?',
+          callback: this.FETCH_PROBLEMS,
+        });
+      }
+    });
+
+    this.FETCH_PROBLEMS();
+  },
+  computed: {
+    ...mapGetters([
+      'problems',
+      'fetchProblemsStatus',
+    ]),
   },
   methods: {
+    ...mapActions([
+      FETCH_PROBLEMS,
+    ]),
     push() {
       this.pageStack.push(CameraPage);
     },
-    getUser,
   },
   props: ['pageStack'],
 };
 </script>
+
+<style scoped>
+.h100 {
+  height:100%;
+}
+main {
+  padding: 5px;
+  box-sizing: border-box;
+}
+.centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  width: 100%;
+}
+.card-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding-bottom: 100px;
+}
+.card-list > li {
+  margin: 10px 0;
+}
+</style>
