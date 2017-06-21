@@ -33,11 +33,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
+import { FETCH_PROBLEMS } from '../vuex/mutation-types';
 
 // 引数はbase64形式の文字列
 function toBlob(base64) {
@@ -112,6 +114,7 @@ function postProblem() {
   axios.post(`${WEB_API_URL}/v1/problems`, data, config)
       .then((response) => {
         console.log(response);
+        this.FETCH_PROBLEMS();
         ons.notification.alert({
           title: '',
           message: 'Post has been completed.',
@@ -150,6 +153,9 @@ export default {
     getPhoto,
     postProblem,
     onSuccess,
+    ...mapActions([
+      FETCH_PROBLEMS,
+    ]),
   },
   created() {
     navigator.geolocation.getCurrentPosition(
