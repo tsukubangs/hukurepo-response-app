@@ -1,7 +1,8 @@
 <template>
   <v-ons-card>
       <div class="thumbnail">
-        <img :src="thumbnailUrl">
+        <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
+        <img src="../assets/noimage.jpg" v-else>
       </div>
       <div class="content">
           <div class="comment">
@@ -22,7 +23,7 @@ export default {
   ],
   computed: {
     thumbnailUrl() {
-      return WEB_API_URL + this.problem.image_url;
+      return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
     },
   },
 };
