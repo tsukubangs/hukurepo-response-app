@@ -81,6 +81,7 @@ p {
 img {
   width: 100%;
   object-fit: cover;
+  border-radius: 20px;
 }
 v-ons-card {
     background: #cdeffc;
