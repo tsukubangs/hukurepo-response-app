@@ -82,4 +82,7 @@ img {
   width: 100%;
   object-fit: cover;
 }
+v-ons-card {
+    background: #cdeffc;
+}
 </style>
