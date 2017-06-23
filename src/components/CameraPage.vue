@@ -98,7 +98,7 @@ function postProblem() {
   data.append('problem[latitude]', this.latitude);
   data.append('problem[longitude]', this.longitude);
 
-  const checkImage = document.getElementsByClassName('picture-box');
+  const checkImage = document.getElementsByClassName('trim-img');
   if (checkImage.length > 0) {
     const dataURL = document.getElementById('picture').src;
     console.log(dataURL);
