@@ -84,5 +84,6 @@ img {
 }
 v-ons-card {
     background: #cdeffc;
+    border-radius: 20px;
 }
 </style>
