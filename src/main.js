@@ -7,6 +7,9 @@ import ons from 'onsenui';
 import Vue from 'vue';
 import VueOnsen from 'vue-onsenui';
 import * as VueGoogleMaps from 'vue2-google-maps';
+
+import './style.css';
+
 import router from './router';
 import App from './App';
 import { GOOGLE_MAP_API } from '../.env';
