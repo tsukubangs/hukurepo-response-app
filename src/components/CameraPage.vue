@@ -60,10 +60,7 @@ function toBlob(base64) {
 }
 
 function onFail(message) {
-  ons.notification.alert({
-    title: '',
-    message: `An error occured: ${message}`,
-  });
+  console.log(message);
 }
 
 function onSuccess(imageData) {
