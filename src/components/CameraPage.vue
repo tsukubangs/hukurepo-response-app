@@ -5,7 +5,7 @@
     <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
 
     <div class="cover">
-      <div class="box">
+      <div class="box" @click="takePhoto">
         <img class="" id="picture" src="../assets/no-image.png" />
       </div>
       <div class="box">
@@ -60,16 +60,13 @@ function toBlob(base64) {
 }
 
 function onFail(message) {
-  ons.notification.alert({
-    title: '',
-    message: `An error occured: ${message}`,
-  });
+  console.log(message);
 }
 
 function onSuccess(imageData) {
   const largeImage = document.getElementById('picture');
   largeImage.style.display = 'block';
-  largeImage.classList.add('picture-box');
+  largeImage.classList.add('trim-img');
   const head = 'data:image/jpeg;base64,';
   largeImage.src = head + imageData;
 }
@@ -213,7 +210,7 @@ export default {
 }
 .box {
    display: table-cell;
-   width: 50%;
+   width: 48%;
    position: relative;
    box-sizing: border-box;
    border: transparent 2px solid;
@@ -231,7 +228,7 @@ export default {
     right: 0;
     height: 100%;
 }
-.picture-box {
+.trim-img {
     object-fit: cover;
     width: 100%;
     height: 100%;
