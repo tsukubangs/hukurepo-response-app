@@ -1,6 +1,6 @@
 <template id="top-page">
   <v-ons-page>
-    <custom-toolbar>Top Page</custom-toolbar>
+    <custom-toolbar><div class="title"><img class="title-icon" src="../assets/s_logo.png" /></div></custom-toolbar>
     <main class="h100">
         <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
@@ -84,5 +84,13 @@ main {
 }
 .card-list > li {
   margin: 10px 0;
+}
+.title {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 3px 0;
+}
+.title-icon {
+  height: 100%;
 }
 </style>
