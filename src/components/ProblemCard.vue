@@ -63,11 +63,13 @@ v-ons-card {
   align-items: center;
   justify-content: center;
   flex-grow: 9;
+  color: #7f7f7f;
 }
 .date {
   flex-grow: 1;
   text-align: right;
   font-size: x-small;
+  color: #aaaaaa;
 }
 .cover {
   width: 100%;
@@ -84,7 +86,7 @@ img {
   border-radius: 20px;
 }
 v-ons-card {
-  background: #cdeffc;
+  background: rgba(1,168,236,0.1);
   border-radius: 20px;
 }
 </style>
