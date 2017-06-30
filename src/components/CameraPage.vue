@@ -2,7 +2,7 @@
   <v-ons-page>
     <custom-toolbar>Camera Page</custom-toolbar>
 
-    <textarea id="text-form" class="textarea" row="5" placeholder="text area" v-model="postComment" name='description' ></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus></textarea>
 
     <div class="cover">
       <div class="box" @click="takePhoto">
@@ -41,6 +41,11 @@ import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
 import { FETCH_PROBLEMS } from '../vuex/mutation-types';
 
+const focus = {
+  inserted(el) {
+    el.focus();
+  },
+};
 // 引数はbase64形式の文字列
 function toBlob(base64) {
   const bin = atob(base64.replace(/^.*,/, ''));
@@ -139,6 +144,7 @@ export default {
     GoogleMap,
   },
   props: ['pageStack'],
+  directives: { focus },
   data() {
     return {
       latitude: '',
