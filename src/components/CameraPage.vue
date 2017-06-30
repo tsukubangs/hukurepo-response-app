@@ -2,7 +2,7 @@
   <v-ons-page>
     <custom-toolbar>Camera Page</custom-toolbar>
 
-    <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus v-resize></textarea>
 
     <div class="cover">
       <div class="box" @click="takePhoto">
@@ -44,6 +44,15 @@ import { FETCH_PROBLEMS } from '../vuex/mutation-types';
 const focus = {
   inserted(el) {
     el.focus();
+  },
+};
+
+const resize = {
+  update(el) {
+    const textForm = el;
+    if (textForm.scrollHeight > textForm.offsetHeight) {
+      textForm.rows += 1;
+    }
   },
 };
 // 引数はbase64形式の文字列
@@ -144,7 +153,7 @@ export default {
     GoogleMap,
   },
   props: ['pageStack'],
-  directives: { focus },
+  directives: { focus, resize },
   data() {
     return {
       latitude: '',
