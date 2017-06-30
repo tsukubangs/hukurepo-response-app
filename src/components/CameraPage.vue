@@ -192,10 +192,10 @@ export default {
 
 <style scoped >
  #text-form {
-   width: 90%;
-   height: 150px;
-   margin-bottom: 10px;
+   width: 100%;
    margin-top: 10px;
+   background-color: transparent;
+   border: 0;
  }
  #post-btn{
    display: block;
