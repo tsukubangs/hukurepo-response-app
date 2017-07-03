@@ -1,9 +1,7 @@
-<template class="custom-toolbar">
-    <div>
-        <div class="frame">
-            <v-ons-icon icon="ion-ios-camera-outline" size="200px" style="margin: -20px 0; color: #01a8ec;"></v-ons-icon>
-            <p>Add Photo</p>
-        </div>
+<template>
+    <div class="frame">
+        <v-ons-icon icon="ion-ios-camera-outline" size="200px" style="margin: -20px 0; color: #01a8ec;"></v-ons-icon>
+        <p>Add Photo</p>
     </div>
 </template>
 
