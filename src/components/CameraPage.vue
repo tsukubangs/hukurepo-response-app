@@ -3,7 +3,12 @@
     <custom-toolbar>Camera Page</custom-toolbar>
 
     <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus v-resize></textarea>
-    <camera-button></camera-button>
+    <div @click="takePhoto">
+        <camera-button></camera-button>
+    </div>
+    <div>
+        <img :src="imageData" class="photo">
+    </div>
     <!-- <div class="cover">
       <div class="box" @click="takePhoto">
         <img class="" id="picture" src="../assets/no-image.png" />
@@ -12,7 +17,6 @@
         <google-map :latitude="latitude" :longitude="longitude" :isError="isMapError"></google-map>
       </div>
     </div> -->
-
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
@@ -87,7 +91,10 @@ function onSuccess(imageData) {
 }
 
 function takePhoto() {
-  navigator.camera.getPicture(onSuccess, onFail,
+  navigator.camera.getPicture((imageData) => {
+    const head = 'data:image/jpeg;base64,';
+    this.imageData = head + imageData;
+  }, () => {},
     { quality: 50,
       destinationType: navigator.camera.DestinationType.DATA_URL,
       sourceType: navigator.camera.PictureSourceType.CAMERA,
@@ -99,7 +106,7 @@ function takePhoto() {
 function getPhoto() {
 // Specify the source to get the photos.
   navigator.camera.getPicture(onSuccess, onFail,
-    { quality: 50,
+    { quality: 10,
       destinationType: navigator.camera.DestinationType.DATA_URL,
       sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
       correctOrientation: true,
@@ -163,6 +170,7 @@ export default {
       address: '',
       isMapError: false,
       postComment: '',
+      imageData: '',
     };
   },
   methods: {
@@ -252,5 +260,8 @@ export default {
 }
 .bottom-bar{
   position: fixed;
+}
+.photo {
+  width: 100%;
 }
 </style>
