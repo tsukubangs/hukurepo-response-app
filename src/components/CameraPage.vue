@@ -3,15 +3,15 @@
     <custom-toolbar>Camera Page</custom-toolbar>
 
     <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus v-resize></textarea>
-
-    <div class="cover">
+    <camera-button></camera-button>
+    <!-- <div class="cover">
       <div class="box" @click="takePhoto">
         <img class="" id="picture" src="../assets/no-image.png" />
       </div>
       <div class="box">
         <google-map :latitude="latitude" :longitude="longitude" :isError="isMapError"></google-map>
       </div>
-    </div>
+    </div> -->
 
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
@@ -38,6 +38,7 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import GoogleMap from './GoogleMap';
+import CameraButton from './CameraButton';
 import { WEB_API_URL } from '../../.env';
 import { FETCH_PROBLEMS } from '../vuex/mutation-types';
 
@@ -151,6 +152,7 @@ export default {
   components: {
     CustomToolbar,
     GoogleMap,
+    CameraButton,
   },
   props: ['pageStack'],
   directives: { focus, resize },
@@ -208,7 +210,7 @@ export default {
 <style scoped >
  #text-form {
    width: 100%;
-   margin-top: 10px;
+   margin: 10px 0;
    background-color: transparent;
    border: 0;
  }
