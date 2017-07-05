@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_PROBLEMS, FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR } from './mutation-types';
+import { FETCH_PROBLEMS, FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, SELECTE_PROBLEM, SELECTED_PROBLEM } from './mutation-types';
 import { WEB_API_URL } from '../../.env';
 
 export default {
@@ -15,5 +15,9 @@ export default {
             }).catch(() => {
               commit(FETCH_PROBLEMS_ERROR);
             });
+  },
+  [SELECTE_PROBLEM]({ commit }, problem) {
+    console.log(problem);
+    commit(SELECTED_PROBLEM, problem);
   },
 };

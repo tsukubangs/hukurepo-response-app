@@ -12,10 +12,12 @@ export default new Vuex.Store({
       isError: false,
       isCompleted: false,
     },
+    selectedProblem: { },
   },
   getters: {
     problems: state => state.problems,
     fetchProblemsStatus: state => state.fetchProblemsStatus,
+    selectedProblem: state => state.selectedProblem,
   },
   actions,
   mutations,

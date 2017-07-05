@@ -2,11 +2,12 @@
   <v-ons-page>
     <custom-toolbar>Response Page</custom-toolbar>
       <p>this is a response page</p>
+      <p>{{ selectedProblem }}</p>
   </v-ons-page>
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 // import axios from 'axios';
 // import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
@@ -16,6 +17,13 @@ export default {
   name: 'response-page',
   components: {
     CustomToolbar,
+  },
+  computed: {
+    ...mapGetters([
+      'selectedProblem',
+    ]),
+  },
+  created() {
   },
   props: ['pageStack'],
 };

@@ -6,7 +6,7 @@
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
         </div>
         <ul class="card-list">
-            <li v-for="problem in problems" @click="toResponse">
+            <li v-for="problem in problems" @click="toResponse(problem)">
                 <problem-card :problem="problem" class="card"></problem-card>
             </li>
         </ul>
@@ -22,7 +22,7 @@ import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
 import ProblemCard from './ProblemCard';
 import ResponsePage from './ResponsePage';
-import { FETCH_PROBLEMS } from '../vuex/mutation-types';
+import { FETCH_PROBLEMS, SELECTE_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
@@ -56,7 +56,10 @@ export default {
     push() {
       this.pageStack.push(CameraPage);
     },
-    toResponse() {
+    toResponse(problem) {
+      // this.postProblem = problem;
+      console.log(problem.id);
+      this.$store.dispatch(SELECTE_PROBLEM, problem);
       this.pageStack.push(ResponsePage);
     },
   },
