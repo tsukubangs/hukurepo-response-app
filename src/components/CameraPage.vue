@@ -21,11 +21,9 @@
     <p>lat:{{latitude}}</p>
     <p>lng:{{longitude}}</p>
     <p>address:{{address}}</p>
-    <div class="bottom-bar">
+    <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
         <div class="toolbar__left">
-          <span class="toolbar-button" @click="getPhoto"><ons-icon icon="ion-folder" size="30px"></ons-icon></span>
-          <span class="toolbar-button" @click="takePhoto"><ons-icon icon="ion-camera" size="30px"></ons-icon></span>
         </div>
         <div class="toolbar__center">
         </div>
@@ -34,6 +32,13 @@
         </div>
       </div>
     </div>
+    <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
+      <div class="left"></div>
+      <div class="center"></div>
+      <div class="right">
+          <span class="toolbar-button toolbar-button--outline" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+      </div>
+    </v-ons-toolbar>
   </v-ons-page>
 </template>
 
@@ -183,6 +188,15 @@ export default {
     hasImageData() {
       return this.imageData !== '';
     },
+    isIOS() {
+      /* eslint-disable no-undef */
+      try {
+        return device.platform === 'iOS';
+      } catch (e) {
+        console.log(e);
+        return false;
+      }
+    },
   },
   methods: {
     takePhoto,
@@ -290,4 +304,17 @@ export default {
   color: #fff;
   padding: 0 6px;
 }
+.bottom-bar {
+  border-top: solid 1px rgba(127, 127, 127, 0.5);
+}
+.bottom-bar > .toolbar {
+  background-color: #fff;
+}
+.ios-bottom-bar {
+  background-color: #fff;
+  border-top: solid 1px rgba(127, 127, 127, 0.5);
+  top: auto;
+  bottom: 0;
+}
+
 </style>
