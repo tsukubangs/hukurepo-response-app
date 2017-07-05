@@ -3,11 +3,12 @@
     <custom-toolbar>Camera Page</custom-toolbar>
 
     <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus v-resize></textarea>
-    <div @click="takePhoto">
+    <div @click="takePhoto" v-if="!this.hasImageData">
         <camera-button></camera-button>
     </div>
-    <div>
+    <div class="photo-block" v-else>
         <img :src="imageData" class="photo">
+        <ons-icon class="cancel-button" icon="ion-android-cancel" size="30px"></ons-icon>
     </div>
     <!-- <div class="cover">
       <div class="box" @click="takePhoto">
@@ -94,12 +95,14 @@ function takePhoto() {
   navigator.camera.getPicture((imageData) => {
     const head = 'data:image/jpeg;base64,';
     this.imageData = head + imageData;
-  }, () => {},
-    { quality: 50,
-      destinationType: navigator.camera.DestinationType.DATA_URL,
-      sourceType: navigator.camera.PictureSourceType.CAMERA,
-      correctOrientation: true,
-    },
+  }, (error) => {
+    console.log(error);
+  }, {
+    quality: 50,
+    destinationType: navigator.camera.DestinationType.DATA_URL,
+    sourceType: navigator.camera.PictureSourceType.CAMERA,
+    correctOrientation: true,
+  },
   );
 }
 
@@ -172,6 +175,11 @@ export default {
       postComment: '',
       imageData: '',
     };
+  },
+  computed: {
+    hasImageData() {
+      return this.imageData !== '';
+    },
   },
   methods: {
     takePhoto,
@@ -263,5 +271,13 @@ export default {
 }
 .photo {
   width: 100%;
+}
+.photo-block {
+  position: relative;
+}
+.cancel-button {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
