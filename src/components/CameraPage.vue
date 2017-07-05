@@ -73,14 +73,6 @@ function toBlob(base64) {
   }
 }
 
-function onSuccess(imageData) {
-  const largeImage = document.getElementById('picture');
-  largeImage.style.display = 'block';
-  largeImage.classList.add('trim-img');
-  const head = 'data:image/jpeg;base64,';
-  largeImage.src = head + imageData;
-}
-
 function takePhoto() {
   navigator.camera.getPicture((imageData) => {
     const head = 'data:image/jpeg;base64,';
@@ -168,9 +160,7 @@ export default {
   },
   methods: {
     takePhoto,
-    getPhoto,
     postProblem,
-    onSuccess,
     cancelPhoto() {
       this.imageData = '';
     },
