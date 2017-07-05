@@ -8,7 +8,7 @@
     </div>
     <div class="photo-block" v-else>
         <img :src="imageData" class="photo">
-        <ons-icon class="cancel-button" icon="ion-android-cancel" size="30px"></ons-icon>
+        <v-ons-icon class="cancel-button" icon="fa-times" size="45px" @click="cancelPhoto"></v-ons-icon>
     </div>
     <!-- <div class="cover">
       <div class="box" @click="takePhoto">
@@ -92,6 +92,9 @@ function onSuccess(imageData) {
 }
 
 function takePhoto() {
+  if (this.imageData !== '') {
+    return;
+  }
   navigator.camera.getPicture((imageData) => {
     const head = 'data:image/jpeg;base64,';
     this.imageData = head + imageData;
@@ -186,6 +189,9 @@ export default {
     getPhoto,
     postProblem,
     onSuccess,
+    cancelPhoto() {
+      this.imageData = '';
+    },
     ...mapActions([
       FETCH_PROBLEMS,
     ]),
@@ -279,5 +285,9 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  padding: 0 6px;
 }
 </style>
