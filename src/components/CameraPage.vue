@@ -73,10 +73,6 @@ function toBlob(base64) {
   }
 }
 
-function onFail(message) {
-  console.log(message);
-}
-
 function onSuccess(imageData) {
   const largeImage = document.getElementById('picture');
   largeImage.style.display = 'block';
@@ -86,9 +82,6 @@ function onSuccess(imageData) {
 }
 
 function takePhoto() {
-  if (this.imageData !== '') {
-    return;
-  }
   navigator.camera.getPicture((imageData) => {
     const head = 'data:image/jpeg;base64,';
     this.imageData = head + imageData;
@@ -99,19 +92,7 @@ function takePhoto() {
     destinationType: navigator.camera.DestinationType.DATA_URL,
     sourceType: navigator.camera.PictureSourceType.CAMERA,
     correctOrientation: true,
-  },
-  );
-}
-
-function getPhoto() {
-// Specify the source to get the photos.
-  navigator.camera.getPicture(onSuccess, onFail,
-    { quality: 10,
-      destinationType: navigator.camera.DestinationType.DATA_URL,
-      sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
-      correctOrientation: true,
-    },
-  );
+  });
 }
 
 function postProblem() {
@@ -123,7 +104,6 @@ function postProblem() {
   const checkImage = document.getElementsByClassName('trim-img');
   if (checkImage.length > 0) {
     const dataURL = document.getElementById('picture').src;
-    console.log(dataURL);
     const head = 'data:image/jpeg;base64,';
     const blob = toBlob(dataURL.substr(head.length));
     data.append('problem[image]', blob, 'blob.jpg');
@@ -134,8 +114,7 @@ function postProblem() {
     headers: { Authorization: token },
   };
   axios.post(`${WEB_API_URL}/v1/problems`, data, config)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         this.FETCH_PROBLEMS();
         ons.notification.alert({
           title: '',
