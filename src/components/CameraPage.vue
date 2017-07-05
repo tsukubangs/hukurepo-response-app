@@ -10,17 +10,6 @@
         <img :src="imageData" class="photo">
         <v-ons-icon class="cancel-button" icon="fa-times" size="45px" @click="cancelPhoto"></v-ons-icon>
     </div>
-    <!-- <div class="cover">
-      <div class="box" @click="takePhoto">
-        <img class="" id="picture" src="../assets/no-image.png" />
-      </div>
-      <div class="box">
-        <google-map :latitude="latitude" :longitude="longitude" :isError="isMapError"></google-map>
-      </div>
-    </div> -->
-    <p>lat:{{latitude}}</p>
-    <p>lng:{{longitude}}</p>
-    <p>address:{{address}}</p>
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
         <div class="toolbar__left">
