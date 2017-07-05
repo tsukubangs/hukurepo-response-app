@@ -17,7 +17,7 @@
         <div class="toolbar__center">
         </div>
         <div class="toolbar__right">
-          <span class="toolbar-button toolbar-button--outline" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+            <span class="toolbar-button post-problem-btn" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
       <div class="left"></div>
       <div class="center"></div>
       <div class="right">
-          <span class="toolbar-button toolbar-button--outline" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+          <span class="toolbar-button post-problem-btn" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
       </div>
     </v-ons-toolbar>
   </v-ons-page>
@@ -274,5 +274,12 @@ export default {
   top: auto;
   bottom: 0;
 }
-
+.post-problem-btn {
+  background-color: #01a8ec;
+  color: #fff;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto 8px;
+  border-radius: 15px;
+}
 </style>
