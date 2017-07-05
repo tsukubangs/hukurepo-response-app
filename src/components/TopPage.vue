@@ -52,6 +52,7 @@ export default {
   methods: {
     ...mapActions([
       FETCH_PROBLEMS,
+      SELECTE_PROBLEM,
     ]),
     push() {
       this.pageStack.push(CameraPage);
@@ -59,7 +60,8 @@ export default {
     toResponse(problem) {
       // this.postProblem = problem;
       console.log(problem.id);
-      this.$store.dispatch(SELECTE_PROBLEM, problem);
+      // this.$store.dispatch(SELECTE_PROBLEM, problem);
+      this.SELECTE_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
     },
   },
