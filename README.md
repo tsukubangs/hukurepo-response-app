@@ -38,4 +38,10 @@ npm test
 - for geolocation
 ` cordova plugin add cordova-plugin-geolocation `
 
+- for keyboard
+` cordova plugin add cordova-plugin-keyboard `
+
+- for device
+` cordova plugin add cordova-plugin-device `
+
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
