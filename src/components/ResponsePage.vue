@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <v-ons-page>
     <custom-toolbar>Response Page</custom-toolbar>
 
@@ -55,7 +55,6 @@ export default {
   methods: {
     loadItem(done) {
       setTimeout(() => {
-        console.log('pull!!');
         this.getResponse();
         done();
       }, 400);

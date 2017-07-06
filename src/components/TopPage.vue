@@ -22,7 +22,7 @@ import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
 import ProblemCard from './ProblemCard';
 import ResponsePage from './ResponsePage';
-import { FETCH_PROBLEMS, SELECTE_PROBLEM } from '../vuex/mutation-types';
+import { FETCH_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
@@ -52,14 +52,13 @@ export default {
   methods: {
     ...mapActions([
       FETCH_PROBLEMS,
-      SELECTE_PROBLEM,
+      SELECT_PROBLEM,
     ]),
     push() {
       this.pageStack.push(CameraPage);
     },
     toResponse(problem) {
-      console.log(problem.id);
-      this.SELECTE_PROBLEM(problem);
+      this.SELECT_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
     },
   },
