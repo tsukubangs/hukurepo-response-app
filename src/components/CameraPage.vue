@@ -92,9 +92,8 @@ function postProblem() {
   data.append('problem[latitude]', this.latitude);
   data.append('problem[longitude]', this.longitude);
 
-  const checkImage = document.getElementsByClassName('trim-img');
-  if (checkImage.length > 0) {
-    const dataURL = document.getElementById('picture').src;
+  if (this.imageData !== '') {
+    const dataURL = this.imageData;
     const head = 'data:image/jpeg;base64,';
     const blob = toBlob(dataURL.substr(head.length));
     data.append('problem[image]', blob, 'blob.jpg');
