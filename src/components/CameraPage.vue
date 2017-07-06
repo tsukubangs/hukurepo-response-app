@@ -1,6 +1,6 @@
 <template id="camera-page">
   <v-ons-page>
-    <custom-toolbar>Camera Page</custom-toolbar>
+    <custom-toolbar></custom-toolbar>
 
     <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus v-resize></textarea>
     <div @click="takePhoto" style="display: inline-block" v-if="!this.hasImageData"><camera-button></camera-button></div>
