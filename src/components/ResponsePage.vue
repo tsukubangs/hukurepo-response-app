@@ -1,6 +1,16 @@
 <template lang="html">
   <v-ons-page>
     <custom-toolbar>Response Page</custom-toolbar>
+
+    <v-ons-pull-hook
+      :action="loadItem"
+      @changestate="state = $event.state"
+    >
+      <span v-show="state === 'initial'"> Pull to refresh </span>
+      <span v-show="state === 'preaction'"> Release </span>
+      <span v-show="state === 'action'"> Loading... </span>
+    </v-ons-pull-hook>
+
     <main class="h100">
       <ul class="card-list">
         <li>
@@ -32,6 +42,7 @@ export default {
   data() {
     return {
       responses: '',
+      state: 'initial',
     };
   },
   computed: {
@@ -40,11 +51,23 @@ export default {
     ]),
   },
   created() {
-    const token = window.localStorage.getItem('access_token');
-    const config = {
-      headers: { Authorization: token },
-    };
-    axios.get(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, config)
+    this.getResponse();
+  },
+  methods: {
+    loadItem(done) {
+      setTimeout(() => {
+        // this.items = [...this.items, this.items.length + 1];
+        console.log('pull!!');
+        this.getResponse();
+        done();
+      }, 400);
+    },
+    getResponse() {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      axios.get(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, config)
       .then((response) => {
         console.log(response);
         this.responses = response.data;
@@ -52,6 +75,7 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+    },
   },
   props: ['pageStack'],
 };
