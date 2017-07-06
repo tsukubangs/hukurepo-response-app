@@ -17,7 +17,6 @@
           <response-card :response="selectedProblem" class="card card-right"></response-card>
         </li>
         <li v-for="response in responses">
-          <!-- <problem-card :problem="problem" class="card"></problem-card> -->
           <response-card :response="response" class="card"></response-card>
         </li>
       </ul>
@@ -56,7 +55,6 @@ export default {
   methods: {
     loadItem(done) {
       setTimeout(() => {
-        // this.items = [...this.items, this.items.length + 1];
         console.log('pull!!');
         this.getResponse();
         done();

@@ -58,9 +58,7 @@ export default {
       this.pageStack.push(CameraPage);
     },
     toResponse(problem) {
-      // this.postProblem = problem;
       console.log(problem.id);
-      // this.$store.dispatch(SELECTE_PROBLEM, problem);
       this.SELECTE_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
     },

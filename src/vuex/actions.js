@@ -17,7 +17,6 @@ export default {
             });
   },
   [SELECTE_PROBLEM]({ commit }, problem) {
-    console.log(problem);
     commit(SELECTED_PROBLEM, problem);
   },
 };
