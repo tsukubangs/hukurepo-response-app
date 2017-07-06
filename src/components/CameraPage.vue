@@ -17,7 +17,7 @@
         <div class="toolbar__center">
         </div>
         <div class="toolbar__right">
-            <span class="toolbar-button post-problem-btn" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+            <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
       <div class="left"></div>
       <div class="center"></div>
       <div class="right">
-          <span class="toolbar-button post-problem-btn" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+          <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
       </div>
     </v-ons-toolbar>
   </v-ons-page>
@@ -88,6 +88,7 @@ function takePhoto() {
 }
 
 function postProblem() {
+  this.postEnabled = false;
   const data = new FormData();
   data.append('problem[comment]', this.postComment);
   data.append('problem[latitude]', this.latitude);
@@ -117,6 +118,7 @@ function postProblem() {
           },
         });
       }).catch((error) => {
+        this.postEnabled = true;
         console.log(error);
         ons.notification.alert({
           title: '',
@@ -142,6 +144,7 @@ export default {
       isMapError: false,
       postComment: '',
       imageData: '',
+      postEnabled: true,
     };
   },
   computed: {
