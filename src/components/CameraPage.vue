@@ -3,9 +3,7 @@
     <custom-toolbar>Camera Page</custom-toolbar>
 
     <textarea id="text-form" class="textarea" rows="5" placeholder="What's your problem?" v-model="postComment" name='description' v-focus v-resize></textarea>
-    <div @click="takePhoto" v-if="!this.hasImageData">
-        <camera-button></camera-button>
-    </div>
+    <div @click="takePhoto" style="display: inline-block" v-if="!this.hasImageData"><camera-button></camera-button></div>
     <div class="photo-block" v-else>
         <img :src="imageData" class="photo">
         <v-ons-icon class="cancel-button" icon="fa-times" size="45px" @click="cancelPhoto"></v-ons-icon>
@@ -88,7 +86,7 @@ function takePhoto() {
 }
 
 function postProblem() {
-  this.postEnabled = false;
+  this.isPosting = true;
   const data = new FormData();
   data.append('problem[comment]', this.postComment);
   data.append('problem[latitude]', this.latitude);
@@ -118,7 +116,7 @@ function postProblem() {
           },
         });
       }).catch((error) => {
-        this.postEnabled = true;
+        this.isPosting = false;
         console.log(error);
         ons.notification.alert({
           title: '',
@@ -144,7 +142,7 @@ export default {
       isMapError: false,
       postComment: '',
       imageData: '',
-      postEnabled: true,
+      isPosting: false,
     };
   },
   computed: {
@@ -159,6 +157,9 @@ export default {
         console.log(e);
         return false;
       }
+    },
+    postEnabled() {
+      return !this.isPosting && (this.postComment !== '' || this.imageData !== '');
     },
   },
   methods: {
