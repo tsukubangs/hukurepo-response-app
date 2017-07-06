@@ -40,6 +40,7 @@ v-ons-card {
   /*align-items: center;*/
   /*justify-content: center;*/
   flex-grow: 9;
+  word-break: break-all;
   color: #7f7f7f;
 }
 .date {
@@ -47,6 +48,7 @@ v-ons-card {
   text-align: right;
   font-size: x-small;
   color: #aaaaaa;
+  margin-top:0.5em;
 }
 .cover {
   width: 100%;
