@@ -217,31 +217,6 @@ export default {
    margin-left: auto;
    margin-bottom: 10px;
  }
-.cover {
-   display: table;
-   margin: auto;
-   width: 90%;
-}
-.box {
-   display: table-cell;
-   width: 48%;
-   position: relative;
-   box-sizing: border-box;
-   border: transparent 2px solid;
-}
-.box:before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.box > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-}
 .trim-img {
     object-fit: cover;
     width: 100%;
