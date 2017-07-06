@@ -1,4 +1,4 @@
-import { FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR } from './mutation-types';
+import { FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, SELECT_PROBLEM } from './mutation-types';
 
 /* eslint-disable no-param-reassign */
 export default {
@@ -20,5 +20,8 @@ export default {
       isError: true,
       isCompleted: false,
     };
+  },
+  [SELECT_PROBLEM](state, problem) {
+    state.selectedProblem = problem;
   },
 };
