@@ -28,7 +28,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
-// import ons from 'onsenui';
+import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import { WEB_API_URL } from '../../.env';
@@ -74,6 +74,11 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+        ons.notification.alert({
+          title: 'Can\'t connect to server',
+          message: 'Try again?',
+          callback: this.getResponse,
+        });
       });
     },
   },
