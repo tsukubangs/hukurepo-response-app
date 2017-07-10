@@ -30,9 +30,9 @@
       </div>
     </div>
     <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
-      <div class="left"></div>
-      <div class="center"></div>
+      <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
       <div class="right">
+        <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
       </div>
     </v-ons-toolbar>
   </v-ons-page>
