@@ -45,7 +45,14 @@ import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import { WEB_API_URL } from '../../.env';
-// import { FETCH_PROBLEMS } from '../vuex/mutation-types';
+
+function scrollBottom() {
+  const pageContents = document.getElementsByClassName('page__content');
+  const responsePageContent = pageContents[pageContents.length - 1];
+  if (!responsePageContent) return;
+  responsePageContent.scrollTop = responsePageContent.scrollHeight;
+}
+
 export default {
   name: 'response-page',
   components: {
@@ -98,6 +105,7 @@ export default {
       .then((response) => {
         this.responses.push(response.data);
         this.replyComment = '';
+        scrollBottom();
       })
       .catch((error) => {
         console.log(error);
