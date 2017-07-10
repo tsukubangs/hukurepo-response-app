@@ -23,7 +23,9 @@
     </main>
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
-        <div class="toolbar__left">
+        <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' v-focus v-resize></textarea>
+        <div class="toolbar__right">
+          <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
         </div>
       </div>
     </div>
@@ -138,5 +140,19 @@ main {
   border-top: solid 1px rgba(127, 127, 127, 0.5);
   top: auto;
   bottom: 0;
+}
+.bottom-bar-textarea {
+  padding-top: 12px;
+  width: 100%;
+  background-color: transparent;
+  border-color: transparent;
+}
+.post-problem-btn {
+  background-color: #01a8ec;
+  color: #fff;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto 8px;
+  border-radius: 15px;
 }
 </style>
