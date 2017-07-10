@@ -56,6 +56,7 @@ export default {
     return {
       responses: '',
       state: 'initial',
+      replyComment: '',
     };
   },
   computed: {
@@ -70,6 +71,9 @@ export default {
         console.log(e);
         return false;
       }
+    },
+    postEnabled() {
+      return this.replyComment !== '';
     },
   },
   created() {
