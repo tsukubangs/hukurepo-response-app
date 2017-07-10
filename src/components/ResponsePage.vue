@@ -87,6 +87,25 @@ export default {
       }, 400);
     },
     postResponse() {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      const data = {
+        comment: this.replyComment,
+      };
+      axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, data, config)
+      .then((response) => {
+        this.responses.push(response.data);
+        this.replyComment = '';
+      })
+      .catch((error) => {
+        console.log(error);
+        ons.notification.alert({
+          title: '',
+          message: 'Sorry, posting failed...',
+        });
+      });
     },
     getResponse() {
       const token = window.localStorage.getItem('access_token');
