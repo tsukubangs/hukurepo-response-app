@@ -11,7 +11,7 @@
       <span v-show="state === 'action'"> Loading... </span>
     </v-ons-pull-hook>
 
-    <main class="h100">
+    <main>
       <ul class="card-list">
         <li>
           <response-card :response="selectedProblem" class="card card-right"></response-card>
@@ -21,6 +21,18 @@
         </li>
       </ul>
     </main>
+    <div class="bottom-bar" v-if="!this.isIOS">
+      <div class="toolbar">
+        <div class="toolbar__left">
+        </div>
+      </div>
+    </div>
+    <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
+      <div class="left"></div>
+      <div class="center"></div>
+      <div class="right">
+      </div>
+    </v-ons-toolbar>
   </v-ons-page>
 </template>
 
@@ -48,6 +60,15 @@ export default {
     ...mapGetters([
       'selectedProblem',
     ]),
+    isIOS() {
+      /* eslint-disable no-undef */
+      try {
+        return device.platform === 'iOS';
+      } catch (e) {
+        console.log(e);
+        return false;
+      }
+    },
   },
   created() {
     this.getResponse();
@@ -105,5 +126,17 @@ main {
 }
 .card-list > li {
   margin: 10px 0;
+}
+.bottom-bar {
+  border-top: solid 1px rgba(127, 127, 127, 0.5);
+}
+.bottom-bar > .toolbar {
+  background-color: #fff;
+}
+.ios-bottom-bar {
+  background-color: #fff;
+  border-top: solid 1px rgba(127, 127, 127, 0.5);
+  top: auto;
+  bottom: 0;
 }
 </style>
