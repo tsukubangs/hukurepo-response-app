@@ -17,7 +17,7 @@
           <response-card :response="selectedProblem" class="card card-right"></response-card>
         </li>
         <li v-for="response in responses">
-          <response-card :response="response" class="card"></response-card>
+          <response-card :response="response" class="card" v-bind:class="[selectedProblem.user_id == response.user_id ? 'card-right' : '']"></response-card>
         </li>
       </ul>
     </main>
