@@ -23,7 +23,7 @@
     </main>
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
-        <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' v-focus v-resize></textarea>
+        <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
         <div class="toolbar__right">
           <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
         </div>
@@ -85,6 +85,8 @@ export default {
         this.getResponse();
         done();
       }, 400);
+    },
+    postResponse() {
     },
     getResponse() {
       const token = window.localStorage.getItem('access_token');
