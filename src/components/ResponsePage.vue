@@ -132,11 +132,8 @@ export default {
 </script>
 
 <style scoped>
-.h100 {
-  height:100%;
-}
 main {
-  padding: 5px;
+  padding: 5px 5px 44px;
   box-sizing: border-box;
 }
 .card {
@@ -149,12 +146,12 @@ main {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  padding-bottom: 100px;
 }
 .card-list > li {
   margin: 10px 0;
 }
 .bottom-bar {
+  position: fixed;
   border-top: solid 1px rgba(127, 127, 127, 0.5);
 }
 .bottom-bar > .toolbar {
