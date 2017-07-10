@@ -64,6 +64,7 @@ export default {
       responses: '',
       state: 'initial',
       replyComment: '',
+      isPosting: false,
     };
   },
   computed: {
@@ -80,7 +81,7 @@ export default {
       }
     },
     postEnabled() {
-      return this.replyComment !== '';
+      return !this.isPosting && this.replyComment !== '';
     },
   },
   created() {
@@ -94,6 +95,7 @@ export default {
       }, 400);
     },
     postResponse() {
+      this.isPosting = true;
       const token = window.localStorage.getItem('access_token');
       const config = {
         headers: { Authorization: token },
@@ -105,6 +107,7 @@ export default {
       .then((response) => {
         this.responses.push(response.data);
         this.replyComment = '';
+        this.isPosting = false;
         scrollBottom();
       })
       .catch((error) => {
@@ -113,6 +116,7 @@ export default {
           title: '',
           message: 'Sorry, posting failed...',
         });
+        this.isPosting = false;
       });
     },
     getResponse() {
