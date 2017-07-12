@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_PROBLEMS, FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, SELECT_PROBLEM } from './mutation-types';
+import { FETCH_PROBLEMS, FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, REFETCH_PROBLEMS, SELECT_PROBLEM } from './mutation-types';
 import { WEB_API_URL } from '../../.env';
 
 export default {
@@ -15,6 +15,16 @@ export default {
             }).catch(() => {
               commit(FETCH_PROBLEMS_ERROR);
             });
+  },
+  [REFETCH_PROBLEMS]({ commit }) {
+    const token = window.localStorage.getItem('access_token');
+    const config = {
+      headers: { Authorization: token },
+    };
+    axios.get(`${WEB_API_URL}/v1/problems/me`, config)
+            .then((response) => {
+              commit(REFETCH_PROBLEMS, response.data);
+            }).catch(() => {});
   },
   [SELECT_PROBLEM]({ commit }, problem) {
     commit(SELECT_PROBLEM, problem);
