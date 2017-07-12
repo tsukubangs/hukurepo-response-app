@@ -89,4 +89,7 @@ v-ons-card {
   background: rgba(1,168,236,0.1);
   border-radius: 20px;
 }
+.unread {
+  background: rgba(244,177,131,0.1);
+}
 </style>
