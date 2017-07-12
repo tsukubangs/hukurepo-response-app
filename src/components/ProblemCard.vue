@@ -1,5 +1,6 @@
 <template>
   <v-ons-card>
+      <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px"></v-ons-icon>
       <div class="thumbnail">
         <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
         <img src="../assets/noimage.jpg" v-else>
@@ -91,5 +92,11 @@ v-ons-card {
 }
 .unread {
   background: rgba(244,177,131,0.1);
+}
+.unread-icon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: rgb(1, 168, 236);
 }
 </style>
