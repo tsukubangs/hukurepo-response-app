@@ -18,7 +18,7 @@
 import { WEB_API_URL } from '../../.env';
 
 export default {
-  name: 'google-map',
+  name: 'problem-card',
   props: [
     'problem',
   ],
