@@ -1,4 +1,4 @@
-import { FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, REFETCH_PROBLEMS, SELECT_PROBLEM } from './mutation-types';
+import { FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESTPONSES_OF_PROBLEM } from './mutation-types';
 
 /* eslint-disable no-param-reassign */
 export default {
@@ -26,5 +26,9 @@ export default {
   },
   [SELECT_PROBLEM](state, problem) {
     state.selectedProblem = problem;
+  },
+  [SAW_RESTPONSES_OF_PROBLEM](state, problem) {
+    const problemsNumber = state.problems.indexOf(problem);
+    state.problems[problemsNumber].responses_seen = true;
   },
 };

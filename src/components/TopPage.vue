@@ -27,7 +27,7 @@ import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
 import ProblemCard from './ProblemCard';
 import ResponsePage from './ResponsePage';
-import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
+import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESTPONSES_OF_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
@@ -64,6 +64,7 @@ export default {
       FETCH_PROBLEMS,
       REFETCH_PROBLEMS,
       SELECT_PROBLEM,
+      SAW_RESTPONSES_OF_PROBLEM,
     ]),
     push() {
       this.pageStack.push(CameraPage);
@@ -71,6 +72,9 @@ export default {
     toResponse(problem) {
       this.SELECT_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
+      if (!problem.responses_seen) {
+        this.SAW_RESTPONSES_OF_PROBLEM(problem);
+      }
     },
     loadItem(done) {
       setTimeout(() => {

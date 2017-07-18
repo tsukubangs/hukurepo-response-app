@@ -1,6 +1,6 @@
 <template>
-  <v-ons-card>
-      <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px"></v-ons-icon>
+  <v-ons-card v-bind:class="{ unread: isUnSeen }">
+      <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px" v-show="isUnSeen"></v-ons-icon>
       <div class="thumbnail">
         <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
         <img src="../assets/noimage.jpg" v-else>
@@ -25,6 +25,9 @@ export default {
   computed: {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
+    },
+    isUnSeen() {
+      return !this.problem.responses_seen;
     },
   },
 };
