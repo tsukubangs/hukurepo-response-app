@@ -1,5 +1,6 @@
 <template>
-  <v-ons-card>
+  <v-ons-card v-bind:class="{ unread: isUnSeen }">
+      <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px" v-show="isUnSeen"></v-ons-icon>
       <div class="thumbnail">
         <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
         <img src="../assets/noimage.jpg" v-else>
@@ -17,13 +18,16 @@
 import { WEB_API_URL } from '../../.env';
 
 export default {
-  name: 'google-map',
+  name: 'problem-card',
   props: [
     'problem',
   ],
   computed: {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
+    },
+    isUnSeen() {
+      return !this.problem.responses_seen;
     },
   },
 };
@@ -88,5 +92,14 @@ img {
 v-ons-card {
   background: rgba(1,168,236,0.1);
   border-radius: 20px;
+}
+.unread {
+  background: rgba(244,177,131,0.1);
+}
+.unread-icon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: rgb(1, 168, 236);
 }
 </style>

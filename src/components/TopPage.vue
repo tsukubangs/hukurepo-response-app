@@ -1,6 +1,11 @@
 <template id="top-page">
   <v-ons-page>
     <custom-toolbar><div class="title"><img class="title-icon" src="../assets/s_logo.png" /></div></custom-toolbar>
+    <v-ons-pull-hook :action="loadItem" @changestate="state = $event.state">
+      <span v-show="state === 'initial'"> Pull to refresh </span>
+      <span v-show="state === 'preaction'"> Release </span>
+      <span v-show="state === 'action'"> Loading... </span>
+    </v-ons-pull-hook>
     <main class="h100">
         <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
             <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
@@ -22,7 +27,7 @@ import CustomToolbar from './CustomToolbar';
 import CameraPage from './CameraPage';
 import ProblemCard from './ProblemCard';
 import ResponsePage from './ResponsePage';
-import { FETCH_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
+import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
@@ -43,6 +48,11 @@ export default {
 
     this.FETCH_PROBLEMS();
   },
+  data() {
+    return {
+      state: 'initial',
+    };
+  },
   computed: {
     ...mapGetters([
       'problems',
@@ -52,7 +62,9 @@ export default {
   methods: {
     ...mapActions([
       FETCH_PROBLEMS,
+      REFETCH_PROBLEMS,
       SELECT_PROBLEM,
+      SAW_RESPONSES_OF_PROBLEM,
     ]),
     push() {
       this.pageStack.push(CameraPage);
@@ -60,6 +72,15 @@ export default {
     toResponse(problem) {
       this.SELECT_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
+      if (!problem.responses_seen) {
+        this.SAW_RESPONSES_OF_PROBLEM(problem);
+      }
+    },
+    loadItem(done) {
+      setTimeout(() => {
+        this.REFETCH_PROBLEMS();
+        done();
+      }, 400);
     },
   },
   props: ['pageStack'],
