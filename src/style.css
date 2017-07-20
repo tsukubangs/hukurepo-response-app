@@ -1,0 +1,20 @@
+.toolbar {
+    background: #01a8ec;
+    color: #fff;
+}
+
+.back-button {
+    color: #fff;
+}
+
+.toolbar__title {
+    color: #fff;
+}
+
+.page__content {
+    background-color: #fff;
+}
+
+.page__background {
+    background-color: #fff;
+}
