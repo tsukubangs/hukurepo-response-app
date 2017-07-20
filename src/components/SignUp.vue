@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="center">Sign up</div>
-      <div class="right"><v-ons-toolbar-button modifier="outline" @click="toLogin">Log in</v-ons-toolbar-button></div>
+      <div class="right"><v-ons-toolbar-button class="white-btn" modifier="outline" @click="toLogin">Log in</v-ons-toolbar-button></div>
     </v-ons-toolbar>
     <v-ons-list>
       <v-ons-list-header>
@@ -213,5 +213,9 @@ export default {
 .error-message {
   color: red;
   font-size: 13px;
+}
+.white-btn {
+  color: #fff;
+  border-color: #fff;
 }
 </style>
