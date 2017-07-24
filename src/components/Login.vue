@@ -58,11 +58,4 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#cover{
-  background-image: url("../assets/welcome.png");
-}
-#icon{
-  width: 150px;
-  height: auto;
-}
 </style>
