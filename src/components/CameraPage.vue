@@ -14,7 +14,7 @@
         </div>
         <div class="toolbar__center">
         </div>
-        <div class="toolbar__right">
+        <div class="toolbar__right mr10">
             <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postProblem"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
         </div>
       </div>
@@ -257,7 +257,9 @@ export default {
   color: #fff;
   padding-left: 15px;
   padding-right: 15px;
-  margin: auto 8px;
   border-radius: 15px;
+}
+.mr10 {
+  margin-right: 10px;
 }
 </style>
