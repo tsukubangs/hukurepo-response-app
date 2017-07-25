@@ -7,7 +7,7 @@
       </div>
       <div class="content">
           <div class="comment">
-              <p>{{problem.comment}}</p>
+              <p class="limit-comment">{{problem.comment}}</p>
           </div>
           <div class="date">{{problem.created_at}}</div>
       </div>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import $ from 'jquery';
+import 'trunk8/trunk8';
 import { WEB_API_URL } from '../../.env';
 
 export default {
@@ -22,6 +24,11 @@ export default {
   props: [
     'problem',
   ],
+  mounted() {
+    $('.limit-comment').trunk8({
+      lines: 2,
+    });
+  },
   computed: {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
