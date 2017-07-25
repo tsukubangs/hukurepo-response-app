@@ -9,7 +9,7 @@
           <div class="comment">
               <p class="limit-comment">{{problem.comment}}</p>
           </div>
-          <div class="date">{{problem.created_at}}</div>
+          <div class="date">{{this.updatedTime}}</div>
       </div>
   </v-ons-card>
 </template>
@@ -35,6 +35,11 @@ export default {
     },
     isUnSeen() {
       return !this.problem.responses_seen;
+    },
+    updatedTime() {
+      const regExp = new RegExp('T', 'g');
+      const date = this.problem.updated_at.replace(regExp, ' ').split('.');
+      return date[0];
     },
   },
 };
