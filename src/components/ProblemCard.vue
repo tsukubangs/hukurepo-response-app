@@ -18,6 +18,7 @@
 import $ from 'jquery';
 import 'trunk8/trunk8';
 import { WEB_API_URL } from '../../.env';
+import formatDateTime from '../function/formatDateTime';
 
 export default {
   name: 'problem-card',
@@ -37,9 +38,7 @@ export default {
       return !this.problem.responses_seen;
     },
     updatedTime() {
-      const regExp = new RegExp('T', 'g');
-      const date = this.problem.updated_at.replace(regExp, ' ').split('.');
-      return date[0];
+      return formatDateTime(this.problem.updated_at);
     },
   },
 };
