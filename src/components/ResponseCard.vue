@@ -1,5 +1,8 @@
 <template>
-  <v-ons-card>
+  <v-ons-card v-bind:class="{ reverce: !isMyResponse }">
+    <div class="icon-container">
+      aaaa
+    </div>
     <div class="content">
       <div class="comment">
         {{ response.comment }}
@@ -16,6 +19,7 @@ export default {
   name: 'response-card',
   props: [
     'response',
+    'isMyResponse',
   ],
 };
 </script>
@@ -24,8 +28,10 @@ export default {
 v-ons-card {
   position: relative;
   display: flex;
-  background: rgba(1,168,236,0.1);
-  border-radius: 20px;
+  flex-direction: row;
+}
+.reverce {
+  flex-direction: row-reverse;
 }
 .content {
   display: flex;
@@ -49,14 +55,5 @@ v-ons-card {
   font-size: x-small;
   color: #aaaaaa;
   margin-top:0.5em;
-}
-.cover {
-  width: 100%;
-  height: 100%;
-}
-p {
-  padding: 0.5em 0;
-  margin: 0;
-  font-size: initial;
 }
 </style>

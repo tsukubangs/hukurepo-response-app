@@ -20,6 +20,12 @@
           <response-card :response="response" class="card" v-bind:class="[selectedProblem.user_id == response.user_id ? 'card-right' : '']"></response-card>
         </li>
       </ul>
+      <v-ons-list class="response-list">
+        <v-ons-list-item v-for="response in responses" class="p0">
+          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id">
+          </response-card>
+        </v-ons-list-item>
+      </v-ons-list>
     </main>
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
@@ -144,6 +150,9 @@ export default {
 </script>
 
 <style scoped>
+.p0 {
+  padding: 0;
+}
 main {
   padding: 5px 5px 44px;
   box-sizing: border-box;
@@ -188,5 +197,8 @@ main {
   padding-right: 15px;
   margin: auto 8px;
   border-radius: 15px;
+}
+.response-list {
+  padding: 0 10px;
 }
 </style>
