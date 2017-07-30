@@ -1,7 +1,7 @@
 <template>
   <v-ons-card v-bind:class="{ reverce: !isMyResponse }">
     <div class="icon-container">
-      aaaa
+      <img src="../assets/response_icon.png" />
     </div>
     <div class="content">
       <p>{{ response.comment }}</p>
@@ -30,14 +30,17 @@ v-ons-card {
   flex-direction: row-reverse;
 }
 .icon-container {
+  padding-top: 5px;
   width: 120px;
+}
+.icon-container > * {
+  width: 50px;
 }
 .content {
   width: 100%;
   color: #7f7f7f;
 }
 .date {
-  text-align: right;
   font-size: x-small;
   color: #aaaaaa;
   margin: 0;
