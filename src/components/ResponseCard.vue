@@ -1,7 +1,7 @@
 <template>
   <v-ons-card v-bind:class="{ reverce: !isMyResponse }">
     <div class="icon-container">
-      <div class="tsukuba-icon" v-if="!isMyResponse">
+      <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
         <img src="../assets/s_logo.png" />
       </div>
       <img src="../assets/response_icon.png" v-else />
@@ -46,6 +46,8 @@ v-ons-card {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.right-justified {
   margin-left: auto;
 }
 .tsukuba-icon > img {
