@@ -7,7 +7,7 @@
       <img src="../assets/response_icon.png" v-else />
     </div>
     <div class="content">
-      <p>{{ response.comment }}</p>
+      <p class="comment">{{ response.comment }}</p>
       <p class="date">{{ response.created_at }}</p>
     </div>
   </v-ons-card>
@@ -56,6 +56,9 @@ v-ons-card {
 .content {
   width: 100%;
   color: #7f7f7f;
+}
+.comment {
+  margin-top: 5px;
 }
 .date {
   font-size: x-small;
