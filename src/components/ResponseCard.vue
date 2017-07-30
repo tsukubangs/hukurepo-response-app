@@ -4,12 +4,8 @@
       aaaa
     </div>
     <div class="content">
-      <div class="comment">
-        {{ response.comment }}
-      </div>
-      <div class="date">
-        {{ response.created_at }}
-      </div>
+      <p>{{ response.comment }}</p>
+      <p class="date">{{ response.created_at }}</p>
     </div>
   </v-ons-card>
 </template>
@@ -33,27 +29,17 @@ v-ons-card {
 .reverce {
   flex-direction: row-reverse;
 }
-.content {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  padding: 0 10px;
-  margin: 5px;
-  text-align: left;
+.icon-container {
+  width: 120px;
 }
-.comment {
-  display: flex;
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  flex-grow: 9;
-  word-break: break-all;
+.content {
+  width: 100%;
   color: #7f7f7f;
 }
 .date {
-  flex-grow: 1;
   text-align: right;
   font-size: x-small;
   color: #aaaaaa;
-  margin-top:0.5em;
+  margin: 0;
 }
 </style>

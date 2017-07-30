@@ -12,17 +12,12 @@
     </v-ons-pull-hook>
 
     <main>
-      <ul class="card-list">
-        <li>
-          <response-card :response="selectedProblem" class="card card-right"></response-card>
-        </li>
-        <li v-for="response in responses">
-          <response-card :response="response" class="card" v-bind:class="[selectedProblem.user_id == response.user_id ? 'card-right' : '']"></response-card>
-        </li>
-      </ul>
-      <v-ons-list class="response-list">
-        <v-ons-list-item v-for="response in responses" class="p0">
-          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id">
+      <v-ons-list>
+        <v-ons-list-item>
+          <response-card :response="selectedProblem" :is-my-response="true" class="w100"></response-card>
+        </v-ons-list-item>
+        <v-ons-list-item v-for="response in responses">
+          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" class="w100">
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
@@ -150,26 +145,12 @@ export default {
 </script>
 
 <style scoped>
-.p0 {
-  padding: 0;
+.w100{
+  width: 100%;
 }
 main {
   padding: 5px 5px 44px;
   box-sizing: border-box;
-}
-.card {
-  width: 80%;
-}
-.card-right {
-  margin-left: auto;
-}
-.card-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-.card-list > li {
-  margin: 10px 0;
 }
 .bottom-bar {
   position: fixed;
@@ -197,8 +178,5 @@ main {
   padding-right: 15px;
   margin: auto 8px;
   border-radius: 15px;
-}
-.response-list {
-  padding: 0 10px;
 }
 </style>
