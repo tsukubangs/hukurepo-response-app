@@ -9,6 +9,7 @@
     <div class="content">
       <p class="comment">{{ response.comment }}</p>
       <p class="date">{{ response.created_at }}</p>
+      <slot></slot>
     </div>
   </v-ons-card>
 </template>
@@ -65,6 +66,5 @@ v-ons-card {
 .date {
   font-size: x-small;
   color: #aaaaaa;
-  margin: 0;
 }
 </style>

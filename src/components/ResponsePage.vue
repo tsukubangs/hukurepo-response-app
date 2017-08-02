@@ -14,7 +14,9 @@
     <main>
       <v-ons-list modifier="noborder">
         <v-ons-list-item modifier="nodivider">
-          <response-card :response="selectedProblem" :is-my-response="true" class="w100"></response-card>
+          <response-card :response="selectedProblem" :is-my-response="true" class="w100">
+            <photo-thumbnail :thumbnailUrl="selectedProblemImage" v-if="!!selectedProblem.image_url" class="thumbnail"></photo-thumbnail>
+          </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses" modifier="nodivider">
           <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" class="w100">
@@ -45,6 +47,7 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
+import PhotoThumbnail from './PhotoThumbnail';
 import { WEB_API_URL } from '../../.env';
 
 function scrollBottom() {
@@ -59,6 +62,7 @@ export default {
   components: {
     CustomToolbar,
     ResponseCard,
+    PhotoThumbnail,
   },
   data() {
     return {
@@ -72,6 +76,9 @@ export default {
     ...mapGetters([
       'selectedProblem',
     ]),
+    selectedProblemImage() {
+      return WEB_API_URL + this.selectedProblem.image_url;
+    },
     isIOS() {
       /* eslint-disable no-undef */
       try {
@@ -178,5 +185,8 @@ main {
   padding-right: 15px;
   margin: auto 8px;
   border-radius: 15px;
+}
+.thumbnail {
+  width: 100px;
 }
 </style>
