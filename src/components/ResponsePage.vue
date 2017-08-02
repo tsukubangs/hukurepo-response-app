@@ -12,11 +12,11 @@
     </v-ons-pull-hook>
 
     <main>
-      <v-ons-list>
-        <v-ons-list-item>
+      <v-ons-list modifier="noborder">
+        <v-ons-list-item modifier="nodivider">
           <response-card :response="selectedProblem" :is-my-response="true" class="w100"></response-card>
         </v-ons-list-item>
-        <v-ons-list-item v-for="response in responses">
+        <v-ons-list-item v-for="response in responses" modifier="nodivider">
           <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" class="w100">
           </response-card>
         </v-ons-list-item>
