@@ -1,7 +1,7 @@
 <template>
   <v-ons-card v-bind:class="{ unread: isUnSeen }">
       <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px" v-show="isUnSeen"></v-ons-icon>
-      <photo-thumbnail :thumbnailUrl="thumbnailUrl" class="radius20"></photo-thumbnail>
+      <photo-thumbnail :thumbnailUrl="thumbnailUrl" class="photo-thumbnail"></photo-thumbnail>
       <div class="content">
           <div class="comment">
               <p class="limit-comment">{{problem.comment}}</p>
@@ -60,6 +60,11 @@ v-ons-card {
   flex-grow: 9;
   color: #7f7f7f;
 }
+.photo-thumbnail {
+  width: 40%;
+  border-radius: 20px;
+  overflow: hidden;
+}
 .date {
   flex-grow: 1;
   text-align: right;
@@ -74,10 +79,6 @@ p {
   padding: 0.5em 0;
   margin: 0;
   font-size: initial;
-}
-.radius20 {
-  border-radius: 20px;
-  overflow: hidden;
 }
 v-ons-card {
   background: rgba(1,168,236,0.1);
