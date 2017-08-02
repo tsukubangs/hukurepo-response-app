@@ -1,10 +1,7 @@
 <template>
   <v-ons-card v-bind:class="{ unread: isUnSeen }">
       <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px" v-show="isUnSeen"></v-ons-icon>
-      <div class="thumbnail">
-        <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
-        <img src="../assets/noimage.jpg" v-else>
-      </div>
+      <photo-thumbnail :thumbnailUrl="thumbnailUrl" class="radius20"></photo-thumbnail>
       <div class="content">
           <div class="comment">
               <p class="limit-comment">{{problem.comment}}</p>
@@ -18,9 +15,13 @@
 import $ from 'jquery';
 import 'trunk8/trunk8';
 import { WEB_API_URL } from '../../.env';
+import PhotoThumbnail from './PhotoThumbnail';
 
 export default {
   name: 'problem-card',
+  components: {
+    PhotoThumbnail,
+  },
   props: [
     'problem',
   ],
@@ -44,23 +45,6 @@ export default {
 v-ons-card {
   position: relative;
   display: flex;
-}
-.thumbnail {
-  position: relative;
-  width: 40%;
-}
-.thumbnail:before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.thumbnail > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
 }
 .content {
   display: flex;
@@ -91,10 +75,9 @@ p {
   margin: 0;
   font-size: initial;
 }
-img {
-  width: 100%;
-  object-fit: cover;
+.radius20 {
   border-radius: 20px;
+  overflow: hidden;
 }
 v-ons-card {
   background: rgba(1,168,236,0.1);
