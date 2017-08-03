@@ -15,7 +15,9 @@
       <v-ons-list modifier="noborder">
         <v-ons-list-item modifier="nodivider">
           <response-card :response="selectedProblem" :is-my-response="true" class="w100">
-            <photo-thumbnail :thumbnailUrl="selectedProblemImage" v-if="!!selectedProblem.image_url" class="thumbnail"></photo-thumbnail>
+            <div @click="photoModalVisible = true">
+              <photo-thumbnail :thumbnailUrl="selectedProblemImage" v-if="!!selectedProblem.image_url" class="thumbnail" ></photo-thumbnail>
+            </div>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses" modifier="nodivider">
@@ -38,6 +40,9 @@
         <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
       </div>
     </v-ons-toolbar>
+    <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
+      <img :src="selectedProblemImage" class="modalImage"/>
+    </v-ons-modal>
   </v-ons-page>
 </template>
 
@@ -70,6 +75,7 @@ export default {
       state: 'initial',
       replyComment: '',
       isPosting: false,
+      photoModalVisible: false,
     };
   },
   computed: {
@@ -188,5 +194,9 @@ main {
 }
 .thumbnail {
   width: 100px;
+}
+.modalImage {
+  width: 100%;
+  object-fit: contain;
 }
 </style>
