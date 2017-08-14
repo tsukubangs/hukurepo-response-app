@@ -4,7 +4,7 @@
       <photo-thumbnail :thumbnailUrl="thumbnailUrl" class="photo-thumbnail"></photo-thumbnail>
       <div class="content">
           <div class="comment">
-              <p class="limit-comment">{{problem.comment}}</p>
+              <p class="limit-comment">{{this.shortComment}}</p>
           </div>
           <div class="date">{{problem.created_at}}</div>
       </div>
@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import 'trunk8/trunk8';
 import { WEB_API_URL } from '../../.env';
 import PhotoThumbnail from './PhotoThumbnail';
 
@@ -25,17 +23,19 @@ export default {
   props: [
     'problem',
   ],
-  mounted() {
-    $('.limit-comment').trunk8({
-      lines: 2,
-    });
-  },
   computed: {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
     },
     isUnSeen() {
       return !this.problem.responses_seen;
+    },
+    shortComment() {
+      const limitLength = 60;
+      if (this.problem.comment.length <= limitLength) {
+        return this.problem.comment;
+      }
+      return `${this.problem.comment.substr(0, limitLength - 1)}…`;
     },
   },
 };
