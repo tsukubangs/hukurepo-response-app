@@ -11,6 +11,7 @@
     "build:hybrid": "node build/build_hybrid.js",
     "android": "node build/build_hybrid.js && cordova run android",
     "build:android": "node build/build_hybrid.js && cordova build android",
+    "build:ios": "node build/build_hybrid.js && cordova build ios",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
