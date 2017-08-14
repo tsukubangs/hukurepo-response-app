@@ -36,7 +36,9 @@
     </div>
     <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
       <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
-      <div class="right">
+      <div class="left toolbar-ios"></div>
+      <div class="center toolbar-ios"></div>
+      <div class="right toolbar-ios">
         <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
       </div>
     </v-ons-toolbar>
@@ -177,6 +179,9 @@ main {
   border-top: solid 1px rgba(127, 127, 127, 0.5);
   top: auto;
   bottom: 0;
+}
+.toolbar-ios {
+  width: auto;
 }
 .bottom-bar-textarea {
   padding-top: 12px;
