@@ -5,18 +5,25 @@
         {{ response.comment }}
       </div>
       <div class="date">
-        {{ response.created_at }}
+        {{ this.updatedTime }}
       </div>
     </div>
   </v-ons-card>
 </template>
 
 <script>
+import formatDateTime from '../function/formatDateTime';
+
 export default {
   name: 'response-card',
   props: [
     'response',
   ],
+  computed: {
+    updatedTime() {
+      return formatDateTime(this.response.updated_at);
+    },
+  },
 };
 </script>
 

@@ -9,7 +9,7 @@
           <div class="comment">
               <p class="limit-comment">{{problem.comment}}</p>
           </div>
-          <div class="date">{{problem.created_at}}</div>
+          <div class="date">{{this.updatedTime}}</div>
       </div>
   </v-ons-card>
 </template>
@@ -18,6 +18,7 @@
 import $ from 'jquery';
 import 'trunk8/trunk8';
 import { WEB_API_URL } from '../../.env';
+import formatDateTime from '../function/formatDateTime';
 
 export default {
   name: 'problem-card',
@@ -35,6 +36,9 @@ export default {
     },
     isUnSeen() {
       return !this.problem.responses_seen;
+    },
+    updatedTime() {
+      return formatDateTime(this.problem.updated_at);
     },
   },
 };
