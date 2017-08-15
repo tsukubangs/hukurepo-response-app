@@ -43,7 +43,7 @@
       </div>
     </v-ons-toolbar>
     <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
-      <img :src="selectedProblemImage" class="modalImage"/>
+      <img :src="selectedProblemImage" class="modal-image"/>
     </v-ons-modal>
   </v-ons-page>
 </template>
@@ -200,8 +200,9 @@ main {
 .thumbnail {
   width: 100px;
 }
-.modalImage {
+.modal-image {
   width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 </style>
