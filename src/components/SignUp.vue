@@ -207,6 +207,9 @@ export default {
 .width100 {
   width: 100%;
 }
+.text-input__container > input {
+  width: 100%;
+}
 .select-input {
   color: #1f1f21;
 }
