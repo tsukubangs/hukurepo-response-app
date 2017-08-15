@@ -6,7 +6,7 @@
           <div class="comment">
               <p class="limit-comment">{{this.shortComment}}</p>
           </div>
-          <div class="date">{{problem.created_at}}</div>
+          <div class="date">{{this.updatedTime}}</div>
       </div>
   </v-ons-card>
 </template>
@@ -14,6 +14,7 @@
 <script>
 import { WEB_API_URL } from '../../.env';
 import PhotoThumbnail from './PhotoThumbnail';
+import formatDateTime from '../function/formatDateTime';
 
 export default {
   name: 'problem-card',
@@ -36,6 +37,9 @@ export default {
         return this.problem.comment;
       }
       return `${this.problem.comment.substr(0, limitLength - 1)}…`;
+    },
+    updatedTime() {
+      return formatDateTime(this.problem.updated_at);
     },
   },
 };

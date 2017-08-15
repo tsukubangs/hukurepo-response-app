@@ -1,26 +1,33 @@
 <template>
   <v-ons-card v-bind:class="{ reverce: !isMyResponse }">
-    <div class="icon-container">
-      <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
-        <img src="../assets/s_logo.png" />
+      <div class="icon-container">
+        <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
+          <img src="../assets/s_logo.png" />
+        </div>
+        <img src="../assets/response_icon.png" v-else />
       </div>
-      <img src="../assets/response_icon.png" v-else />
-    </div>
-    <div class="content">
-      <p class="comment">{{ response.comment }}</p>
-      <p class="date">{{ response.created_at }}</p>
-      <slot></slot>
-    </div>
-  </v-ons-card>
-</template>
+      <div class="content">
+        <p class="comment">{{ response.comment }}</p>
+        <p class="date">{{ this.updatedTime }}</p>
+        <slot></slot>
+      </div>
+    </v-ons-card>
+  </template>
 
 <script>
+import formatDateTime from '../function/formatDateTime';
+
 export default {
   name: 'response-card',
   props: [
     'response',
     'isMyResponse',
   ],
+  computed: {
+    updatedTime() {
+      return formatDateTime(this.response.updated_at);
+    },
+  },
 };
 </script>
 
