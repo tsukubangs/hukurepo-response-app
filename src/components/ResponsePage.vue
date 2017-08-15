@@ -12,14 +12,19 @@
     </v-ons-pull-hook>
 
     <main>
-      <ul class="card-list">
-        <li>
-          <response-card :response="selectedProblem" class="card card-right"></response-card>
-        </li>
-        <li v-for="response in responses">
-          <response-card :response="response" class="card" v-bind:class="[selectedProblem.user_id == response.user_id ? 'card-right' : '']"></response-card>
-        </li>
-      </ul>
+      <v-ons-list modifier="noborder">
+        <v-ons-list-item modifier="nodivider">
+          <response-card :response="selectedProblem" :is-my-response="true" class="w100">
+            <div @click="photoModalVisible = true">
+              <photo-thumbnail :thumbnailUrl="selectedProblemImage" v-if="!!selectedProblem.image_url" class="thumbnail" ></photo-thumbnail>
+            </div>
+          </response-card>
+        </v-ons-list-item>
+        <v-ons-list-item v-for="response in responses" modifier="nodivider">
+          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" class="w100">
+          </response-card>
+        </v-ons-list-item>
+      </v-ons-list>
     </main>
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
@@ -31,10 +36,15 @@
     </div>
     <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
       <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
-      <div class="right">
+      <div class="left toolbar-ios"></div>
+      <div class="center toolbar-ios"></div>
+      <div class="right toolbar-ios">
         <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
       </div>
     </v-ons-toolbar>
+    <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
+      <img :src="selectedProblemImage" class="modal-image"/>
+    </v-ons-modal>
   </v-ons-page>
 </template>
 
@@ -44,6 +54,7 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
+import PhotoThumbnail from './PhotoThumbnail';
 import { WEB_API_URL } from '../../.env';
 
 function scrollBottom() {
@@ -58,6 +69,7 @@ export default {
   components: {
     CustomToolbar,
     ResponseCard,
+    PhotoThumbnail,
   },
   data() {
     return {
@@ -65,12 +77,16 @@ export default {
       state: 'initial',
       replyComment: '',
       isPosting: false,
+      photoModalVisible: false,
     };
   },
   computed: {
     ...mapGetters([
       'selectedProblem',
     ]),
+    selectedProblemImage() {
+      return WEB_API_URL + this.selectedProblem.image_url;
+    },
     isIOS() {
       /* eslint-disable no-undef */
       try {
@@ -144,23 +160,12 @@ export default {
 </script>
 
 <style scoped>
+.w100{
+  width: 100%;
+}
 main {
   padding: 5px 5px 44px;
   box-sizing: border-box;
-}
-.card {
-  width: 80%;
-}
-.card-right {
-  margin-left: auto;
-}
-.card-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-.card-list > li {
-  margin: 10px 0;
 }
 .bottom-bar {
   position: fixed;
@@ -175,6 +180,9 @@ main {
   top: auto;
   bottom: 0;
 }
+.toolbar-ios {
+  width: auto;
+}
 .bottom-bar-textarea {
   padding-top: 12px;
   width: 100%;
@@ -188,5 +196,12 @@ main {
   padding-right: 15px;
   margin: auto 8px;
   border-radius: 15px;
+}
+.thumbnail {
+  width: 100px;
+}
+.modal-image {
+  width: 100%;
+  object-fit: contain;
 }
 </style>

@@ -1,15 +1,18 @@
 <template>
-  <v-ons-card>
-    <div class="content">
-      <div class="comment">
-        {{ response.comment }}
+  <v-ons-card v-bind:class="{ reverce: !isMyResponse }">
+      <div class="icon-container">
+        <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
+          <img src="../assets/s_logo.png" />
+        </div>
+        <img src="../assets/response_icon.png" v-else />
       </div>
-      <div class="date">
-        {{ this.updatedTime }}
+      <div class="content">
+        <p class="comment">{{ response.comment }}</p>
+        <p class="date">{{ this.updatedTime }}</p>
+        <slot></slot>
       </div>
-    </div>
-  </v-ons-card>
-</template>
+    </v-ons-card>
+  </template>
 
 <script>
 import formatDateTime from '../function/formatDateTime';
@@ -18,6 +21,7 @@ export default {
   name: 'response-card',
   props: [
     'response',
+    'isMyResponse',
   ],
   computed: {
     updatedTime() {
@@ -31,39 +35,43 @@ export default {
 v-ons-card {
   position: relative;
   display: flex;
-  background: rgba(1,168,236,0.1);
-  border-radius: 20px;
+  flex-direction: row;
+}
+.reverce {
+  flex-direction: row-reverse;
+}
+.icon-container {
+  padding-top: 5px;
+  width: 120px;
+}
+.icon-container > * {
+  height: 50px;
+  width: 50px;
+}
+.tsukuba-icon {
+  background-color: #01a8ec;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right-justified {
+  margin-left: auto;
+}
+.tsukuba-icon > img {
+  display: inline-block;
+  height: unset;
+  width: 30px;
 }
 .content {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  padding: 0 10px;
-  margin: 5px;
-  text-align: left;
-}
-.comment {
-  display: flex;
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  flex-grow: 9;
-  word-break: break-all;
+  width: 100%;
   color: #7f7f7f;
 }
+.comment {
+  margin-top: 5px;
+}
 .date {
-  flex-grow: 1;
-  text-align: right;
   font-size: x-small;
   color: #aaaaaa;
-  margin-top:0.5em;
-}
-.cover {
-  width: 100%;
-  height: 100%;
-}
-p {
-  padding: 0.5em 0;
-  margin: 0;
-  font-size: initial;
 }
 </style>

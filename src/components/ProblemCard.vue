@@ -1,13 +1,10 @@
 <template>
   <v-ons-card v-bind:class="{ unread: isUnSeen }">
       <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px" v-show="isUnSeen"></v-ons-icon>
-      <div class="thumbnail">
-        <img :src="thumbnailUrl"  v-if="!!thumbnailUrl">
-        <img src="../assets/noimage.jpg" v-else>
-      </div>
+      <photo-thumbnail :thumbnailUrl="thumbnailUrl" class="photo-thumbnail"></photo-thumbnail>
       <div class="content">
           <div class="comment">
-              <p class="limit-comment">{{problem.comment}}</p>
+              <p class="limit-comment">{{this.shortComment}}</p>
           </div>
           <div class="date">{{this.updatedTime}}</div>
       </div>
@@ -15,27 +12,31 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import 'trunk8/trunk8';
 import { WEB_API_URL } from '../../.env';
+import PhotoThumbnail from './PhotoThumbnail';
 import formatDateTime from '../function/formatDateTime';
 
 export default {
   name: 'problem-card',
+  components: {
+    PhotoThumbnail,
+  },
   props: [
     'problem',
   ],
-  mounted() {
-    $('.limit-comment').trunk8({
-      lines: 2,
-    });
-  },
   computed: {
     thumbnailUrl() {
       return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
     },
     isUnSeen() {
       return !this.problem.responses_seen;
+    },
+    shortComment() {
+      const limitLength = 60;
+      if (this.problem.comment.length <= limitLength) {
+        return this.problem.comment;
+      }
+      return `${this.problem.comment.substr(0, limitLength - 1)}…`;
     },
     updatedTime() {
       return formatDateTime(this.problem.updated_at);
@@ -48,23 +49,6 @@ export default {
 v-ons-card {
   position: relative;
   display: flex;
-}
-.thumbnail {
-  position: relative;
-  width: 40%;
-}
-.thumbnail:before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.thumbnail > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
 }
 .content {
   display: flex;
@@ -80,6 +64,11 @@ v-ons-card {
   flex-grow: 9;
   color: #7f7f7f;
 }
+.photo-thumbnail {
+  width: 40%;
+  border-radius: 20px;
+  overflow: hidden;
+}
 .date {
   flex-grow: 1;
   text-align: right;
@@ -94,11 +83,6 @@ p {
   padding: 0.5em 0;
   margin: 0;
   font-size: initial;
-}
-img {
-  width: 100%;
-  object-fit: cover;
-  border-radius: 20px;
 }
 v-ons-card {
   background: rgba(1,168,236,0.1);
