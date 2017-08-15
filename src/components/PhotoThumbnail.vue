@@ -23,7 +23,7 @@ export default {
     display: block;
     padding-top: 100%;
 }
-.thumbnail > * {
+.thumbnail > img {
     position: absolute;
     top: 0;
     left: 0;
