@@ -30,9 +30,25 @@ npm run e2e
 # run all tests
 npm test
 ```
+
+## build
+
+### android
+
+```
+cordova platform add android
+npm run android
+```
+
+Please reinstall chalk when an error message "Error: Cannot find module 'chalk'" appears.
+
+```
+npm install --save chalk
+```
+
 ## Plugins
 ### cordova
-- to use camera  
+- to use camera
 ` cordova plugin add cordova-plugin-camera `
 
 - for geolocation
