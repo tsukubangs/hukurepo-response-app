@@ -50,4 +50,5 @@
         <variable name="URL_SCHEME" value="tsukurepo" />
     </plugin>
     <engine name="android" spec="~5.0.0" />
+    <engine name="ios" spec="~4.4.0" />
 </widget>
