@@ -46,6 +46,15 @@ Please reinstall chalk when an error message "Error: Cannot find module 'chalk'"
 npm install --save chalk
 ```
 
+### ios
+
+After creating the project file with cordova, please build with xcode.
+
+```
+cordova platform add ios
+open platforms/ios/TsukuRepo.xcodeproj
+```
+
 ## Plugins
 ### cordova
 - to use camera
