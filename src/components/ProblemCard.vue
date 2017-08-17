@@ -26,7 +26,7 @@ export default {
   ],
   computed: {
     thumbnailUrl() {
-      return !this.problem.image_url ? null : WEB_API_URL + this.problem.image_url;
+      return !this.problem.thumbnail_url ? null : WEB_API_URL + this.problem.thumbnail_url;
     },
     isUnSeen() {
       return !this.problem.responses_seen;

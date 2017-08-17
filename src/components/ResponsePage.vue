@@ -16,7 +16,7 @@
         <v-ons-list-item modifier="nodivider">
           <response-card :response="selectedProblem" :is-my-response="true" class="w100">
             <div @click="photoModalVisible = true">
-              <photo-thumbnail :thumbnailUrl="selectedProblemImage" v-if="!!selectedProblem.image_url" class="thumbnail" ></photo-thumbnail>
+              <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.image_url" class="thumbnail" ></photo-thumbnail>
             </div>
           </response-card>
         </v-ons-list-item>
@@ -86,6 +86,9 @@ export default {
     ]),
     selectedProblemImage() {
       return WEB_API_URL + this.selectedProblem.image_url;
+    },
+    selectedProblemThumbnailImage() {
+      return WEB_API_URL + this.selectedProblem.thumbnail_url;
     },
     isIOS() {
       /* eslint-disable no-undef */
