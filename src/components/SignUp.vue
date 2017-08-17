@@ -129,7 +129,7 @@ function postSignUp(component) {
           if (!error.response) {
             title = 'Connection error';
             message = 'Can\'t connect to server';
-          } else if (error.response.data.status === 422) {
+          } else if (error.response.status === 422) {
             title = 'Email error';
             message = 'This email address is already registered.';
           }
