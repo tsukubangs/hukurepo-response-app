@@ -33,3 +33,64 @@ new Vue({
   template: '<App/>',
   components: { App },
 });
+
+function alertDismissed() {
+    // do something
+}
+
+const app = {
+// Application Constructor
+  initialize() {
+    document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+  },
+
+// deviceready Event Handler
+//
+// Bind any cordova events here. Common events are:
+// 'pause', 'resume', etc.
+  onDeviceReady() {
+    this.initPushNotification();
+
+    /* global FCMPlugin */
+    FCMPlugin.onNotification(
+      (data) => {
+        if (data.wasTapped) {
+          // Notification was received on device tray and tapped by the user.
+          alert(JSON.stringify(data));
+        } else {
+          // Notification was received in foreground. Maybe the user needs to be notified.
+          // alert(JSON.stringify(data));
+          navigator.notification.alert(
+          JSON.stringify(data),  // message
+          alertDismissed,         // callback
+          'You got a new response',            // title
+          'OK',                  // buttonName
+          );
+        }
+      },
+      (msg) => {
+        console.log(`onNotification callback successfully registered: ${msg}`);
+      },
+      (err) => {
+        console.log(`Error registering onNotification callback: ${err}`);
+      },
+    );
+  },
+
+  /* eslint-disable no-undef */
+  initPushNotification() {
+    /* global FCMPlugin */
+    FCMPlugin.getToken(
+      (token) => {
+        console.log(token);
+        alert(token);
+    // ここにトークンを送るAPIの処理を書く
+      },
+      (err) => {
+        console.log(`error retrieving token: ${err}`);
+      },
+    );
+  },
+};
+
+app.initialize();
