@@ -34,10 +34,6 @@ new Vue({
   components: { App },
 });
 
-function alertDismissed() {
-    // do something
-}
-
 const app = {
 // Application Constructor
   initialize() {
@@ -59,13 +55,7 @@ const app = {
           alert(JSON.stringify(data));
         } else {
           // Notification was received in foreground. Maybe the user needs to be notified.
-          // alert(JSON.stringify(data));
-          navigator.notification.alert(
-          JSON.stringify(data),  // message
-          alertDismissed,         // callback
-          'You got a new response',            // title
-          'OK',                  // buttonName
-          );
+          alert(JSON.stringify(data));
         }
       },
       (msg) => {
@@ -83,7 +73,6 @@ const app = {
     FCMPlugin.getToken(
       (token) => {
         console.log(token);
-        alert(token);
     // ここにトークンを送るAPIの処理を書く
       },
       (err) => {
