@@ -38,9 +38,17 @@
         <icon height="58" src="res/ios/AppIcon.appiconset/Icon-App-29x29@2x.png" width="58" />
         <icon height="50" src="res/ios/AppIcon.appiconset/Icon-Small-50x50@1x.png" width="50" />
         <icon height="100" src="res/ios/AppIcon.appiconset/Icon-Small-50x50@2x.png" width="100" />
+        <splash src="res/ios/screen/Default~iphone.png" width="320" height="480"/>
+        <splash src="res/ios/screen/Default@2x~iphone.png" width="640" height="960"/>
+        <splash src="res/ios/screen/Default-Portrait~ipad.png" width="768" height="1024"/>
+        <splash src="res/ios/screen/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
+        <splash src="res/ios/screen/Default-Landscape~ipad.png" width="1024" height="768"/>
+        <splash src="res/ios/screen/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
+        <splash src="res/ios/screen/Default-568h@2x~iphone.png" width="640" height="1136"/>
     </platform>
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="KeyboardShrinksView" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false"/>
     <engine name="android" spec="~5.0.0" />
     <engine name="ios" spec="~4.4.0" />
     <plugin name="cordova-plugin-camera" spec="~2.4.0" />
