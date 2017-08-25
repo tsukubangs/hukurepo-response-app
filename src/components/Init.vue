@@ -9,7 +9,7 @@
     </div>
     <div id="signup-or-login">
       <p style="margin-top: 30px;">
-        <ons-button modifier= "outline" @click="toAgree()">Sign Up</ons-button>
+        <ons-button modifier="outline" @click="toAgree()">Sign Up</ons-button>
       </p>
       <p><ons-button modifier="quiet" @click="toLogin()">Already have an account</ons-button></p>
     </div>
