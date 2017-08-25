@@ -37,7 +37,7 @@ export default {
     ProblemCard,
   },
   created() {
-    notification.initialize();
+    notification.initialize(this);
     this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
       if (isError) {
         ons.notification.alert({
