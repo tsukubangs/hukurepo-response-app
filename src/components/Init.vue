@@ -5,8 +5,8 @@
       <p style="margin-top: 100px">
         Welcome to Tsukuba. If you have any problems, let us know! We can help you!
       </p>
-    <img src="../../res/tsukurepo-icon.png" width="200" height="200" alt="owl">
-  </div>
+      <img src="../../res/tsukurepo-icon.png" width="200" height="200" alt="owl">
+    </div>
     <div id="signup-or-login">
       <p style="margin-top: 30px;">
         <ons-button modifier= "outline" @click="toAgree()">Sign Up</ons-button>
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// import ons from 'onsenui';
 import router from '../router';
 
 export default {
