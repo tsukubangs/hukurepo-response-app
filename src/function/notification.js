@@ -38,9 +38,8 @@ const app = {
             title: 'You got a response',
             message: 'Please reload.',
           });
-
-          this.REFETCH_PROBLEMS();
         }
+        this.REFETCH_PROBLEMS();
       },
       (msg) => {
         console.log(`onNotification callback successfully registered: ${msg}`);
