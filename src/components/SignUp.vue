@@ -88,13 +88,17 @@
       </v-ons-list-item>
     </v-ons-list>
     <section style="margin: 16px">
-      <v-ons-button modifier="large" v-bind:disabled="!this.signUpIsPermitted" @click="confirmDialogVisible = true">Sign up</v-ons-button>
+      <v-ons-button modifier="large" v-bind:disabled="!this.signUpIsPermitted" @click="confirmDialogVisible = true">Confirm</v-ons-button>
     </section>
-    <v-ons-alert-dialog modifier="rowfooter" :visible.sync="confirmDialogVisible"
-      :footer="{ Edit: () => confirmDialogVisible = false, Confirm: signup }">
+    <v-ons-alert-dialog modifier="rowfooter" title="Sign up with the following information" :visible.sync="confirmDialogVisible">
       Email: {{this.email}}<br />
       Gender: {{this.selectedGender}}<br />
       Nationality: {{this.selectedNationality}}
+
+      <template slot="footer">
+        <button class="alert-dialog-button" @click="confirmDialogVisible = false">Edit</button>
+        <button class="alert-dialog-button" @click="signup">Sign Up</button>
+      </template>
     </v-ons-alert-dialog>
   </v-ons-page>
 </template>
