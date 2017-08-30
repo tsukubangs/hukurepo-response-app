@@ -44,7 +44,7 @@ export default {
           });
     },
     toSignUp() {
-      router.push('sign-up');
+      router.push('agree');
     },
   },
 };
