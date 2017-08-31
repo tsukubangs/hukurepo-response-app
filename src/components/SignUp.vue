@@ -72,7 +72,7 @@
       <v-ons-list-item>
         <div class="center">
           <v-ons-select class="width100" v-ons-model="selectedAge">
-            <option v-for="age in ages" :value="age.value">{{ age.key }}</option>
+            <option v-for="age in ages" :value="age">{{ age.slice(1) }}</option>
           </v-ons-select>
         </div>
       </v-ons-list-item>
@@ -93,11 +93,12 @@
     <v-ons-alert-dialog modifier="rowfooter" title="Sign up with the following information" :visible.sync="confirmDialogVisible">
       Email: {{this.email}}<br />
       Gender: {{this.selectedGender}}<br />
+      Age: {{this.selectedAge.slice(1)}}<br />
       Nationality: {{this.selectedNationality}}
 
       <template slot="footer">
         <button class="alert-dialog-button" @click="confirmDialogVisible = false">Edit</button>
-        <button class="alert-dialog-button" @click="signup">Sign Up</button>
+        <button class="alert-dialog-button" @click="postSignUp">Sign Up</button>
       </template>
     </v-ons-alert-dialog>
   </v-ons-page>
@@ -115,14 +116,16 @@ const emailRegExp = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/;
 const passwordMinLength = 6;
 const passwordMaxLength = 29;
 
-function postSignUp(component) {
+function postSignUp() {
   const data = {
-    email: component.email,
-    password: component.password,
-    gender: component.selectedGender,
-    nationality: component.selectedNationality,
-    age: component.selectedAge.slice(1),
+    email: this.email,
+    password: this.password,
+    gender: this.selectedGender,
+    nationality: this.selectedNationality,
+    age: this.selectedAge.split('-')[0].slice(1),
   };
+  this.confirmDialogVisible = false;
+  this.signUpPosting = true;
   axios.post(`${WEB_API_URL}/v1/users`, data)
         .then((response) => {
           window.localStorage.setItem('access_token', response.data.access_token);
@@ -147,6 +150,7 @@ function postSignUp(component) {
             title,
             message,
           });
+          this.signUpPosting = false;
         });
 }
 
@@ -159,7 +163,7 @@ export default {
       countries,
       selectedNationality: 'Japan',
       ages,
-      selectedAge: ages[2].value,
+      selectedAge: 'a20-29',
       email: '',
       password: '',
       confirmPassword: '',
@@ -167,6 +171,7 @@ export default {
       passwordIsInputted: false,
       confirmPasswordIsInputted: false,
       confirmDialogVisible: false,
+      signUpPosting: false,
     };
   },
   computed: {
@@ -183,16 +188,14 @@ export default {
     signUpIsPermitted() {
       return this.validation.emailRequired && this.validation.emailFormat
              && this.validation.passwordRequired && this.validation.passwordLength
-             && this.validation.confirmPasswordMatch;
+             && this.validation.confirmPasswordMatch && !this.signUpPosting;
     },
   },
   methods: {
     toLogin() {
       router.push('login');
     },
-    signUp() {
-      postSignUp(this);
-    },
+    postSignUp,
   },
   created() {
     this.$watch('email', () => {
