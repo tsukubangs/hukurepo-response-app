@@ -16,7 +16,11 @@
             </li>
         </ul>
     </main>
-    <v-ons-fab position="bottom right" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
+
+    <v-ons-popover cancelable :visible.sync="popoverVisible" :target="target" :direction="up" :cover-target="false">
+      <p style="text-align: center">Let's push the button to post a problem!</p>
+    </v-ons-popover>
   </v-ons-page>
 </template>
 
@@ -37,7 +41,7 @@ export default {
     ProblemCard,
   },
   created() {
-    notification.initialize();
+    notification.initialize(this);
     this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
       if (isError) {
         ons.notification.alert({
@@ -53,6 +57,7 @@ export default {
   data() {
     return {
       state: 'initial',
+      target: '#postButton',
     };
   },
   computed: {
@@ -60,6 +65,9 @@ export default {
       'problems',
       'fetchProblemsStatus',
     ]),
+    popoverVisible() {
+      return this.problems.length === 0 && this.fetchProblemsStatus.isCompleted;
+    },
   },
   methods: {
     ...mapActions([
