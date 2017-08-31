@@ -64,9 +64,9 @@ I understand that I will not be penalized in any way if I do not consent to part
 
       <p>Team. NGS<br> Attn: Privacy Policy Inquiry<br> 1-1-1 3F817, Tennoudai<br> Tsukuba, Ibaraki,Japan</p>
 
-      <p>Kitagawa & Amagasa Data Engineering Lab<br> Attn: Privacy Policy Inquiry<br> 1-1-1 SB0912, Tennoudai<br> Tsukuba, Ibaraki,Japan</p>
+      <p>Kitagawa and Amagasa Data Engineering Lab<br> Attn: Privacy Policy Inquiry<br> 1-1-1 SB0912, Tennoudai<br> Tsukuba, Ibaraki,Japan</p>
 
-      <div class="">© 2017 Kitagawa & Amagasa Data Enginieering Lab</div>
+      <div class="">© 2017 Kitagawa and Amagasa Data Enginieering Lab</div>
     </div>
 <br><br>
       Do you agree to the above consent form?</p>
