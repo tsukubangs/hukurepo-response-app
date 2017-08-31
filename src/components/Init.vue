@@ -1,18 +1,16 @@
 <template>
   <v-ons-page>
     <div class="background"></div>
-    <div id="owl-words">
-      <p style="margin-top: 100px">
-        Welcome to Tsukuba. If you have any problems, let us know! We can help you!
-      </p>
-      <img src="../../res/tsukurepo-icon.png" width="200" height="200" alt="owl">
-    </div>
-    <div id="signup-or-login">
-      <p style="margin-top: 30px;">
-        <ons-button modifier="outline" @click="toAgree()">Sign Up</ons-button>
-      </p>
-      <p><ons-button modifier="quiet" @click="toLogin()">Already have an account</ons-button></p>
-    </div>
+    <main>
+      <div id="owl-words">
+        <p>Welcome to Tsukuba. If you have any problems, let us know! We can help you!</p>
+        <img id="owl-icon" src="../../res/tsukurepo-icon.png" alt="owl">
+        <div id="signup-or-login">
+          <p><v-ons-button modifier="outline" @click="toAgree()">Sign Up</v-ons-button></p>
+          <p><v-ons-button modifier="quiet" @click="toLogin()">Already have an account</v-ons-button></p>
+        </div>
+      </div>
+    </main>
   </v-ons-page>
 </template>
 
@@ -33,23 +31,27 @@ export default {
 </script>
 
 <style scoped>
-#signup-or-login {
-  background-color: transparent;
-  width: 300px;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+main {
+    height: 100%;
+    display: flex;          /* 2 */
+    justify-content: center;/* 3 */
+    align-items: center;    /* 4 */
+}
+
+#signup-or-login > p {
+  margin: 10px 0;
 }
 
 #owl-words{
   color: #FFF;
   font-size: x-large;
-  width: 300px;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 300px;
+}
+
+#owl-icon {
+  width: 70%;
+  max-width: 200px;
 }
 
 .background {
