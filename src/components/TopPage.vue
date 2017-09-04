@@ -12,7 +12,7 @@
         </div>
         <ul class="card-list">
             <li v-for="problem in problems" @click="toResponse(problem)">
-                <problem-card :problem="problem" class="card"></problem-card>
+                <problem-card :problem="problem" class="w100"></problem-card>
             </li>
         </ul>
     </main>
@@ -110,9 +110,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-.card {
-  width: 100%;
-}
 .card-list {
   margin: 0;
   padding: 0;
@@ -129,5 +126,8 @@ main {
 }
 .title-icon {
   height: 100%;
+}
+.w100 {
+  width: 100%;
 }
 </style>
