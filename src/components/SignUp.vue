@@ -10,7 +10,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Email" v-ons-model="email" float>
+          <v-ons-input class="width100" placeholder="Email" v-model="email" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -29,7 +29,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Password" type="password" v-ons-model="password" float>
+          <v-ons-input class="width100" placeholder="Password" type="password" v-model="password" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -48,7 +48,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Confirm Password" type="password" v-ons-model="confirmPassword" float>
+          <v-ons-input class="width100" placeholder="Confirm Password" type="password" v-model="confirmPassword" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
@@ -62,7 +62,7 @@
       </v-ons-list-header>
       <v-ons-list-item v-for="(gender, $index) in genders" tappable>
         <label class="left">
-          <v-ons-input type="radio" :input-id="'radio-' + $index" :value="gender" v-ons-model="selectedGender"></v-ons-input>
+          <v-ons-radio :input-id="'radio-' + $index" :value="gender" v-model="selectedGender"></v-ons-radio>
         </label>
         <label :for="'radio-' + $index" class="center">{{ gender }}</label>
       </v-ons-list-item>
@@ -71,7 +71,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-select class="width100" v-ons-model="selectedAge">
+          <v-ons-select class="width100" v-model="selectedAge">
             <option v-for="age in ages" :value="age">{{ age.slice(1) }}</option>
           </v-ons-select>
         </div>
@@ -81,7 +81,7 @@
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-select class="width100" v-ons-model="selectedNationality">
+          <v-ons-select class="width100" v-model="selectedNationality">
             <option v-for="Nationality in countries" :value="Nationality.name">{{ Nationality.name }}</option>
           </v-ons-select>
         </div>
