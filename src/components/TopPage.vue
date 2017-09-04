@@ -18,7 +18,7 @@
     </main>
     <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
 
-    <v-ons-popover cancelable :visible.sync="popoverVisible" :target="target" :direction="up" :cover-target="false">
+    <v-ons-popover cancelable :visible.sync="popoverVisible" :target="target" direction="up" :cover-target="false">
       <p style="text-align: center">Let's push the button to post a problem!</p>
     </v-ons-popover>
   </v-ons-page>
