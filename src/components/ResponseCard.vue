@@ -1,5 +1,5 @@
 <template>
-  <v-ons-card v-bind:class="{ reverce: !isMyResponse }">
+  <div v-bind:class="{ reverce: !isMyResponse }" class="response-card">
       <div class="icon-container">
         <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
           <img src="../assets/s_logo.png" />
@@ -11,8 +11,8 @@
         <p class="date">{{ this.updatedTime }}</p>
         <slot></slot>
       </div>
-    </v-ons-card>
-  </template>
+  </div>
+</template>
 
 <script>
 import formatDateTime from '../function/formatDateTime';
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-v-ons-card {
+.response-card {
   position: relative;
   display: flex;
   flex-direction: row;
