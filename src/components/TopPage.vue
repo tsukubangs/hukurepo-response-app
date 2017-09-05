@@ -8,7 +8,7 @@
 <script>
 import CustomToolbar from './CustomToolbar';
 import MyProblemsPage from './MyProblemsPage';
-import OtherProblem from './OtherProblem';
+import AllProblemsPage from './AllProblemsPage';
 import notification from '../function/notification';
 
 export default {
@@ -16,7 +16,7 @@ export default {
   components: {
     CustomToolbar,
     MyProblemsPage,
-    OtherProblem,
+    AllProblemsPage,
   },
   created() {
     notification.initialize(this);
@@ -36,12 +36,12 @@ export default {
         {
           icon: 'ion-ios-people-outline',
           label: 'News',
-          page: OtherProblem,
+          page: AllProblemsPage,
         },
         {
           icon: 'ion-navicon-round',
           label: 'Settings',
-          page: OtherProblem,
+          page: AllProblemsPage,
         },
       ],
     };
