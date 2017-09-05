@@ -1,33 +1,37 @@
-<template id="top-page">
+<template>
   <v-ons-page>
-    <custom-toolbar><div class="title"><img class="title-icon" src="../assets/s_logo.png" /></div></custom-toolbar>
-    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
-
-    <v-ons-popover cancelable :visible.sync="popoverVisible" :target="target" direction="up" :cover-target="false">
-      <p style="text-align: center">Let's push the button to post a problem!</p>
-    </v-ons-popover>
-    <v-ons-tabbar :tabs="tabs" :visible="true" :index="0"></v-ons-tabbar>
+    <v-ons-pull-hook :action="loadItem" @changestate="state = $event.state">
+      <span v-show="state === 'initial'"> Pull to refresh </span>
+      <span v-show="state === 'preaction'"> Release </span>
+      <span v-show="state === 'action'"> Loading... </span>
+    </v-ons-pull-hook>
+    <main class="h100">
+      <div class="centering h100" v-if="!fetchProblemsStatus.isCompleted">
+        <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
+      </div>
+      <ul class="card-list">
+        <li v-for="problem in problems" @click="toResponse(problem)">
+          <problem-card :problem="problem" class="w100"></problem-card>
+        </li>
+      </ul>
+    </main>
   </v-ons-page>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
-import CustomToolbar from './CustomToolbar';
-import CameraPage from './CameraPage';
 import ProblemCard from './ProblemCard';
 import ResponsePage from './ResponsePage';
-import MyProblemsPage from './MyProblemsPage';
 import notification from '../function/notification';
 import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'top-page',
   components: {
-    CustomToolbar,
     ProblemCard,
-    MyProblemsPage,
   },
+  props: ['pageStack'],
   created() {
     notification.initialize(this);
     this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
@@ -45,27 +49,6 @@ export default {
   data() {
     return {
       state: 'initial',
-      target: '#postButton',
-      tabs: [
-        {
-          icon: 'ion-home',
-          label: 'Home',
-          page: MyProblemsPage,
-          props: {
-            pageStack: this.pageStack,
-          },
-        },
-        {
-          icon: 'ion-ios-people-outline',
-          label: 'News',
-          page: MyProblemsPage,
-        },
-        {
-          icon: 'ion-navicon-round',
-          label: 'Settings',
-          page: MyProblemsPage,
-        },
-      ],
     };
   },
   computed: {
@@ -84,9 +67,6 @@ export default {
       SELECT_PROBLEM,
       SAW_RESPONSES_OF_PROBLEM,
     ]),
-    push() {
-      this.pageStack.push(CameraPage);
-    },
     toResponse(problem) {
       this.SELECT_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
@@ -101,7 +81,6 @@ export default {
       }, 400);
     },
   },
-  props: ['pageStack'],
 };
 </script>
 
@@ -127,18 +106,7 @@ main {
 .card-list > li {
   margin: 10px 0;
 }
-.title {
-  height: 100%;
-  box-sizing: border-box;
-  padding: 3px 0;
-}
-.title-icon {
-  height: 100%;
-}
 .w100 {
   width: 100%;
-}
-#postButton {
-  bottom: 70px;
 }
 </style>
