@@ -37,6 +37,9 @@ export default {
           icon: 'ion-ios-people-outline',
           label: 'News',
           page: AllProblemsPage,
+          props: {
+            pageStack: this.pageStack,
+          },
         },
         {
           icon: 'ion-navicon-round',
