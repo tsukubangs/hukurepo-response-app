@@ -15,6 +15,10 @@
         </li>
       </ul>
     </main>
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
+    <v-ons-popover cancelable :visible="popoverVisible" :target="target" direction="up" :cover-target="false">
+      <p style="text-align: center">Let's push the button to post a problem!</p>
+    </v-ons-popover>
   </v-ons-page>
 </template>
 
@@ -22,11 +26,12 @@
 import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
 import ProblemCard from './ProblemCard';
+import CameraPage from './CameraPage';
 import ResponsePage from './ResponsePage';
 import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM } from '../vuex/mutation-types';
 
 export default {
-  name: 'top-page',
+  name: 'my-problems-page',
   components: {
     ProblemCard,
   },
@@ -47,6 +52,7 @@ export default {
   data() {
     return {
       state: 'initial',
+      target: '#postButton',
     };
   },
   computed: {
@@ -65,6 +71,9 @@ export default {
       SELECT_PROBLEM,
       SAW_RESPONSES_OF_PROBLEM,
     ]),
+    push() {
+      this.pageStack.push(CameraPage);
+    },
     toResponse(problem) {
       this.SELECT_PROBLEM(problem);
       this.pageStack.push(ResponsePage);
