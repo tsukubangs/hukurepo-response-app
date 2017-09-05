@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar><div class="title"><img class="title-icon" src="../assets/s_logo.png" /></div></custom-toolbar>
-    <div id="privacy" style="margin: 8%">
-      <h2>Fukurepo Privacy Policy</h2>
+    <div id="privacy" style="margin: 5%">
+      <h1>Fukurepo Privacy Policy</h1>
         <p>Our service is for collecting problems in the city. The problems gathered will be used to improve the city.</p>
         <p>The problem you posted is useful for the city and for people.You are a hero!<br></p>
         <p>This Privacy Policy describes how and when we collect, use, and
@@ -77,30 +77,12 @@ export default {
 </script>
 
 <style scoped>
-#button {
-text-align:center;
-margin: 10px;
-}
-
-ons-dialog:not([modifier='material']) p {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 input {
   width: 100%;
 }
 
-div.button {
-text-align:center;
-}
-div.button input {
-margin: 0px 20px;
-}
-
-.button--outline {
-  background-color: white;
-  color: #01a8ec;
+#privacy{
+  text-align: left;
 }
 
 .title {
