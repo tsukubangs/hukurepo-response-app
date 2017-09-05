@@ -1,5 +1,5 @@
 <template>
-  <v-ons-card v-bind:class="{ unread: isUnSeen }">
+  <div v-bind:class="{ unread: isUnSeen }" class="problem-card">
       <v-ons-icon icon="fa-exclamation-circle" class="unread-icon" size="32px" v-show="isUnSeen"></v-ons-icon>
       <photo-thumbnail :thumbnailUrl="thumbnailUrl" class="photo-thumbnail"></photo-thumbnail>
       <div class="content">
@@ -8,7 +8,7 @@
           </div>
           <div class="date">{{this.updatedTime}}</div>
       </div>
-  </v-ons-card>
+  </div>
 </template>
 
 <script>
@@ -46,9 +46,11 @@ export default {
 </script>
 
 <style scoped>
-v-ons-card {
+.problem-card {
   position: relative;
   display: flex;
+  background: rgba(1,168,236,0.1);
+  border-radius: 20px;
 }
 .content {
   display: flex;
@@ -83,10 +85,6 @@ p {
   padding: 0.5em 0;
   margin: 0;
   font-size: initial;
-}
-v-ons-card {
-  background: rgba(1,168,236,0.1);
-  border-radius: 20px;
 }
 .unread {
   background: rgba(244,177,131,0.1);

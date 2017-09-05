@@ -12,13 +12,13 @@
         </div>
         <ul class="card-list">
             <li v-for="problem in problems" @click="toResponse(problem)">
-                <problem-card :problem="problem" class="card"></problem-card>
+                <problem-card :problem="problem" class="w100"></problem-card>
             </li>
         </ul>
     </main>
     <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
 
-    <v-ons-popover cancelable :visible.sync="popoverVisible" :target="target" :direction="up" :cover-target="false">
+    <v-ons-popover cancelable :visible.sync="popoverVisible" :target="target" direction="up" :cover-target="false">
       <p style="text-align: center">Let's push the button to post a problem!</p>
     </v-ons-popover>
   </v-ons-page>
@@ -110,9 +110,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-.card {
-  width: 100%;
-}
 .card-list {
   margin: 0;
   padding: 0;
@@ -129,5 +126,8 @@ main {
 }
 .title-icon {
   height: 100%;
+}
+.w100 {
+  width: 100%;
 }
 </style>
