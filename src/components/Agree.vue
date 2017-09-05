@@ -1,21 +1,23 @@
 <template>
   <v-ons-page>
-    <div id="agreement" style="margin: 8%">
-      <h2>Agreement</h2>
+    <div id="agreement" class="blueOutline">
+      <h1>Agreement</h1>
         <p>This application is a research entitled “Problem finding and solving for foreign visitors using a smartphone application,” which includes the summary and methods of study, necessity of human subjects’ participation, possible risks and safety issues associated with participation in the study, measures to prevent anticipated harm, and protection of personal information?along with a video recording.<br></p>
 
         <p>I understand that I will not be penalized in any way if I do not consent to participate in the study, and I am free to withdraw my consent at any time without any penalty. I also understand that I am free to withdraw my consent for any data that I provide for use in this study at any time before the date specified below, even after completion of the study and experiments (if applicable). <br></p>
 
-        <p>I agree to participate in the research study with the above understanding.</p>
+        <v-ons-checkbox
+            :value="0"
+            v-model="checkOn"
+          >
+          </v-ons-checkbox>
+          <b>I agree to participate in the research study with the above understanding.</b>
 
-        <h3 class="blue">Do you agree to the above consent form?</h3>
+          <div id="button">
+            <ons-button style="margin-right: 10%;" modifier="light" @click="toInit()">N O</ons-button>
+            <ons-button input-id="nextButton" :disabled="!checkOn" modifier="cta" @click="toSignUp()">YES</ons-button>
+          </div>
   </div>
-    <div id="button">
-      <p style="margin:20px;">
-        <ons-button style="margin-right: 10%;" modifier="light" @click="toInit()">N O</ons-button>
-        <ons-button modifier="cta" @click="toSignUp()">YES</ons-button>
-      </p>
-    </div>
 
   </v-ons-page>
 </template>
@@ -31,8 +33,7 @@ export default {
   },
   data() {
     return {
-      email: '',
-      password: '',
+      checkOn: false,
     };
   },
   methods: {
@@ -51,6 +52,11 @@ export default {
 #button {
 text-align:center;
 margin: 10px;
+}
+
+#agreement {
+  margin: 5%;
+  padding: 5%;
 }
 
 ons-dialog:not([modifier='material']) p {
@@ -74,8 +80,9 @@ margin: 0px 20px;
   color: #01a8ec;
 }
 
-h3.blue {
-  color: #01a8ec;
+.blueOutline {
+  /*color: #01a8ec;*/
+  border: solid 1px #01a8ec;
 }
 
 </style>
