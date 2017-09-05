@@ -23,7 +23,6 @@ import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
 import ProblemCard from './ProblemCard';
 import ResponsePage from './ResponsePage';
-import notification from '../function/notification';
 import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM } from '../vuex/mutation-types';
 
 export default {
@@ -33,7 +32,6 @@ export default {
   },
   props: ['pageStack'],
   created() {
-    notification.initialize(this);
     this.$store.watch(state => state.fetchProblemsStatus.isError, (isError) => {
       if (isError) {
         ons.notification.alert({
