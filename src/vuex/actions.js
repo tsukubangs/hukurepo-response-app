@@ -51,7 +51,7 @@ export default {
     const config = {
       headers: { Authorization: token },
     };
-    axios.get(`${WEB_API_URL}/v1/problems/me`, config)
+    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10`, config)
             .then((response) => {
               commit(REFETCH_ALL_PROBLEMS, response.data);
             }).catch(() => {});
