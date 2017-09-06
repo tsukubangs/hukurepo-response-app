@@ -1,4 +1,10 @@
-import { FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM } from './mutation-types';
+import {
+  FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR,
+  REFETCH_PROBLEMS,
+  FETCH_ALL_PROBLEMS_START, FETCH_ALL_PROBLEMS_FINISH, FETCH_ALL_PROBLEMS_ERROR,
+  REFETCH_ALL_PROBLEMS,
+  SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM,
+} from './mutation-types';
 
 /* eslint-disable no-param-reassign */
 export default {
@@ -23,6 +29,28 @@ export default {
   },
   [REFETCH_PROBLEMS](state, problems) {
     state.problems = problems;
+  },
+  [FETCH_ALL_PROBLEMS_START](state) {
+    state.fetchAllProblemsStatus = {
+      isError: false,
+      isCompleted: false,
+    };
+  },
+  [FETCH_ALL_PROBLEMS_FINISH](state, allProblems) {
+    state.allProblems = allProblems;
+    state.fetchAllProblemsStatus = {
+      isError: false,
+      isCompleted: true,
+    };
+  },
+  [FETCH_ALL_PROBLEMS_ERROR](state) {
+    state.fetchAllProblemsStatus = {
+      isError: true,
+      isCompleted: false,
+    };
+  },
+  [REFETCH_ALL_PROBLEMS](state, allProblems) {
+    state.allProblems = allProblems;
   },
   [SELECT_PROBLEM](state, problem) {
     state.selectedProblem = problem;
