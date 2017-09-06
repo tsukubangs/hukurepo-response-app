@@ -1,9 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="center">Setting</div>
-    </v-ons-toolbar>
-
+    <v-ons-list-header class="header">Setting</v-ons-list-header>
     <v-ons-list>
       <v-ons-list-item tappable  @click="toPrivacy()">
         <div class="left">
@@ -13,28 +10,30 @@
           Privacy Policy
         </div>
       </v-ons-list-item>
-      <v-ons-list-item tappable>
-        <div class="left">
-          <v-ons-icon icon="md-face" class="list-item__icon"></v-ons-icon>
-        </div>
-        <div class="center">
-          Icon
-        </div>
-      </v-ons-list-item>
     </v-ons-list>
   </v-ons-page>
 </template>
 
-
 <script>
-import router from '../router';
+import PrivacyPolicy from './PrivacyPolicy';
+import CustomToolbar from './CustomToolbar';
 
 export default {
   name: 'setting-page',
+  components: {
+    CustomToolbar,
+  },
+  props: ['pageStack'],
   methods: {
     toPrivacy() {
-      router.push('privacy');
+      this.pageStack.push(PrivacyPolicy);
     },
   },
 };
 </script>
+
+<style>
+.header {
+  background-color: aliceblue;
+}
+</style>

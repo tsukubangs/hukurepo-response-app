@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar><div class="title"><img class="title-icon" src="../assets/s_logo.png" /></div></custom-toolbar>
+    <custom-toolbar></custom-toolbar>
     <div id="privacy" style="margin: 5%">
       <h1>Fukurepo Privacy Policy</h1>
         <p>Our service is for collecting problems in the city. The problems gathered will be used to improve the city.</p>
