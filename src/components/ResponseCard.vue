@@ -29,7 +29,7 @@ export default {
       return formatDateTime(this.response.updated_at);
     },
     activateLinkComment() {
-      return autolinker.link(this.response.comment);
+      return autolinker.link(this.response.comment, { truncate: { length: 32, location: 'smart' } });
     },
   },
 };
