@@ -27,7 +27,6 @@ export default {
       tabs: [
         {
           icon: 'ion-home',
-          label: 'Home',
           page: MyProblemsPage,
           props: {
             pageStack: this.pageStack,
@@ -35,7 +34,6 @@ export default {
         },
         {
           icon: 'ion-ios-people-outline',
-          label: 'News',
           page: AllProblemsPage,
           props: {
             pageStack: this.pageStack,
@@ -43,7 +41,6 @@ export default {
         },
         {
           icon: 'ion-navicon-round',
-          label: 'Settings',
           page: AllProblemsPage,
         },
       ],
