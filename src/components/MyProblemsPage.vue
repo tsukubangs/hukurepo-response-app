@@ -11,7 +11,7 @@
       </div>
       <ul class="card-list">
         <li v-for="problem in problems" @click="toResponse(problem)">
-          <problem-card :problem="problem" class="w100"></problem-card>
+          <problem-card :problem="problem" :useUnReadNotification="true" class="w100"></problem-card>
         </li>
       </ul>
     </main>
