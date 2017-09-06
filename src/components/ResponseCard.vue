@@ -7,7 +7,7 @@
         <img src="../assets/response_icon.png" v-else />
       </div>
       <div class="content">
-        <p class="comment">{{ response.comment }}</p>
+        <p v-html="activateLinkComment"></p>
         <p class="date">{{ this.updatedTime }}</p>
         <slot></slot>
       </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import autolinker from 'autolinker';
 import formatDateTime from '../function/formatDateTime';
 
 export default {
@@ -26,6 +27,9 @@ export default {
   computed: {
     updatedTime() {
       return formatDateTime(this.response.updated_at);
+    },
+    activateLinkComment() {
+      return autolinker.link(this.response.comment, { truncate: { length: 32, location: 'smart' } });
     },
   },
 };
