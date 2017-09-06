@@ -23,13 +23,14 @@ export default {
   },
   props: [
     'problem',
+    'useUnReadNotification',
   ],
   computed: {
     thumbnailUrl() {
       return !this.problem.thumbnail_url ? null : WEB_API_URL + this.problem.thumbnail_url;
     },
     isUnSeen() {
-      return !this.problem.responses_seen;
+      return this.useUnReadNotification && !this.problem.responses_seen;
     },
     shortComment() {
       const limitLength = 60;

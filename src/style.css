@@ -22,3 +22,7 @@
 .page__background {
     background-color: #fff;
 }
+
+.tabbar {
+  position: fixed;
+}
