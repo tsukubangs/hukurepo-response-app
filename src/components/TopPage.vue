@@ -9,6 +9,7 @@
 import CustomToolbar from './CustomToolbar';
 import MyProblemsPage from './MyProblemsPage';
 import AllProblemsPage from './AllProblemsPage';
+import SettingPage from './SettingPage';
 import notification from '../function/notification';
 
 export default {
@@ -41,7 +42,10 @@ export default {
         },
         {
           icon: 'ion-navicon-round',
-          page: AllProblemsPage,
+          page: SettingPage,
+          props: {
+            pageStack: this.pageStack,
+          },
         },
       ],
     };
