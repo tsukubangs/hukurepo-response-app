@@ -69,7 +69,6 @@ export default {
 }
 .content {
   width: 220px;
-  /*width: 100%;*/
   color: #7f7f7f;
 }
 .comment {
@@ -80,7 +79,6 @@ export default {
   color: #aaaaaa;
 }
 .break-word {
-  /*word-break: break-word;*/
   word-wrap: break-word;
 }
 </style>
