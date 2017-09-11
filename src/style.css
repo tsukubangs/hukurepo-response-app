@@ -26,3 +26,7 @@
 .tabbar {
   position: fixed;
 }
+
+.page[status-bar-fill] > .page__content {
+  top: 0;
+}
