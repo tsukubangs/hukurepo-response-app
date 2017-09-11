@@ -34,10 +34,8 @@ const app = {
           // Notification was received on device tray and tapped by the user.
         } else {
           // Notification was received in foreground. Maybe the user needs to be notified.
-          ons.notification.alert({
-            title: 'You got a response',
-            message: 'Please reload.',
-          });
+          // ons.notification.alert({
+          ons.notification.toast('You got a response, please reload.', { timeout: 2000 });
         }
         this.REFETCH_PROBLEMS();
       },
