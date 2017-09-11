@@ -1,16 +1,16 @@
 <template>
   <div v-bind:class="{ reverce: !isMyResponse }" class="response-card">
-      <div class="icon-container">
-        <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
-          <img src="../assets/s_logo.png" />
-        </div>
-        <img src="../assets/response_icon.png" v-else />
+    <div class="icon-container">
+      <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
+        <img src="../assets/s_logo.png" />
       </div>
-      <div class="content">
-        <p v-html="activateLinkComment"></p>
-        <p class="date">{{ this.updatedTime }}</p>
-        <slot></slot>
-      </div>
+      <img src="../assets/response_icon.png" v-else />
+    </div>
+    <div class="content">
+      <p class="break-word" v-html="activateLinkComment"></p>
+      <p class="date">{{ this.updatedTime }}</p>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
 }
 .icon-container {
   padding-top: 5px;
-  width: 120px;
+  width: 60px;
 }
 .icon-container > * {
   height: 50px;
@@ -68,7 +68,7 @@ export default {
   width: 30px;
 }
 .content {
-  width: 100%;
+  width: 220px;
   color: #7f7f7f;
 }
 .comment {
@@ -77,5 +77,8 @@ export default {
 .date {
   font-size: x-small;
   color: #aaaaaa;
+}
+.break-word {
+  word-wrap: break-word;
 }
 </style>
