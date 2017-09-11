@@ -7,7 +7,7 @@
       <img src="../assets/response_icon.png" v-else />
     </div>
     <div class="content">
-      <p class="brek-word" v-html="activateLinkComment"></p>
+      <p class="break-word" v-html="activateLinkComment"></p>
       <p class="date">{{ this.updatedTime }}</p>
       <slot></slot>
     </div>
@@ -46,7 +46,7 @@ export default {
 }
 .icon-container {
   padding-top: 5px;
-  width: 100px;
+  width: 60px;
 }
 .icon-container > * {
   height: 50px;
@@ -68,7 +68,7 @@ export default {
   width: 30px;
 }
 .content {
-  width: 190px;
+  width: 220px;
   /*width: 100%;*/
   color: #7f7f7f;
 }
@@ -79,7 +79,7 @@ export default {
   font-size: x-small;
   color: #aaaaaa;
 }
-.brek-word {
+.break-word {
   /*word-break: break-word;*/
   word-wrap: break-word;
 }
