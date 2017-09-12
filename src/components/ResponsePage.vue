@@ -25,6 +25,7 @@
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
+      <google-map :latitude="selectedProblem.latitude" :longitude="selectedProblem.longitude"></google-map>
     </main>
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
@@ -55,6 +56,7 @@ import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
+import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
 
 function scrollBottom() {
@@ -70,6 +72,7 @@ export default {
     CustomToolbar,
     ResponseCard,
     PhotoThumbnail,
+    GoogleMap,
   },
   data() {
     return {
