@@ -45,6 +45,7 @@
     <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
       <img :src="selectedProblemImage" class="modal-image"/>
     </v-ons-modal>
+    <v-ons-fab position="bottom right" id="postButton" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
   </v-ons-page>
 </template>
 
@@ -52,6 +53,7 @@
 import { mapGetters } from 'vuex';
 import axios from 'axios';
 import ons from 'onsenui';
+import ResponseEnglishToJapanese from './ResponseEnglishToJapanese';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
@@ -112,6 +114,9 @@ export default {
         this.getResponse();
         done();
       }, 400);
+    },
+    push() {
+      this.pageStack.push(ResponseEnglishToJapanese);
     },
     postResponse() {
       this.isPosting = true;
