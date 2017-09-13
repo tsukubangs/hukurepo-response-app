@@ -4,7 +4,7 @@
 
     <form name="js">
     <textarea id="text-form" class="textarea" rows="5" placeholder="日本語で入力してください" v-model="postComment" name='japanese' v-focus v-resize></textarea>
-    <textarea id="text-form" class="textarea" rows="5" placeholder="英語訳" name='english' v-resize></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="日→英　ボタンを押すと英語訳が表示されます" name='english' v-resize></textarea>
     </form>
 
     <div class="bottom-bar" v-if="!this.isIOS">
@@ -15,7 +15,7 @@
         <div class="toolbar__center">
         </div>
         <div class="toolbar__right mr10">
-            <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse"><ons-icon icon="ion-compose" size="25px"></ons-icon> 投稿</span>
+            <span class="toolbar-button post-problem-btn" @click="postResponse"><ons-icon icon="ion-compose" size="25px"></ons-icon> 投稿</span>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
       <div class="left"></div>
       <div class="center"></div>
       <div class="right">
-          <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+          <span class="toolbar-button post-problem-btn" @click="postResponse"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
       </div>
     </v-ons-toolbar>
   </v-ons-page>
@@ -124,9 +124,6 @@ export default {
         return false;
       }
     },
-    postEnabled() {
-      return !this.isPosting && (this.postComment !== '' || this.imageData !== '');
-    },
   },
   methods: {
     postResponse,
@@ -138,8 +135,8 @@ export default {
 
 <style scoped >
  #text-form {
-   width: 100%;
-   margin: 10px 0;
+   width: 95%;
+   margin: 10px;
    background-color: transparent;
    border: 1;
  }
@@ -149,28 +146,11 @@ export default {
    margin-left: auto;
    margin-bottom: 10px;
  }
-.trim-img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
 .bottom-bar{
   position: fixed;
 }
 .photo {
   width: 100%;
-}
-.photo-block {
-  position: relative;
-}
-.cancel-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-radius: 50%;
-  background-color: #000;
-  color: #fff;
-  padding: 0 6px;
 }
 .bottom-bar {
   border-top: solid 1px rgba(127, 127, 127, 0.5);
