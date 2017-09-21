@@ -26,22 +26,6 @@
         </v-ons-list-item>
       </v-ons-list>
     </main>
-    <div class="bottom-bar" v-if="!this.isIOS">
-      <div class="toolbar">
-        <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
-        <div class="toolbar__right">
-          <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
-        </div>
-      </div>
-    </div>
-    <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
-      <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
-      <div class="left toolbar-ios"></div>
-      <div class="center toolbar-ios"></div>
-      <div class="right toolbar-ios">
-        <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
-      </div>
-    </v-ons-toolbar>
     <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
       <img :src="selectedProblemImage" class="modal-image"/>
     </v-ons-modal>
@@ -56,13 +40,6 @@ import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
 import { WEB_API_URL } from '../../.env';
-
-function scrollBottom() {
-  const pageContents = document.getElementsByClassName('page__content');
-  const responsePageContent = pageContents[pageContents.length - 1];
-  if (!responsePageContent) return;
-  responsePageContent.scrollTop = responsePageContent.scrollHeight;
-}
 
 export default {
   name: 'response-page',
@@ -90,18 +67,6 @@ export default {
     selectedProblemThumbnailImage() {
       return WEB_API_URL + this.selectedProblem.thumbnail_url;
     },
-    isIOS() {
-      /* eslint-disable no-undef */
-      try {
-        return device.platform === 'iOS';
-      } catch (e) {
-        console.log(e);
-        return false;
-      }
-    },
-    postEnabled() {
-      return !this.isPosting && this.replyComment !== '';
-    },
   },
   created() {
     this.getResponse();
@@ -112,31 +77,6 @@ export default {
         this.getResponse();
         done();
       }, 400);
-    },
-    postResponse() {
-      this.isPosting = true;
-      const token = window.localStorage.getItem('access_token');
-      const config = {
-        headers: { Authorization: token },
-      };
-      const data = {
-        comment: this.replyComment,
-      };
-      axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, data, config)
-      .then((response) => {
-        this.responses.push(response.data);
-        this.replyComment = '';
-        this.isPosting = false;
-        scrollBottom();
-      })
-      .catch((error) => {
-        console.log(error);
-        ons.notification.alert({
-          title: '',
-          message: 'Sorry, posting failed...',
-        });
-        this.isPosting = false;
-      });
     },
     getResponse() {
       const token = window.localStorage.getItem('access_token');
