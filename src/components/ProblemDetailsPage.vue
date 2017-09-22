@@ -25,7 +25,7 @@
         </v-ons-list-item>
       </v-ons-list>
     </main>
-    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}">
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}" @click="toResponse()">
       <span class="fab__icon" style="line-height:0;">
         <v-ons-icon icon="ion-ios-chatbubble" :style="{fontSize: '50px'}"></v-ons-icon>
         <span style="font-size: 15px;">Reply</span>
@@ -41,6 +41,7 @@
 import { mapGetters } from 'vuex';
 import axios from 'axios';
 import ons from 'onsenui';
+import ResponsePage from './ResponsePage';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
@@ -48,7 +49,7 @@ import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
 
 export default {
-  name: 'response-page',
+  name: 'problem-details-page',
   components: {
     CustomToolbar,
     ResponseCard,
@@ -103,6 +104,9 @@ export default {
           callback: this.getResponse,
         });
       });
+    },
+    toResponse() {
+      this.pageStack.push(ResponsePage);
     },
   },
   props: ['pageStack'],
