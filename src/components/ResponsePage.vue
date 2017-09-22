@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar>Response Page</custom-toolbar>
+    <custom-toolbar></custom-toolbar>
 
     <v-ons-pull-hook
       :action="loadItem"
