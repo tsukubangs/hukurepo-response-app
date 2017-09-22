@@ -19,11 +19,12 @@
             <google-map :latitude="selectedProblem.data.latitude" :longitude="selectedProblem.data.longitude" v-if="selectedProblem.data.longitude && selectedProblem.data.latitude" class="thumbnail"></google-map>
           </response-card>
         </v-ons-list-item>
-        <v-ons-list-item v-for="response in responses" modifier="nodivider">
+        <v-ons-list-item v-for="response in responses.data" modifier="nodivider">
           <response-card :response="response" :is-my-response="true" class="w100">
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
+      <v-ons-progress-circular indeterminate v-show="responses.isLoading"></v-ons-progress-circular>
     </main>
     <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}" @click="toResponse()">
       <span class="fab__icon" style="line-height:0;">
@@ -39,8 +40,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import axios from 'axios';
-import ons from 'onsenui';
 import ResponsePage from './ResponsePage';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
@@ -58,7 +57,6 @@ export default {
   },
   data() {
     return {
-      responses: '',
       state: 'initial',
       replyComment: '',
       isPosting: false,
@@ -75,35 +73,15 @@ export default {
     selectedProblemThumbnailImage() {
       return WEB_API_URL + this.selectedProblem.data.thumbnail_url;
     },
-  },
-  created() {
-    this.getResponse();
+    responses() {
+      return this.selectedProblem.responses;
+    },
   },
   methods: {
     loadItem(done) {
       setTimeout(() => {
-        this.getResponse();
         done();
       }, 400);
-    },
-    getResponse() {
-      const token = window.localStorage.getItem('access_token');
-      const config = {
-        headers: { Authorization: token },
-      };
-      axios.get(`${WEB_API_URL}/v1/problems/${this.selectedProblem.data.id}/responses`, config)
-      .then((response) => {
-        console.log(response);
-        this.responses = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-        ons.notification.alert({
-          title: 'Can\'t connect to server',
-          message: 'Try again?',
-          callback: this.getResponse,
-        });
-      });
     },
     toResponse() {
       this.pageStack.push(ResponsePage);
