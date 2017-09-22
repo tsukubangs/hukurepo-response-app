@@ -20,7 +20,7 @@
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses" modifier="nodivider">
-          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" class="w100">
+          <response-card :response="response" :is-my-response="true" class="w100">
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
