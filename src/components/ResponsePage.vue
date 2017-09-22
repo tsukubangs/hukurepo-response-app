@@ -16,6 +16,7 @@
         <v-ons-list-item modifier="nodivider">
           <response-card :response="selectedProblem" :is-my-response="true" class="w100">
             <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
+            <google-map :latitude="selectedProblem.latitude" :longitude="selectedProblem.longitude" v-if="selectedProblem.longitude && selectedProblem.latitude" class="thumbnail"></google-map>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses" modifier="nodivider">
@@ -43,6 +44,7 @@ import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
+import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
 
 export default {
@@ -51,6 +53,7 @@ export default {
     CustomToolbar,
     ResponseCard,
     PhotoThumbnail,
+    GoogleMap,
   },
   data() {
     return {
@@ -145,7 +148,9 @@ main {
   border-radius: 15px;
 }
 .thumbnail {
-  width: 100px;
+  display: inline-block;
+  height: 150px;
+  width: 200px;
 }
 .modal-image {
   width: 100%;
