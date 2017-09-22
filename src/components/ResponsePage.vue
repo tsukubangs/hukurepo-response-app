@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar>Response Page</custom-toolbar>
+    <custom-toolbar></custom-toolbar>
 
     <v-ons-pull-hook
       :action="loadItem"
@@ -15,33 +15,22 @@
       <v-ons-list modifier="noborder">
         <v-ons-list-item modifier="nodivider">
           <response-card :response="selectedProblem" :is-my-response="true" class="w100">
-            <div @click="photoModalVisible = true">
-              <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.image_url" class="thumbnail" ></photo-thumbnail>
-            </div>
+            <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
+            <google-map :latitude="selectedProblem.latitude" :longitude="selectedProblem.longitude" v-if="selectedProblem.longitude && selectedProblem.latitude" class="thumbnail"></google-map>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses" modifier="nodivider">
-          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" class="w100">
+          <response-card :response="response" :is-my-response="true" class="w100">
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
     </main>
-    <div class="bottom-bar" v-if="!this.isIOS">
-      <div class="toolbar">
-        <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
-        <div class="toolbar__right">
-          <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
-        </div>
-      </div>
-    </div>
-    <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
-      <textarea id="text-form" class="textarea bottom-bar-textarea" rows="1" placeholder="Reply message" v-model="replyComment" name='description' ></textarea>
-      <div class="left toolbar-ios"></div>
-      <div class="center toolbar-ios"></div>
-      <div class="right toolbar-ios">
-        <span class="toolbar-button post-problem-btn" v-bind:disabled="!this.postEnabled" @click="postResponse">Send</span>
-      </div>
-    </v-ons-toolbar>
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}">
+      <span class="fab__icon" style="line-height:0;">
+        <v-ons-icon icon="ion-ios-chatbubble" :style="{fontSize: '50px'}"></v-ons-icon>
+        <span style="font-size: 15px;">Reply</span>
+      </span>
+    </v-ons-fab>
     <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
       <img :src="selectedProblemImage" class="modal-image"/>
     </v-ons-modal>
@@ -55,14 +44,8 @@ import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
+import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
-
-function scrollBottom() {
-  const pageContents = document.getElementsByClassName('page__content');
-  const responsePageContent = pageContents[pageContents.length - 1];
-  if (!responsePageContent) return;
-  responsePageContent.scrollTop = responsePageContent.scrollHeight;
-}
 
 export default {
   name: 'response-page',
@@ -70,6 +53,7 @@ export default {
     CustomToolbar,
     ResponseCard,
     PhotoThumbnail,
+    GoogleMap,
   },
   data() {
     return {
@@ -90,18 +74,6 @@ export default {
     selectedProblemThumbnailImage() {
       return WEB_API_URL + this.selectedProblem.thumbnail_url;
     },
-    isIOS() {
-      /* eslint-disable no-undef */
-      try {
-        return device.platform === 'iOS';
-      } catch (e) {
-        console.log(e);
-        return false;
-      }
-    },
-    postEnabled() {
-      return !this.isPosting && this.replyComment !== '';
-    },
   },
   created() {
     this.getResponse();
@@ -112,31 +84,6 @@ export default {
         this.getResponse();
         done();
       }, 400);
-    },
-    postResponse() {
-      this.isPosting = true;
-      const token = window.localStorage.getItem('access_token');
-      const config = {
-        headers: { Authorization: token },
-      };
-      const data = {
-        comment: this.replyComment,
-      };
-      axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, data, config)
-      .then((response) => {
-        this.responses.push(response.data);
-        this.replyComment = '';
-        this.isPosting = false;
-        scrollBottom();
-      })
-      .catch((error) => {
-        console.log(error);
-        ons.notification.alert({
-          title: '',
-          message: 'Sorry, posting failed...',
-        });
-        this.isPosting = false;
-      });
     },
     getResponse() {
       const token = window.localStorage.getItem('access_token');
@@ -201,7 +148,9 @@ main {
   border-radius: 15px;
 }
 .thumbnail {
-  width: 100px;
+  display: inline-block;
+  height: 150px;
+  width: 200px;
 }
 .modal-image {
   width: 100%;
