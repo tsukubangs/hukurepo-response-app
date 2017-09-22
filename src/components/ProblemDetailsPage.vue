@@ -14,9 +14,9 @@
     <main>
       <v-ons-list modifier="noborder">
         <v-ons-list-item modifier="nodivider">
-          <response-card :response="selectedProblem" :is-my-response="true" class="w100">
-            <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
-            <google-map :latitude="selectedProblem.latitude" :longitude="selectedProblem.longitude" v-if="selectedProblem.longitude && selectedProblem.latitude" class="thumbnail"></google-map>
+          <response-card :response="selectedProblem.data" :is-my-response="true" class="w100">
+            <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.data.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
+            <google-map :latitude="selectedProblem.data.latitude" :longitude="selectedProblem.data.longitude" v-if="selectedProblem.data.longitude && selectedProblem.data.latitude" class="thumbnail"></google-map>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses" modifier="nodivider">
@@ -70,10 +70,10 @@ export default {
       'selectedProblem',
     ]),
     selectedProblemImage() {
-      return WEB_API_URL + this.selectedProblem.image_url;
+      return WEB_API_URL + this.selectedProblem.data.image_url;
     },
     selectedProblemThumbnailImage() {
-      return WEB_API_URL + this.selectedProblem.thumbnail_url;
+      return WEB_API_URL + this.selectedProblem.data.thumbnail_url;
     },
   },
   created() {
@@ -91,7 +91,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/${this.selectedProblem.data.id}/responses`, config)
       .then((response) => {
         console.log(response);
         this.responses = response.data;
