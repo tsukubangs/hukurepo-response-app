@@ -39,7 +39,7 @@ export default {
     const config = {
       headers: { Authorization: token },
     };
-    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=-responded`, config)
+    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=responded`, config)
             .then((response) => {
               commit(FETCH_ALL_PROBLEMS_FINISH, response.data);
             }).catch(() => {
@@ -51,7 +51,7 @@ export default {
     const config = {
       headers: { Authorization: token },
     };
-    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=-responded`, config)
+    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=responded`, config)
             .then((response) => {
               commit(REFETCH_ALL_PROBLEMS, response.data);
             }).catch(() => {});
