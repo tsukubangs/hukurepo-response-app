@@ -26,6 +26,12 @@
         </v-ons-list-item>
       </v-ons-list>
     </main>
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}">
+      <span class="fab__icon" style="line-height:0;">
+        <v-ons-icon icon="ion-ios-chatbubble" :style="{fontSize: '50px'}"></v-ons-icon>
+        <span style="font-size: 15px;">Reply</span>
+      </span>
+    </v-ons-fab>
     <v-ons-modal :visible="photoModalVisible" @click="photoModalVisible = false">
       <img :src="selectedProblemImage" class="modal-image"/>
     </v-ons-modal>
