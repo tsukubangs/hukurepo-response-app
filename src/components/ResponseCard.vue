@@ -11,12 +11,6 @@
         <p class="date">{{ this.updatedTime }}</p>
         <slot></slot>
       </div>
-      <!-- <div class="content" v-else>
-        日本語
-        <p class="break-word" v-html="activateLinkCommentJapanese"></p>
-        <p class="date">{{ this.updatedTime }}</p>
-        <slot></slot>
-      </div> -->
   </div>
 </template>
 
@@ -36,10 +30,8 @@ export default {
       return formatDateTime(this.response.updated_at);
     },
     activateLinkComment() {
-      if (!this.isJapanese) {
-        return autolinker.link(this.response.comment, { truncate: { length: 32, location: 'smart' } });
-      }
-      return autolinker.link(this.response.japanese_comment, { truncate: { length: 32, location: 'smart' } });
+      const comment = this.isJapanese ? this.response.japanese_comment : this.response.comment;
+      return autolinker.link(comment, { truncate: { length: 32, location: 'smart' } });
     },
   },
 };
