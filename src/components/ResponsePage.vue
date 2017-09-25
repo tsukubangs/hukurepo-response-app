@@ -139,7 +139,7 @@ export default {
       return this.japaneseComment !== '' && !this.isPosting;
     },
     postEnabled() {
-      return this.japaneseComment !== '' && this.comment !== '' && !this.isPosting;
+      return this.comment !== '' && !this.isPosting;
     },
   },
   methods: {
