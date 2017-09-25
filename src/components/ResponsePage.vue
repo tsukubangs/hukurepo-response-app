@@ -127,9 +127,6 @@ export default {
     ...mapGetters([
       'selectedProblem',
     ]),
-    hasImageData() {
-      return this.imageData !== '';
-    },
     isIOS() {
       /* eslint-disable no-undef */
       try {
