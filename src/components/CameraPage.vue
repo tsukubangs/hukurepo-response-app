@@ -253,7 +253,7 @@ export default {
   bottom: 0;
 }
 .post-problem-btn {
-  background-color: #01a8ec;
+  background-color: #2bb46e;
   color: #fff;
   padding-left: 15px;
   padding-right: 15px;

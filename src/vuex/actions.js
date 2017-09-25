@@ -4,7 +4,9 @@ import {
   FETCH_PROBLEMS_START, FETCH_PROBLEMS_FINISH, FETCH_PROBLEMS_ERROR,
   FETCH_ALL_PROBLEMS, REFETCH_ALL_PROBLEMS,
   FETCH_ALL_PROBLEMS_START, FETCH_ALL_PROBLEMS_FINISH, FETCH_ALL_PROBLEMS_ERROR,
-  SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM,
+  SELECT_PROBLEM, FETCH_SELECT_PROBLEM_RESPONSES_START, FETCH_SELECT_PROBLEM_RESPONSES_FINISH,
+  FETCH_SELECT_PROBLEM_RESPONSES_ERROR, FETCH_SELECT_PROBLEM_RESPONSES,
+  SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
 import { WEB_API_URL } from '../../.env';
@@ -58,6 +60,39 @@ export default {
   },
   [SELECT_PROBLEM]({ commit }, problem) {
     commit(SELECT_PROBLEM, problem);
+    const token = window.localStorage.getItem('access_token');
+    const config = {
+      headers: { Authorization: token },
+    };
+    commit(FETCH_SELECT_PROBLEM_RESPONSES_START);
+    axios.get(`${WEB_API_URL}/v1/problems/${problem.id}/responses`, config)
+      .then((response) => {
+        commit(FETCH_SELECT_PROBLEM_RESPONSES_FINISH, response.data);
+      })
+      .catch((error) => {
+        commit(FETCH_SELECT_PROBLEM_RESPONSES_ERROR);
+        console.log(error);
+      });
+  },
+  [FETCH_SELECT_PROBLEM_RESPONSES]({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      commit(FETCH_SELECT_PROBLEM_RESPONSES_START);
+      const problemId = state.selectedProblem.data.id;
+      axios.get(`${WEB_API_URL}/v1/problems/${problemId}/responses`, config)
+        .then((response) => {
+          commit(FETCH_SELECT_PROBLEM_RESPONSES_FINISH, response.data);
+          resolve();
+        })
+        .catch((error) => {
+          commit(FETCH_SELECT_PROBLEM_RESPONSES_ERROR);
+          console.log(error);
+          reject(error);
+        });
+    });
   },
   [SAW_RESPONSES_OF_PROBLEM]({ commit }, problem) {
     const token = window.localStorage.getItem('access_token');

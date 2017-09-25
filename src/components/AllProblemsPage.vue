@@ -11,7 +11,7 @@
         <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
       </div>
       <ul class="card-list">
-        <li v-for="problem in allProblems" @click="toResponse(problem)">
+        <li v-for="problem in allProblems" @click="toDetails(problem)">
           <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
         </li>
       </ul>
@@ -23,7 +23,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
 import ProblemCard from './ProblemCard';
-import ResponsePage from './ResponsePage';
+import ProblemDetailsPage from './ProblemDetailsPage';
 import CustomToolbar from './CustomToolbar';
 import { FETCH_ALL_PROBLEMS, REFETCH_ALL_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
 
@@ -63,9 +63,9 @@ export default {
       REFETCH_ALL_PROBLEMS,
       SELECT_PROBLEM,
     ]),
-    toResponse(problem) {
+    toDetails(problem) {
       this.SELECT_PROBLEM(problem);
-      this.pageStack.push(ResponsePage);
+      this.pageStack.push(ProblemDetailsPage);
     },
     loadItem(done) {
       setTimeout(() => {

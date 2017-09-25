@@ -77,12 +77,12 @@ margin: 0px 20px;
 
 .button--outline {
   background-color: white;
-  color: #01a8ec;
+  color: #2bb46e;
 }
 
 .blueOutline {
-  /*color: #01a8ec;*/
-  border: solid 1px #01a8ec;
+  /*color: #2bb46e;*/
+  border: solid 1px #2bb46e;
 }
 
 </style>
