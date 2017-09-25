@@ -58,16 +58,16 @@ export default {
     state.selectedProblem.data = problem;
   },
   [FETCH_SELECT_PROBLEM_RESPONSES_START](state) {
-    state.selectedProblem.responses.isLoading = true;
+    state.selectedProblem.responses.loading = true;
     state.selectedProblem.responses.isError = false;
   },
   [FETCH_SELECT_PROBLEM_RESPONSES_FINISH](state, responses) {
     state.selectedProblem.responses.data = responses;
-    state.selectedProblem.responses.isLoading = false;
+    state.selectedProblem.responses.loading = false;
     state.selectedProblem.responses.isError = false;
   },
   [FETCH_SELECT_PROBLEM_RESPONSES_ERROR](state) {
-    state.selectedProblem.responses.isLoading = false;
+    state.selectedProblem.responses.loading = false;
     state.selectedProblem.responses.isError = true;
   },
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {

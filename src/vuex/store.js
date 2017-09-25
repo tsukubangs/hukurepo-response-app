@@ -21,7 +21,7 @@ export default new Vuex.Store({
       data: null,
       responses: {
         data: [],
-        isLoading: false,
+        loading: false,
         isError: false,
       },
     },
