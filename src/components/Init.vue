@@ -4,7 +4,7 @@
     <main>
       <div id="owl-words">
         <p>Welcome to Tsukuba. If you have any problems, let us know! We can help you!</p>
-        <img id="owl-icon" src="../../res/tsukurepo-icon.png" alt="owl">
+        <img id="owl-icon" src="../../res/hukurepo-icon.png" alt="owl">
         <div id="signup-or-login">
           <p><v-ons-button modifier="outline" @click="toAgree()">Sign Up</v-ons-button></p>
           <p><v-ons-button modifier="quiet" @click="toLogin()">Already have an account</v-ons-button></p>
@@ -55,12 +55,12 @@ main {
 }
 
 .background {
-  background-color: #01a8ec;
+  background-color: #2bb46e;
 }
 
 .button--outline {
   background-color: white;
-  color: #01a8ec;
+  color: #2bb46e;
 }
 
 .button--quiet {

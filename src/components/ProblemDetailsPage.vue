@@ -26,7 +26,7 @@
       </v-ons-list>
       <v-ons-progress-circular indeterminate v-show="responses.isLoading"></v-ons-progress-circular>
     </main>
-    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}" @click="toResponse()">
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#2bb46e', width: '70px', height: '70px'}" @click="toResponse()">
       <span class="fab__icon" style="line-height:0;">
         <v-ons-icon icon="ion-ios-chatbubble" :style="{fontSize: '50px'}"></v-ons-icon>
         <span style="font-size: 15px;">Reply</span>

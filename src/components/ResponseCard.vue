@@ -53,7 +53,7 @@ export default {
   width: 50px;
 }
 .tsukuba-icon {
-  background-color: #01a8ec;
+  background-color: #2bb46e;
   border-radius: 50%;
   display: flex;
   justify-content: center;
