@@ -5,7 +5,7 @@ import {
   FETCH_ALL_PROBLEMS, REFETCH_ALL_PROBLEMS,
   FETCH_ALL_PROBLEMS_START, FETCH_ALL_PROBLEMS_FINISH, FETCH_ALL_PROBLEMS_ERROR,
   SELECT_PROBLEM, FETCH_SELECT_PROBLEM_RESPONSES_START, FETCH_SELECT_PROBLEM_RESPONSES_FINISH,
-  FETCH_SELECT_PROBLEM_RESPONSES_ERROR,
+  FETCH_SELECT_PROBLEM_RESPONSES_ERROR, FETCH_SELECT_PROBLEM_RESPONSES,
   SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
@@ -66,6 +66,22 @@ export default {
     };
     commit(FETCH_SELECT_PROBLEM_RESPONSES_START);
     axios.get(`${WEB_API_URL}/v1/problems/${problem.id}/responses`, config)
+      .then((response) => {
+        commit(FETCH_SELECT_PROBLEM_RESPONSES_FINISH, response.data);
+      })
+      .catch((error) => {
+        commit(FETCH_SELECT_PROBLEM_RESPONSES_ERROR);
+        console.log(error);
+      });
+  },
+  [FETCH_SELECT_PROBLEM_RESPONSES]({ commit, state }) {
+    const token = window.localStorage.getItem('access_token');
+    const config = {
+      headers: { Authorization: token },
+    };
+    commit(FETCH_SELECT_PROBLEM_RESPONSES_START);
+    const problemId = state.selectedProblem.data.id;
+    axios.get(`${WEB_API_URL}/v1/problems/${problemId}/responses`, config)
       .then((response) => {
         commit(FETCH_SELECT_PROBLEM_RESPONSES_FINISH, response.data);
       })

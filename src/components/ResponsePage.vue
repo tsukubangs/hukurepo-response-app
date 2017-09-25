@@ -32,11 +32,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import { WEB_API_URL, GOOGLE_TRANSLATE_API_KEY } from '../../.env';
+import { FETCH_SELECT_PROBLEM_RESPONSES } from '../vuex/mutation-types';
 
 const focus = {
   inserted(el) {
@@ -83,12 +84,13 @@ function postResponse() {
   const data = {
     comment: this.postComment,
   };
-  axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.id}/responses`, data, config)
+  axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.data.id}/responses`, data, config)
     .then(() => {
       ons.notification.alert({
         title: '',
         message: '投稿が完了しました．',
         callback: () => {
+          this.FETCH_SELECT_PROBLEM_RESPONSES();
           this.pageStack.pop();
         },
       });
@@ -131,6 +133,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      FETCH_SELECT_PROBLEM_RESPONSES,
+    ]),
     postResponse,
     translate,
   },
