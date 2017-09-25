@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ngs.tsukuba.hukurepo-ans" version="1.0.0">
-    <name>HukuRepo@Ans</name>
+<widget id="ngs.tsukuba.hukurepo.reply" version="1.0.0">
+    <name>HukuReply</name>
     <description>
       Answer application of 'Hukurepo'. For Tsukuba City staff.
     </description>
