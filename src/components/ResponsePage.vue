@@ -127,9 +127,6 @@ export default {
     ...mapGetters([
       'selectedProblem',
     ]),
-    hasImageData() {
-      return this.imageData !== '';
-    },
     isIOS() {
       /* eslint-disable no-undef */
       try {
@@ -142,7 +139,7 @@ export default {
       return this.japaneseComment !== '' && !this.isPosting;
     },
     postEnabled() {
-      return this.japaneseComment !== '' && this.comment !== '' && !this.isPosting;
+      return this.comment !== '' && !this.isPosting;
     },
   },
   methods: {
