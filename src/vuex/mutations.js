@@ -3,7 +3,9 @@ import {
   REFETCH_PROBLEMS,
   FETCH_ALL_PROBLEMS_START, FETCH_ALL_PROBLEMS_FINISH, FETCH_ALL_PROBLEMS_ERROR,
   REFETCH_ALL_PROBLEMS,
-  SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM,
+  SELECT_PROBLEM, FETCH_SELECT_PROBLEM_RESPONSES_START, FETCH_SELECT_PROBLEM_RESPONSES_FINISH,
+  FETCH_SELECT_PROBLEM_RESPONSES_ERROR,
+  SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
 /* eslint-disable no-param-reassign */
@@ -53,7 +55,20 @@ export default {
     state.allProblems = allProblems;
   },
   [SELECT_PROBLEM](state, problem) {
-    state.selectedProblem = problem;
+    state.selectedProblem.data = problem;
+  },
+  [FETCH_SELECT_PROBLEM_RESPONSES_START](state) {
+    state.selectedProblem.responses.isLoading = true;
+    state.selectedProblem.responses.isError = false;
+  },
+  [FETCH_SELECT_PROBLEM_RESPONSES_FINISH](state, responses) {
+    state.selectedProblem.responses.data = responses;
+    state.selectedProblem.responses.isLoading = false;
+    state.selectedProblem.responses.isError = false;
+  },
+  [FETCH_SELECT_PROBLEM_RESPONSES_ERROR](state) {
+    state.selectedProblem.responses.isLoading = false;
+    state.selectedProblem.responses.isError = true;
   },
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {
     const problemsNumber = state.problems.indexOf(problem);

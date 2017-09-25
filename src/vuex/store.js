@@ -17,7 +17,14 @@ export default new Vuex.Store({
       isError: false,
       isCompleted: false,
     },
-    selectedProblem: { },
+    selectedProblem: {
+      data: null,
+      responses: {
+        data: [],
+        isLoading: false,
+        isError: false,
+      },
+    },
   },
   getters: {
     problems: state => state.problems,
