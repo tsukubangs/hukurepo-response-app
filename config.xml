@@ -7,7 +7,7 @@
     <author email="tsukuba.ngs@gmail.com">
       Team NGS
     </author>
-    <icon src="res/tsukurepo-icon.png" />
+    <icon src="res/android/hukureply-icon.png" />
     <content src="index.html" />
     <access origin="*" />
     <access origin="content:///*" />
