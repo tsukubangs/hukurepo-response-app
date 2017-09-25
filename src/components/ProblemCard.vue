@@ -34,10 +34,10 @@ export default {
     },
     shortComment() {
       const limitLength = 60;
-      if (this.problem.comment.length <= limitLength) {
-        return this.problem.comment;
+      if (this.problem.japanese_comment.length <= limitLength) {
+        return this.problem.japanese_comment;
       }
-      return `${this.problem.comment.substr(0, limitLength - 1)}…`;
+      return `${this.problem.japanese_comment.substr(0, limitLength - 1)}…`;
     },
     updatedTime() {
       return formatDateTime(this.problem.updated_at);
