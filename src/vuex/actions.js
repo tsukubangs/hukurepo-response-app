@@ -35,28 +35,38 @@ export default {
               commit(REFETCH_PROBLEMS, response.data);
             }).catch(() => {});
   },
-  [FETCH_ALL_PROBLEMS]({ commit }) {
-    commit(FETCH_ALL_PROBLEMS_START);
-    const token = window.localStorage.getItem('access_token');
-    const config = {
-      headers: { Authorization: token },
-    };
-    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=responded`, config)
-            .then((response) => {
-              commit(FETCH_ALL_PROBLEMS_FINISH, response.data);
-            }).catch(() => {
-              commit(FETCH_ALL_PROBLEMS_ERROR);
-            });
+  [FETCH_ALL_PROBLEMS]({ commit, state }, option = {}) {
+    return new Promise((resolve, reject) => {
+      commit(FETCH_ALL_PROBLEMS_START);
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      const queryPage = option.page || state.allProblems.page + 1;
+      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10`, config)
+               .then((response) => {
+                 commit(FETCH_ALL_PROBLEMS_FINISH, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 commit(FETCH_ALL_PROBLEMS_ERROR);
+                 reject(error);
+               });
+    });
   },
   [REFETCH_ALL_PROBLEMS]({ commit }) {
-    const token = window.localStorage.getItem('access_token');
-    const config = {
-      headers: { Authorization: token },
-    };
-    axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=responded`, config)
-            .then((response) => {
-              commit(REFETCH_ALL_PROBLEMS, response.data);
-            }).catch(() => {});
+    return new Promise((resolve, reject) => {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10`, config)
+               .then((response) => {
+                 commit(REFETCH_ALL_PROBLEMS, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 reject(error);
+               });
+    });
   },
   [SELECT_PROBLEM]({ commit }, problem) {
     commit(SELECT_PROBLEM, problem);
