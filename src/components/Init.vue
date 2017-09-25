@@ -55,12 +55,12 @@ main {
 }
 
 .background {
-  background-color: #01a8ec;
+  background-color: #2bb46e;
 }
 
 .button--outline {
   background-color: white;
-  color: #01a8ec;
+  color: #2bb46e;
 }
 
 .button--quiet {

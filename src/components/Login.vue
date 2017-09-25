@@ -61,7 +61,7 @@ export default {
 }
 
 .background {
-  background-color: #01a8ec;
+  background-color: #2bb46e;
 }
 
 </style>

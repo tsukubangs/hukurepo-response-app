@@ -25,7 +25,7 @@
         </v-ons-list-item>
       </v-ons-list>
     </main>
-    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec', width: '70px', height: '70px'}">
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#2bb46e', width: '70px', height: '70px'}">
       <span class="fab__icon" style="line-height:0;">
         <v-ons-icon icon="ion-ios-chatbubble" :style="{fontSize: '50px'}"></v-ons-icon>
         <span style="font-size: 15px;">Reply</span>
@@ -140,7 +140,7 @@ main {
   border-color: transparent;
 }
 .post-problem-btn {
-  background-color: #01a8ec;
+  background-color: #2bb46e;
   color: #fff;
   padding-left: 15px;
   padding-right: 15px;

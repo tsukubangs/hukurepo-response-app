@@ -15,7 +15,7 @@
         </li>
       </ul>
     </main>
-    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#01a8ec'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
+    <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#2bb46e'}" :visible="fetchProblemsStatus.isCompleted" @click="push"><v-ons-icon icon="md-edit"></v-ons-icon></v-ons-fab>
     <v-ons-popover cancelable :visible="popoverVisible" :target="target" direction="up" :cover-target="false">
       <p style="text-align: center">Let's push the button to post a problem!</p>
     </v-ons-popover>
