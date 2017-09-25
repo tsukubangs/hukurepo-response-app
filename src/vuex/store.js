@@ -12,16 +12,17 @@ export default new Vuex.Store({
       isError: false,
       isCompleted: false,
     },
-    allProblems: [],
-    fetchAllProblemsStatus: {
+    allProblems: {
+      data: [],
+      page: 0,
+      loading: false,
       isError: false,
-      isCompleted: false,
     },
     selectedProblem: {
       data: null,
       responses: {
         data: [],
-        isLoading: false,
+        loading: false,
         isError: false,
       },
     },

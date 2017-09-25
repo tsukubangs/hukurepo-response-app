@@ -24,7 +24,7 @@
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
-      <v-ons-progress-circular indeterminate v-show="responses.isLoading"></v-ons-progress-circular>
+      <v-ons-progress-circular indeterminate v-show="responses.loading"></v-ons-progress-circular>
     </main>
     <v-ons-fab position="bottom right" id="postButton" :style="{ backgroundColor: '#2bb46e', width: '70px', height: '70px'}" @click="toResponse()">
       <span class="fab__icon" style="line-height:0;">
