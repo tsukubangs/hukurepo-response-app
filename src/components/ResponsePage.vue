@@ -3,8 +3,8 @@
     <custom-toolbar></custom-toolbar>
 
     <form name="js">
-    <textarea id="text-form" class="textarea" rows="5" placeholder="日本語で入力してください" v-model="postComment" name='japanese' v-focus v-resize></textarea>
-    <textarea id="text-form" class="textarea" rows="5" placeholder="日→英　ボタンを押すと英語訳が表示されます" name='english' v-resize></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="日本語で入力してください" v-model="japaneseComment" name='japanese' v-focus v-resize></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="日→英　ボタンを押すと英語訳が表示されます" v-model="comment" name='english' v-resize></textarea>
     </form>
 
     <div class="bottom-bar" v-if="!this.isIOS">
@@ -56,7 +56,7 @@ const resize = {
 
 function translate() {
   const data = new FormData();
-  data.append('q', this.postComment);
+  data.append('q', this.japaneseComment);
   data.append('source', 'ja');
   data.append('target', 'en');
   data.append('format', 'text');
@@ -65,7 +65,7 @@ function translate() {
   axios.post('https://translation.googleapis.com/language/translate/v2', data)
       .then((response) => {
         console.log(`翻訳後:${response.data.data.translations[0].translatedText}`);
-        document.js.english.value = response.data.data.translations[0].translatedText;
+        this.comment = response.data.data.translations[0].translatedText;
       }).catch((error) => {
         this.isPosting = false;
         console.log(error);
@@ -82,7 +82,8 @@ function postResponse() {
     headers: { Authorization: token },
   };
   const data = {
-    comment: this.postComment,
+    comment: this.comment,
+    japanese_comment: this.japaneseComment,
   };
   axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.data.id}/responses`, data, config)
     .then(() => {
@@ -113,7 +114,8 @@ export default {
   directives: { focus, resize },
   data() {
     return {
-      postComment: '',
+      comment: '',
+      japaneseComment: '',
     };
   },
   computed: {
