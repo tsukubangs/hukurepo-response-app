@@ -10,22 +10,22 @@
     <div class="bottom-bar" v-if="!this.isIOS">
       <div class="toolbar">
         <div class="toolbar__left ml10">
-          <span class="toolbar-button translate-btn" @click="translate"><ons-icon icon="ion-ios-chatboxes" size="25px"></ons-icon> 翻訳</span>
+          <span class="toolbar-button translate-btn" @click="translate" v-bind:disabled="!this.translateEnabled"><ons-icon icon="ion-ios-chatboxes" size="25px"></ons-icon> 翻訳</span>
         </div>
         <div class="toolbar__center">
         </div>
         <div class="toolbar__right mr10">
-            <span class="toolbar-button post-problem-btn" @click="postResponse"><ons-icon icon="ion-compose" size="25px"></ons-icon> 投稿</span>
+            <span class="toolbar-button post-problem-btn" @click="postResponse" v-bind:disabled="!this.postEnabled"><ons-icon icon="ion-compose" size="25px"></ons-icon> 投稿</span>
         </div>
       </div>
     </div>
     <v-ons-toolbar class="ios-bottom-bar" style="padding-top: 0;" v-else="this.isIOS">
       <div class="left">
-        <span class="toolbar-button translate-btn" @click="translate"><ons-icon icon="ion-ios-chatboxes" size="25px"></ons-icon> 翻訳</span>
+        <span class="toolbar-button translate-btn" @click="translate" v-bind:disabled="!this.translateEnabled"><ons-icon icon="ion-ios-chatboxes" size="25px"></ons-icon> 翻訳</span>
       </div>
       <div class="center"></div>
       <div class="right">
-        <span class="toolbar-button post-problem-btn" @click="postResponse"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+        <span class="toolbar-button post-problem-btn" @click="postResponse" v-bind:disabled="!this.postEnabled"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
       </div>
     </v-ons-toolbar>
   </v-ons-page>
@@ -62,8 +62,10 @@ function translate() {
   data.append('format', 'text');
   data.append('key', GOOGLE_TRANSLATE_API_KEY);
 
+  this.isPosting = true;
   axios.post('https://translation.googleapis.com/language/translate/v2', data)
       .then((response) => {
+        this.isPosting = false;
         console.log(`翻訳後:${response.data.data.translations[0].translatedText}`);
         this.comment = response.data.data.translations[0].translatedText;
       }).catch((error) => {
@@ -85,6 +87,7 @@ function postResponse() {
     comment: this.comment,
     japanese_comment: this.japaneseComment,
   };
+  this.isPosting = true;
   axios.post(`${WEB_API_URL}/v1/problems/${this.selectedProblem.data.id}/responses`, data, config)
     .then(() => {
       ons.notification.alert({
@@ -95,6 +98,7 @@ function postResponse() {
           this.pageStack.pop();
         },
       });
+      this.isPosting = false;
     }).catch((error) => {
       console.log(error);
       ons.notification.alert({
@@ -116,6 +120,7 @@ export default {
     return {
       comment: '',
       japaneseComment: '',
+      isPosting: false,
     };
   },
   computed: {
@@ -132,6 +137,12 @@ export default {
       } catch (e) {
         return false;
       }
+    },
+    translateEnabled() {
+      return this.japaneseComment !== '' && !this.isPosting;
+    },
+    postEnabled() {
+      return this.japaneseComment !== '' && this.comment !== '' && !this.isPosting;
     },
   },
   methods: {
