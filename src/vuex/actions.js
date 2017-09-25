@@ -75,20 +75,24 @@ export default {
       });
   },
   [FETCH_SELECT_PROBLEM_RESPONSES]({ commit, state }) {
-    const token = window.localStorage.getItem('access_token');
-    const config = {
-      headers: { Authorization: token },
-    };
-    commit(FETCH_SELECT_PROBLEM_RESPONSES_START);
-    const problemId = state.selectedProblem.data.id;
-    axios.get(`${WEB_API_URL}/v1/problems/${problemId}/responses`, config)
-      .then((response) => {
-        commit(FETCH_SELECT_PROBLEM_RESPONSES_FINISH, response.data);
-      })
-      .catch((error) => {
-        commit(FETCH_SELECT_PROBLEM_RESPONSES_ERROR);
-        console.log(error);
-      });
+    return new Promise((resolve, reject) => {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      commit(FETCH_SELECT_PROBLEM_RESPONSES_START);
+      const problemId = state.selectedProblem.data.id;
+      axios.get(`${WEB_API_URL}/v1/problems/${problemId}/responses`, config)
+        .then((response) => {
+          commit(FETCH_SELECT_PROBLEM_RESPONSES_FINISH, response.data);
+          resolve();
+        })
+        .catch((error) => {
+          commit(FETCH_SELECT_PROBLEM_RESPONSES_ERROR);
+          console.log(error);
+          reject(error);
+        });
+    });
   },
   [SAW_RESPONSES_OF_PROBLEM]({ commit }, problem) {
     const token = window.localStorage.getItem('access_token');

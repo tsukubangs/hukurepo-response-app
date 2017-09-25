@@ -39,13 +39,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ResponsePage from './ResponsePage';
 import CustomToolbar from './CustomToolbar';
 import ResponseCard from './ResponseCard';
 import PhotoThumbnail from './PhotoThumbnail';
 import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
+import { FETCH_SELECT_PROBLEM_RESPONSES } from '../vuex/mutation-types';
 
 export default {
   name: 'problem-details-page',
@@ -78,10 +79,17 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      FETCH_SELECT_PROBLEM_RESPONSES,
+    ]),
+
     loadItem(done) {
-      setTimeout(() => {
-        done();
-      }, 400);
+      this.FETCH_SELECT_PROBLEM_RESPONSES()
+        .then(() => { done(); })
+        .catch((error) => {
+          console.log(error);
+          done();
+        });
     },
     toResponse() {
       this.pageStack.push(ResponsePage);
