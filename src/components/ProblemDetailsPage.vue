@@ -6,8 +6,11 @@
       </div>
       <div class="center">詳細</div>
       <div class="right">
-        <v-ons-toolbar-button class="toolbar-button post-problem-btn">
+        <v-ons-toolbar-button v-if="isJapanese==true" class="toolbar-button post-problem-btn" @click="translate">
           英語原文
+        </v-ons-toolbar-button>
+        <v-ons-toolbar-button v-else class="toolbar-button post-problem-btn" @click="translate">
+          日本語文
         </v-ons-toolbar-button>
       </div>
     </v-ons-toolbar>
@@ -24,13 +27,13 @@
     <main>
       <v-ons-list modifier="noborder">
         <v-ons-list-item modifier="nodivider">
-          <response-card :response="selectedProblem.data" :is-my-response="true" class="w100">
+          <response-card :response="selectedProblem.data" :is-my-response="true" :isJapanese="isJapanese" class="w100">
             <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.data.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
             <google-map :latitude="selectedProblem.data.latitude" :longitude="selectedProblem.data.longitude" v-if="selectedProblem.data.longitude && selectedProblem.data.latitude" class="thumbnail"></google-map>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses.data" modifier="nodivider">
-          <response-card :response="response" :is-my-response="true" class="w100">
+          <response-card :response="response" :is-my-response="true" :is-japanese="isJapanese" class="w100">
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
@@ -58,6 +61,11 @@ import GoogleMap from './GoogleMap';
 import { WEB_API_URL } from '../../.env';
 import { FETCH_SELECT_PROBLEM_RESPONSES } from '../vuex/mutation-types';
 
+function translate() {
+  console.log('translate');
+  this.isJapanese = !this.isJapanese;
+}
+
 export default {
   name: 'problem-details-page',
   components: {
@@ -72,6 +80,7 @@ export default {
       replyComment: '',
       isPosting: false,
       photoModalVisible: false,
+      isJapanese: true,
     };
   },
   computed: {
@@ -89,6 +98,7 @@ export default {
     },
   },
   methods: {
+    translate,
     ...mapActions([
       FETCH_SELECT_PROBLEM_RESPONSES,
     ]),
@@ -107,6 +117,7 @@ export default {
   },
   props: ['pageStack'],
 };
+
 </script>
 
 <style scoped>
