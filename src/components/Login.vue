@@ -3,11 +3,11 @@
     <div class="background"></div>
     <div id="login-form">
       <p><v-ons-input id="email" modifier="underbar" placeholder="Email" v-model="email" float></v-ons-input></p>
-      <p><v-ons-input id="password" modifier="underbar" type="password" placeholder="Password" v-model="password" float></v-ons-input></p>
+      <p><v-ons-input id="password" modifier="underbar" type="password" placeholder="パスワード" v-model="password" float></v-ons-input></p>
       <p style="margin-top: 30px;">
-        <v-ons-button @click="login()">Login</v-ons-button>
+        <v-ons-button @click="login()">ログイン</v-ons-button>
       </p>
-      <p><v-ons-button modifier="quiet" @click="toSignUp()">sign up</v-ons-button></p>
+      <p><v-ons-button modifier="quiet" @click="toSignUp()">サインアップ</v-ons-button></p>
     </div>
   </v-ons-page>
 </template>

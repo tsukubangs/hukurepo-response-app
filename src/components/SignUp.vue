@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">Sign up</div>
-      <div class="right"><v-ons-toolbar-button class="white-btn" modifier="outline" @click="toLogin">Log in</v-ons-toolbar-button></div>
+      <div class="center">サインアップ</div>
+      <div class="right"><v-ons-toolbar-button class="white-btn" modifier="outline" @click="toLogin">ログイン</v-ons-toolbar-button></div>
     </v-ons-toolbar>
     <v-ons-list>
       <v-ons-list-header>
@@ -16,49 +16,49 @@
       </v-ons-list-item>
       <v-ons-list-item class="error-message" v-if="this.emailIsInputted && !validation.emailRequired">
         <div class="right">
-          The email field is required
+          Emailを入力してください
         </div>
       </v-ons-list-item>
       <v-ons-list-item class="error-message" v-else-if="this.emailIsInputted && !validation.emailFormat">
         <div class="right">
-          Invalid email address
+          無効な email アドレスです
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
-          Password
+          パスワード
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Password" type="password" v-model="password" float>
+          <v-ons-input class="width100" placeholder="パスワード" type="password" v-model="password" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
       <v-ons-list-item class="error-message" v-if="this.passwordIsInputted && !validation.passwordRequired">
         <div class="right">
-          The password field is required
+          パスワードを入力してください
         </div>
       </v-ons-list-item>
       <v-ons-list-item class="error-message" v-else-if="this.passwordIsInputted && !validation.passwordLength">
         <div class="right">
-          Password length must be between 6 and 29
+          パスワードの6から29文字の長さが必要です
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
-          Confirm Password
+          確認パスワード
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-input class="width100" placeholder="Confirm Password" type="password" v-model="confirmPassword" float>
+          <v-ons-input class="width100" placeholder="確認パスワード" type="password" v-model="confirmPassword" float>
           </v-ons-input>
         </div>
       </v-ons-list-item>
       <v-ons-list-item class="error-message" v-if="this.confirmPasswordIsInputted && !validation.confirmPasswordMatch">
         <div class="right">
-          Password and Confirm Password don't match
+          パスワードが一致しません
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
-        Gender
+        性別
       </v-ons-list-header>
       <v-ons-list-item v-for="(gender, $index) in genders" tappable>
         <label class="left">
@@ -67,7 +67,7 @@
         <label :for="'radio-' + $index" class="center">{{ gender }}</label>
       </v-ons-list-item>
       <v-ons-list-header>
-        Age
+        年代
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
@@ -77,24 +77,24 @@
         </div>
       </v-ons-list-item>
       <v-ons-list-header>
-        Nationality
+        居住国
       </v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-select class="width100" v-model="selectedNationality">
-            <option v-for="Nationality in countries" :value="Nationality.name">{{ Nationality.name }}</option>
+          <v-ons-select class="width100" v-model="selectedCountryOfResidence">
+            <option v-for="Country in countries" :value="Country.name">{{ Country.name }}</option>
           </v-ons-select>
         </div>
       </v-ons-list-item>
     </v-ons-list>
     <section style="margin: 16px">
-      <v-ons-button modifier="large" v-bind:disabled="!this.signUpIsPermitted" @click="confirmDialogVisible = true">Confirm</v-ons-button>
+      <v-ons-button modifier="large" v-bind:disabled="!this.signUpIsPermitted" @click="confirmDialogVisible = true">確認</v-ons-button>
     </section>
     <v-ons-alert-dialog modifier="rowfooter" title="Sign up with the following information" :visible.sync="confirmDialogVisible">
       Email: {{this.email}}<br />
       Gender: {{this.selectedGender}}<br />
       Age: {{this.selectedAge.slice(1)}}<br />
-      Nationality: {{this.selectedNationality}}
+      Nationality: {{this.selectedCountryOfResidence}}
 
       <template slot="footer">
         <button class="alert-dialog-button" @click="confirmDialogVisible = false">Edit</button>
@@ -121,7 +121,7 @@ function postSignUp() {
     email: this.email,
     password: this.password,
     gender: this.selectedGender,
-    nationality: this.selectedNationality,
+    country_of_residence: this.selectedCountryOfResidence,
     age: this.selectedAge.split('-')[0].slice(1),
   };
   this.confirmDialogVisible = false;
@@ -131,7 +131,7 @@ function postSignUp() {
           window.localStorage.setItem('access_token', response.data.access_token);
           ons.notification.alert({
             title: '',
-            message: 'The sign up has been completed.',
+            message: 'サインアップは完了しました',
             callback: () => {
               router.push('/');
             },
@@ -140,11 +140,11 @@ function postSignUp() {
           let title;
           let message;
           if (!error.response) {
-            title = 'Connection error';
-            message = 'Can\'t connect to server';
+            title = '接続エラー';
+            message = 'サーバーに接続できません';
           } else if (error.response.status === 422) {
-            title = 'Email error';
-            message = 'This email address is already registered.';
+            title = 'Emailエラー';
+            message = 'このEmailアドレスは既に登録されています';
           }
           ons.notification.alert({
             title,
@@ -161,7 +161,7 @@ export default {
       selectedGender: 'male',
       genders: ['male', 'female'],
       countries,
-      selectedNationality: 'Japan',
+      selectedCountryOfResidence: 'Japan',
       ages,
       selectedAge: 'a20-29',
       email: '',

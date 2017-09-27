@@ -3,11 +3,11 @@
     <div class="background"></div>
     <main>
       <div id="owl-words">
-        <p>Welcome to Tsukuba. If you have any problems, let us know! We can help you!</p>
+        <p>ようこそ！外国人から送られてくる困りごとを解決しましょう！</p>
         <img id="owl-icon" src="../../res/hukurepo-icon.png" alt="owl">
         <div id="signup-or-login">
-          <p><v-ons-button modifier="outline" @click="toAgree()">Sign Up</v-ons-button></p>
-          <p><v-ons-button modifier="quiet" @click="toLogin()">Already have an account</v-ons-button></p>
+          <p><v-ons-button modifier="outline" @click="toAgree()">サインアップ</v-ons-button></p>
+          <p><v-ons-button modifier="quiet" @click="toLogin()">既にアカウントを持っている</v-ons-button></p>
         </div>
       </div>
     </main>
