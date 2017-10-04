@@ -3,6 +3,8 @@ import {
   REFETCH_PROBLEMS,
   FETCH_ALL_PROBLEMS_START, FETCH_ALL_PROBLEMS_FINISH, FETCH_ALL_PROBLEMS_ERROR,
   REFETCH_ALL_PROBLEMS,
+  FETCH_RESPONDED_PROBLEMS_START, FETCH_RESPONDED_PROBLEMS_FINISH, FETCH_RESPONDED_PROBLEMS_ERROR,
+  REFETCH_RESPONDED_PROBLEMS,
   SELECT_PROBLEM, FETCH_SELECT_PROBLEM_RESPONSES_START, FETCH_SELECT_PROBLEM_RESPONSES_FINISH,
   FETCH_SELECT_PROBLEM_RESPONSES_ERROR,
   SAW_RESPONSES_OF_PROBLEM,
@@ -71,5 +73,27 @@ export default {
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {
     const problemsNumber = state.problems.indexOf(problem);
     state.problems[problemsNumber].responses_seen = true;
+  },
+  [FETCH_RESPONDED_PROBLEMS_START](state) {
+    state.fetchProblemsStatus = {
+      isError: false,
+      isCompleted: false,
+    };
+  },
+  [FETCH_RESPONDED_PROBLEMS_FINISH](state, problems) {
+    state.problems = problems;
+    state.fetchProblemsStatus = {
+      isError: false,
+      isCompleted: true,
+    };
+  },
+  [FETCH_RESPONDED_PROBLEMS_ERROR](state) {
+    state.fetchProblemsStatus = {
+      isError: true,
+      isCompleted: false,
+    };
+  },
+  [REFETCH_RESPONDED_PROBLEMS](state, problems) {
+    state.problems = problems;
   },
 };

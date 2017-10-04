@@ -26,6 +26,14 @@ export default new Vuex.Store({
         isError: false,
       },
     },
+    respondedProblems: {
+      data: [],
+      resposes: {
+        data: [],
+        loading: false,
+        isError: false,
+      },
+    },
   },
   getters: {
     problems: state => state.problems,
@@ -33,6 +41,7 @@ export default new Vuex.Store({
     allProblems: state => state.allProblems,
     fetchAllProblemsStatus: state => state.fetchAllProblemsStatus,
     selectedProblem: state => state.selectedProblem,
+    respondedProblems: state => state.respondedProblems,
   },
   actions,
   mutations,

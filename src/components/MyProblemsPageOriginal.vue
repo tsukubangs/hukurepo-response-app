@@ -27,7 +27,8 @@ import { mapActions, mapGetters } from 'vuex';
 import ons from 'onsenui';
 import ProblemCard from './ProblemCard';
 import CameraPage from './CameraPage';
-import { FETCH_RESPONDED_PROBLEMS } from '../vuex/mutation-types';
+import ResponsePage from './ResponsePage';
+import { FETCH_PROBLEMS, REFETCH_PROBLEMS, SELECT_PROBLEM, SAW_RESPONSES_OF_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'my-problems-page',
@@ -41,12 +42,12 @@ export default {
         ons.notification.alert({
           title: 'Can\'t connect to server',
           message: 'Try again?',
-          callback: this.FETCH_RESPONDED_PROBLEMS,
+          callback: this.FETCH_PROBLEMS,
         });
       }
     });
 
-    this.FETCH_RESPONDED_PROBLEMS();
+    this.FETCH_PROBLEMS();
   },
   data() {
     return {
@@ -65,13 +66,26 @@ export default {
   },
   methods: {
     ...mapActions([
-      FETCH_RESPONDED_PROBLEMS,
-      // REFETCH_PROBLEMS,
-      // SELECT_PROBLEM,
-      // SAW_RESPONSES_OF_PROBLEM,
+      FETCH_PROBLEMS,
+      REFETCH_PROBLEMS,
+      SELECT_PROBLEM,
+      SAW_RESPONSES_OF_PROBLEM,
     ]),
     push() {
       this.pageStack.push(CameraPage);
+    },
+    toResponse(problem) {
+      this.SELECT_PROBLEM(problem);
+      this.pageStack.push(ResponsePage);
+      if (!problem.responses_seen) {
+        this.SAW_RESPONSES_OF_PROBLEM(problem);
+      }
+    },
+    loadItem(done) {
+      setTimeout(() => {
+        this.REFETCH_PROBLEMS();
+        done();
+      }, 400);
     },
   },
 };
