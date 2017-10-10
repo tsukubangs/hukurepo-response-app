@@ -1,6 +1,5 @@
 <template>
   <v-ons-page :infinite-scroll="loadMore">
-    <custom-toolbar><div class="title"><img class="title-icon" src="../assets/s_logo.png" /></div></custom-toolbar>
     <v-ons-pull-hook :action="loadItem" @changestate="state = $event.state">
       <span v-show="state === 'initial'"> Pull to refresh </span>
       <span v-show="state === 'preaction'"> Release </span>
@@ -21,14 +20,12 @@
 import { mapActions, mapGetters } from 'vuex';
 import ProblemCard from './ProblemCard';
 import ProblemDetailsPage from './ProblemDetailsPage';
-import CustomToolbar from './CustomToolbar';
 import { FETCH_ALL_PROBLEMS, REFETCH_ALL_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'all-problems-page',
   components: {
     ProblemCard,
-    CustomToolbar,
   },
   props: ['pageStack'],
   created() {
