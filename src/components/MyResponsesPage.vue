@@ -98,6 +98,7 @@ main {
   text-align: left;
   font-size: 18px;
   margin: 10px 0;
+  color: #333;
 }
 .underline {
   border-bottom: solid 1px;
