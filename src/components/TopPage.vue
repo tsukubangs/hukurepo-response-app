@@ -9,6 +9,7 @@
 import CustomToolbar from './CustomToolbar';
 import AllProblemsPage from './AllProblemsPage';
 import HelpRequiredProblemsPage from './HelpRequiredProblemsPage';
+import MyResposesPage from './MyResponsesPage';
 import notification from '../function/notification';
 
 export default {
@@ -28,6 +29,13 @@ export default {
         {
           icon: 'ion-navicon-round',
           page: HelpRequiredProblemsPage,
+          props: {
+            pageStack: this.pageStack,
+          },
+        },
+        {
+          icon: 'ion-ios-people-outline',
+          page: MyResposesPage,
           props: {
             pageStack: this.pageStack,
           },
