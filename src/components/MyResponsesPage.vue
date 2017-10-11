@@ -6,11 +6,14 @@
       <span v-show="state === 'action'"> Loading... </span>
     </v-ons-pull-hook>
     <main class="h100">
-      <ul class="card-list">
+      <ul class="card-list" v-if="this.myResponsesProblems.data">
         <li v-for="problem in myResponsesProblems.data" @click="toDetails(problem)">
           <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
         </li>
       </ul>
+      <div v-else>
+        <p>まだ返信した投稿はありません</p>
+      </div>
       <v-ons-progress-circular indeterminate v-show="myResponsesProblems.loading"></v-ons-progress-circular>
     </main>
   </v-ons-page>
