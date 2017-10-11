@@ -6,11 +6,14 @@
       <span v-show="state === 'action'"> Loading... </span>
     </v-ons-pull-hook>
     <main class="h100">
-      <ul class="card-list" v-if="this.myResponsesProblems.data">
-        <li v-for="problem in myResponsesProblems.data" @click="toDetails(problem)">
-          <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
-        </li>
-      </ul>
+      <div class="my-responses"  v-if="this.myResponsesProblems.data">
+        <span class="underline">自分の返信した投稿</span>
+        <ul class="card-list">
+          <li v-for="problem in myResponsesProblems.data" @click="toDetails(problem)">
+            <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
+          </li>
+        </ul>
+      </div>
       <div v-else>
         <p>まだ返信した投稿はありません</p>
       </div>
@@ -90,6 +93,14 @@ main {
 }
 .w100 {
   width: 100%;
+}
+.my-responses {
+  text-align: left;
+  font-size: 18px;
+  margin: 10px 0;
+}
+.underline {
+  border-bottom: solid 1px;
 }
 .title {
   height: 100%;
