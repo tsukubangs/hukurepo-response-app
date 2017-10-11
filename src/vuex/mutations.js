@@ -5,6 +5,8 @@ import {
   REFETCH_ALL_PROBLEMS,
   SELECT_PROBLEM, FETCH_SELECT_PROBLEM_RESPONSES_START, FETCH_SELECT_PROBLEM_RESPONSES_FINISH,
   FETCH_SELECT_PROBLEM_RESPONSES_ERROR,
+  FETCH_MY_RESPONSES_PROBLEMS_START, FETCH_MY_RESPONSES_PROBLEMS_FINISH,
+  FETCH_MY_RESPONSES_PROBLEMS_ERROR, REFETCH_MY_RESPONSES_PROBLEMS,
   SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
@@ -67,6 +69,26 @@ export default {
   [FETCH_SELECT_PROBLEM_RESPONSES_ERROR](state) {
     state.selectedProblem.responses.loading = false;
     state.selectedProblem.responses.isError = true;
+  },
+  [FETCH_MY_RESPONSES_PROBLEMS_START](state) {
+    state.myResponsesProblems.isError = false;
+    state.myResponsesProblems.loading = true;
+  },
+  [FETCH_MY_RESPONSES_PROBLEMS_FINISH](state, allProblemsData) {
+    state.myResponsesProblems.data = state.myResponsesProblems.data.concat(allProblemsData);
+    state.myResponsesProblems.page += 1;
+    state.myResponsesProblems.isError = false;
+    state.myResponsesProblems.loading = false;
+  },
+  [FETCH_MY_RESPONSES_PROBLEMS_ERROR](state) {
+    state.myResponsesProblems.isError = true;
+    state.myResponsesProblems.loading = false;
+  },
+  [REFETCH_MY_RESPONSES_PROBLEMS](state, allProblemsData) {
+    state.myResponsesProblems.data = allProblemsData;
+    state.myResponsesProblems.isError = false;
+    state.myResponsesProblems.loading = false;
+    state.myResponsesProblems.page = 1;
   },
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {
     const problemsNumber = state.problems.indexOf(problem);

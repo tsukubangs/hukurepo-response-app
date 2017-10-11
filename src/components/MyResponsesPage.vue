@@ -7,11 +7,11 @@
     </v-ons-pull-hook>
     <main class="h100">
       <ul class="card-list">
-        <li v-for="problem in allProblems.data" @click="toDetails(problem)">
+        <li v-for="problem in myResponsesProblems.data" @click="toDetails(problem)">
           <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
         </li>
       </ul>
-      <v-ons-progress-circular indeterminate v-show="allProblems.loading"></v-ons-progress-circular>
+      <v-ons-progress-circular indeterminate v-show="myResponsesProblems.loading"></v-ons-progress-circular>
     </main>
   </v-ons-page>
 </template>
@@ -20,7 +20,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import ProblemCard from './ProblemCard';
 import ProblemDetailsPage from './ProblemDetailsPage';
-import { FETCH_ALL_PROBLEMS, REFETCH_ALL_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
+import { FETCH_MY_RESPONSES_PROBLEMS, REFETCH_MY_RESPONSES_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
 
 export default {
   name: 'my-responses-page',
@@ -29,7 +29,7 @@ export default {
   },
   props: ['pageStack'],
   created() {
-    this.FETCH_ALL_PROBLEMS({ page: 1 });
+    this.FETCH_MY_RESPONSES_PROBLEMS({ page: 1 });
   },
   data() {
     return {
@@ -38,13 +38,13 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'allProblems',
+      'myResponsesProblems',
     ]),
   },
   methods: {
     ...mapActions([
-      FETCH_ALL_PROBLEMS,
-      REFETCH_ALL_PROBLEMS,
+      FETCH_MY_RESPONSES_PROBLEMS,
+      REFETCH_MY_RESPONSES_PROBLEMS,
       SELECT_PROBLEM,
     ]),
     toDetails(problem) {
@@ -52,12 +52,12 @@ export default {
       this.pageStack.push(ProblemDetailsPage);
     },
     loadItem(done) {
-      this.REFETCH_ALL_PROBLEMS()
+      this.REFETCH_MY_RESPONSES_PROBLEMS()
         .then(() => { done(); }).catch(() => { done(); });
     },
     loadMore(done) {
-      if (!this.allProblems.loading) {
-        this.FETCH_ALL_PROBLEMS()
+      if (!this.myResponsesProblems.loading) {
+        this.FETCH_MY_RESPONSES_PROBLEMS()
           .then(() => { done(); }).catch(() => { done(); });
       }
     } },

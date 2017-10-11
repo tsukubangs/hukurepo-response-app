@@ -6,6 +6,9 @@ import {
   FETCH_ALL_PROBLEMS_START, FETCH_ALL_PROBLEMS_FINISH, FETCH_ALL_PROBLEMS_ERROR,
   SELECT_PROBLEM, FETCH_SELECT_PROBLEM_RESPONSES_START, FETCH_SELECT_PROBLEM_RESPONSES_FINISH,
   FETCH_SELECT_PROBLEM_RESPONSES_ERROR, FETCH_SELECT_PROBLEM_RESPONSES,
+  FETCH_MY_RESPONSES_PROBLEMS,
+  FETCH_MY_RESPONSES_PROBLEMS_START, FETCH_MY_RESPONSES_PROBLEMS_FINISH,
+  FETCH_MY_RESPONSES_PROBLEMS_ERROR, REFETCH_MY_RESPONSES_PROBLEMS,
   SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
@@ -102,6 +105,39 @@ export default {
           console.log(error);
           reject(error);
         });
+    });
+  },
+  [FETCH_MY_RESPONSES_PROBLEMS]({ commit, state }, option = {}) {
+    return new Promise((resolve, reject) => {
+      commit(FETCH_MY_RESPONSES_PROBLEMS_START);
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      const queryPage = option.page || state.allProblems.page + 1;
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10`, config)
+               .then((response) => {
+                 commit(FETCH_MY_RESPONSES_PROBLEMS_FINISH, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 commit(FETCH_MY_RESPONSES_PROBLEMS_ERROR);
+                 reject(error);
+               });
+    });
+  },
+  [REFETCH_MY_RESPONSES_PROBLEMS]({ commit }) {
+    return new Promise((resolve, reject) => {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10`, config)
+               .then((response) => {
+                 commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 reject(error);
+               });
     });
   },
   [SAW_RESPONSES_OF_PROBLEM]({ commit }, problem) {
