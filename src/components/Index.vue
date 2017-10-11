@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import AllProblemsPage from './AllProblemsPage';
+import TopPage from './TopPage';
 
 export default {
   name: 'index',
   data() {
     return {
-      pageStack: [AllProblemsPage],
+      pageStack: [TopPage],
     };
   },
 };

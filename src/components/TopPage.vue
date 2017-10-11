@@ -7,17 +7,17 @@
 
 <script>
 import CustomToolbar from './CustomToolbar';
-import MyProblemsPage from './MyProblemsPage';
 import AllProblemsPage from './AllProblemsPage';
-import SettingPage from './SettingPage';
+import HelpRequiredProblemsPage from './HelpRequiredProblemsPage';
+import MyResposesPage from './MyResponsesPage';
 import notification from '../function/notification';
 
 export default {
   name: 'top-page',
   components: {
     CustomToolbar,
-    MyProblemsPage,
     AllProblemsPage,
+    HelpRequiredProblemsPage,
   },
   created() {
     notification.initialize(this);
@@ -27,8 +27,15 @@ export default {
       state: 'initial',
       tabs: [
         {
-          icon: 'ion-home',
-          page: MyProblemsPage,
+          icon: 'ion-reply',
+          page: HelpRequiredProblemsPage,
+          props: {
+            pageStack: this.pageStack,
+          },
+        },
+        {
+          icon: 'ion-ios-person',
+          page: MyResposesPage,
           props: {
             pageStack: this.pageStack,
           },
@@ -36,13 +43,6 @@ export default {
         {
           icon: 'ion-ios-people-outline',
           page: AllProblemsPage,
-          props: {
-            pageStack: this.pageStack,
-          },
-        },
-        {
-          icon: 'ion-navicon-round',
-          page: SettingPage,
           props: {
             pageStack: this.pageStack,
           },

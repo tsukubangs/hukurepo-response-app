@@ -6,12 +6,18 @@
       <span v-show="state === 'action'"> Loading... </span>
     </v-ons-pull-hook>
     <main class="h100">
-      <ul class="card-list">
-        <li v-for="problem in allProblems.data" @click="toDetails(problem)">
-          <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
-        </li>
-      </ul>
-      <v-ons-progress-circular indeterminate v-show="allProblems.loading"></v-ons-progress-circular>
+      <div class="my-responses"  v-if="this.myResponsesProblems.data">
+        <span class="underline">自分の返信した投稿</span>
+        <ul class="card-list">
+          <li v-for="problem in myResponsesProblems.data" @click="toDetails(problem)">
+            <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
+          </li>
+        </ul>
+      </div>
+      <div v-else>
+        <p>まだ返信した投稿はありません</p>
+      </div>
+      <v-ons-progress-circular indeterminate v-show="myResponsesProblems.loading"></v-ons-progress-circular>
     </main>
   </v-ons-page>
 </template>
@@ -20,16 +26,16 @@
 import { mapActions, mapGetters } from 'vuex';
 import ProblemCard from './ProblemCard';
 import ProblemDetailsPage from './ProblemDetailsPage';
-import { FETCH_ALL_PROBLEMS, REFETCH_ALL_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
+import { FETCH_MY_RESPONSES_PROBLEMS, REFETCH_MY_RESPONSES_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
 
 export default {
-  name: 'all-problems-page',
+  name: 'my-responses-page',
   components: {
     ProblemCard,
   },
   props: ['pageStack'],
   created() {
-    this.FETCH_ALL_PROBLEMS({ page: 1 });
+    this.FETCH_MY_RESPONSES_PROBLEMS({ page: 1 });
   },
   data() {
     return {
@@ -38,13 +44,13 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'allProblems',
+      'myResponsesProblems',
     ]),
   },
   methods: {
     ...mapActions([
-      FETCH_ALL_PROBLEMS,
-      REFETCH_ALL_PROBLEMS,
+      FETCH_MY_RESPONSES_PROBLEMS,
+      REFETCH_MY_RESPONSES_PROBLEMS,
       SELECT_PROBLEM,
     ]),
     toDetails(problem) {
@@ -52,12 +58,12 @@ export default {
       this.pageStack.push(ProblemDetailsPage);
     },
     loadItem(done) {
-      this.REFETCH_ALL_PROBLEMS()
+      this.REFETCH_MY_RESPONSES_PROBLEMS()
         .then(() => { done(); }).catch(() => { done(); });
     },
     loadMore(done) {
-      if (!this.allProblems.loading) {
-        this.FETCH_ALL_PROBLEMS()
+      if (!this.myResponsesProblems.loading) {
+        this.FETCH_MY_RESPONSES_PROBLEMS()
           .then(() => { done(); }).catch(() => { done(); });
       }
     } },
@@ -87,6 +93,15 @@ main {
 }
 .w100 {
   width: 100%;
+}
+.my-responses {
+  text-align: left;
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+.underline {
+  border-bottom: solid 1px;
 }
 .title {
   height: 100%;
