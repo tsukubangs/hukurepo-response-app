@@ -27,14 +27,14 @@ export default {
       state: 'initial',
       tabs: [
         {
-          icon: 'ion-navicon-round',
+          icon: 'ion-reply',
           page: HelpRequiredProblemsPage,
           props: {
             pageStack: this.pageStack,
           },
         },
         {
-          icon: 'ion-ios-people-outline',
+          icon: 'ion-ios-person',
           page: MyResposesPage,
           props: {
             pageStack: this.pageStack,
