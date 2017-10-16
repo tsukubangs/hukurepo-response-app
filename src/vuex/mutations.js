@@ -7,6 +7,8 @@ import {
   FETCH_SELECT_PROBLEM_RESPONSES_ERROR,
   FETCH_MY_RESPONSES_PROBLEMS_START, FETCH_MY_RESPONSES_PROBLEMS_FINISH,
   FETCH_MY_RESPONSES_PROBLEMS_ERROR, REFETCH_MY_RESPONSES_PROBLEMS,
+  FETCH_HIGH_PRIORITY_PROBLEMS_START,
+  FETCH_HIGH_PRIORITY_PROBLEMS_FINISH, FETCH_HIGH_PRIORITY_PROBLEMS_ERROR,
   SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
@@ -89,6 +91,19 @@ export default {
     state.myResponsesProblems.isError = false;
     state.myResponsesProblems.loading = false;
     state.myResponsesProblems.page = 1;
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS_START](state) {
+    state.highPriorityProblems.isError = false;
+    state.highPriorityProblems.loading = true;
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS_FINISH](state, allProblemsData) {
+    state.highPriorityProblems.data = allProblemsData;
+    state.highPriorityProblems.isError = false;
+    state.highPriorityProblems.loading = false;
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS_ERROR](state) {
+    state.highPriorityProblems.isError = true;
+    state.highPriorityProblems.loading = false;
   },
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {
     const problemsNumber = state.problems.indexOf(problem);
