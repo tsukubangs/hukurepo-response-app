@@ -153,9 +153,10 @@ main {
 .post-problem-btn {
   background-color: #FFF;
   color: #2bb46e;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin: auto 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 15px;
+  /*margin: auto 8px;*/
   border-radius: 15px;
 }
 .thumbnail {
