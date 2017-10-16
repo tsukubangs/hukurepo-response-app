@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page :infinite-scroll="loadMore">
     <main class="h100">
       <div class="problems-list"  v-if="this.highPriorityProblems.data.length">
         <span class="underline">すぐに返信が必要な困りごと</span>
@@ -61,6 +61,12 @@ export default {
     toDetails(problem) {
       this.SELECT_PROBLEM(problem);
       this.pageStack.push(ProblemDetailsPage);
+    },
+    loadMore(done) {
+      if (!this.problemsRequiredResponse.loading) {
+        this.FETCH_PROBLEMS_REQUIRED_RESPONSE()
+          .then(() => { done(); }).catch(() => { done(); });
+      }
     },
   },
 };
