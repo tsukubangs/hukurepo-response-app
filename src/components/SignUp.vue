@@ -90,15 +90,15 @@
     <section style="margin: 16px">
       <v-ons-button modifier="large" v-bind:disabled="!this.signUpIsPermitted" @click="confirmDialogVisible = true">確認</v-ons-button>
     </section>
-    <v-ons-alert-dialog modifier="rowfooter" title="Sign up with the following information" :visible.sync="confirmDialogVisible">
+    <v-ons-alert-dialog modifier="rowfooter" title="以下の情報で登録しますか？" :visible.sync="confirmDialogVisible">
       Email: {{this.email}}<br />
-      Gender: {{this.selectedGender}}<br />
-      Age: {{this.selectedAge.slice(1)}}<br />
-      Nationality: {{this.selectedCountryOfResidence}}
+      性別: {{this.selectedGender==="male"?"男":"女"}}<br />
+      年代: {{this.selectedAge.slice(1)}}<br />
+      居住国: {{this.selectedCountryOfResidence}}
 
       <template slot="footer">
-        <button class="alert-dialog-button" @click="confirmDialogVisible = false">Edit</button>
-        <button class="alert-dialog-button" @click="postSignUp">Sign Up</button>
+        <button class="alert-dialog-button" @click="confirmDialogVisible = false">編集</button>
+        <button class="alert-dialog-button" @click="postSignUp">ユーザ登録</button>
       </template>
     </v-ons-alert-dialog>
   </v-ons-page>
