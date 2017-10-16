@@ -152,8 +152,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      // apiが完成したらurlを直す
-      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?by_response_priority=high&responded=false`, config)
                .then((response) => {
                  commit(FETCH_HIGH_PRIORITY_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
@@ -171,8 +170,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.allProblems.page + 1;
-      // apiが完成したらurlを直す
-      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&by_response_priority=high,default`, config)
                .then((response) => {
                  commit(FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH, response.data);
                  resolve(response.data);
@@ -188,8 +186,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      // apiが完成したらurlを直す
-      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&by_response_priority=high,default`, config)
                .then((response) => {
                  commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
                  resolve(response.data);
