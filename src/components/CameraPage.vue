@@ -108,7 +108,7 @@ function postProblem() {
         this.FETCH_PROBLEMS();
         ons.notification.alert({
           title: '',
-          message: 'Post has been completed.',
+          message: '投稿が完了しました.',
           callback: () => {
             // post後にトップページに戻る
             this.pageStack.splice(1, this.pageStack.length - 1);
@@ -119,7 +119,7 @@ function postProblem() {
         console.log(error);
         ons.notification.alert({
           title: '',
-          message: 'Sorry, posting failed...',
+          message: '投稿が失敗しました．',
         });
       });
 }
@@ -195,7 +195,7 @@ export default {
     () => {
       ons.notification.alert({
         title: '',
-        message: "can't get your position",
+        message: '位置情報が取得できませんでした',
       });
       this.isMapError = true;
     });

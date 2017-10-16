@@ -39,7 +39,7 @@ export default {
           }).catch(() => {
             ons.notification.alert({
               title: 'Login failed',
-              message: 'Sorry, your password or email was incorrect.',
+              message: 'パスワードかEmailが間違っています.',
             });
           });
     },

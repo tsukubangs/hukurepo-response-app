@@ -64,7 +64,7 @@
         <label class="left">
           <v-ons-radio :input-id="'radio-' + $index" :value="gender" v-model="selectedGender"></v-ons-radio>
         </label>
-        <label :for="'radio-' + $index" class="center">{{ gender }}</label>
+        <label :for="'radio-' + $index" class="center">{{ gender==="male"?"男":"女" }}</label>
       </v-ons-list-item>
       <v-ons-list-header>
         年代
