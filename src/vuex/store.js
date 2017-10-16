@@ -34,6 +34,11 @@ export default new Vuex.Store({
     },
     highPriorityProblems: {
       data: [],
+      loading: false,
+      isError: false,
+    },
+    problemsRequiredResponse: {
+      data: [],
       page: 0,
       loading: false,
       isError: false,
@@ -47,6 +52,7 @@ export default new Vuex.Store({
     selectedProblem: state => state.selectedProblem,
     myResponsesProblems: state => state.myResponsesProblems,
     highPriorityProblems: state => state.highPriorityProblems,
+    problemsRequiredResponse: state => state.problemsRequiredResponse,
   },
   actions,
   mutations,

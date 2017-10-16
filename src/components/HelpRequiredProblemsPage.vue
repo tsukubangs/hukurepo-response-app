@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <main class="h100">
-      <div class="problems-list"  v-if="this.highPriorityProblems.data">
+      <div class="problems-list"  v-if="this.highPriorityProblems.data.length">
         <span class="underline">すぐに返信が必要な困りごと</span>
         <ul class="card-list">
           <li v-for="problem in highPriorityProblems.data" @click="toDetails(problem)">
@@ -10,6 +10,18 @@
         </ul>
       </div>
       <v-ons-progress-circular indeterminate v-show="highPriorityProblems.loading"></v-ons-progress-circular>
+      <div class="problems-list"  v-if="this.problemsRequiredResponse.data.length">
+        <span class="underline">返信が必要な困りごと</span>
+        <ul class="card-list">
+          <li v-for="problem in problemsRequiredResponse.data" @click="toDetails(problem)">
+            <problem-card :problem="problem" :useUnReadNotification="false" class="w100"></problem-card>
+          </li>
+        </ul>
+      </div>
+      <v-ons-progress-circular indeterminate v-show="problemsRequiredResponse.loading"></v-ons-progress-circular>
+      <div v-show="!this.highPriorityProblems.data.length && !this.problemsRequiredResponse.data.length">
+        <p>返信が必要な困りごとはありません</p>
+      </div>
     </main>
   </v-ons-page>
 </template>
@@ -18,7 +30,10 @@
 import { mapActions, mapGetters } from 'vuex';
 import ProblemCard from './ProblemCard';
 import ProblemDetailsPage from './ProblemDetailsPage';
-import { FETCH_HIGH_PRIORITY_PROBLEMS, SELECT_PROBLEM } from '../vuex/mutation-types';
+import {
+  FETCH_HIGH_PRIORITY_PROBLEMS, FETCH_PROBLEMS_REQUIRED_RESPONSE,
+  REFETCH_PROBLEMS_REQUIRED_RESPONSE, SELECT_PROBLEM,
+} from '../vuex/mutation-types';
 
 export default {
   name: 'help-required-problem-page',
@@ -28,15 +43,19 @@ export default {
   props: ['pageStack'],
   created() {
     this.FETCH_HIGH_PRIORITY_PROBLEMS();
+    this.FETCH_PROBLEMS_REQUIRED_RESPONSE({ page: 1 });
   },
   computed: {
     ...mapGetters([
       'highPriorityProblems',
+      'problemsRequiredResponse',
     ]),
   },
   methods: {
     ...mapActions([
       FETCH_HIGH_PRIORITY_PROBLEMS,
+      FETCH_PROBLEMS_REQUIRED_RESPONSE,
+      REFETCH_PROBLEMS_REQUIRED_RESPONSE,
       SELECT_PROBLEM,
     ]),
     toDetails(problem) {

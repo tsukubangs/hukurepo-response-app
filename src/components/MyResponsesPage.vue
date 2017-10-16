@@ -6,7 +6,7 @@
       <span v-show="state === 'action'"> Loading... </span>
     </v-ons-pull-hook>
     <main class="h100">
-      <div class="my-responses"  v-if="this.myResponsesProblems.data">
+      <div class="my-responses"  v-if="this.myResponsesProblems.data.length">
         <span class="underline">自分の返信した投稿</span>
         <ul class="card-list">
           <li v-for="problem in myResponsesProblems.data" @click="toDetails(problem)">
