@@ -6,8 +6,8 @@
         <p>ようこそ！外国人から送られてくる困りごとを解決しましょう！</p>
         <img id="owl-icon" src="../../res/hukurepo-icon.png" alt="owl">
         <div id="signup-or-login">
-          <p><v-ons-button modifier="outline" @click="toAgree()">サインアップ</v-ons-button></p>
-          <p><v-ons-button modifier="quiet" @click="toLogin()">既にアカウントを持っている</v-ons-button></p>
+          <p><v-ons-button modifier="outline" @click="toAgree()">ユーザ登録</v-ons-button></p>
+          <p><v-ons-button modifier="quiet" @click="toLogin()">既にユーザ登録している方</v-ons-button></p>
         </div>
       </div>
     </main>
