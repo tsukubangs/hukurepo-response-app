@@ -4,7 +4,7 @@
 
     <form name="js">
     <textarea id="text-form" class="textarea" rows="5" placeholder="日本語で入力してください" v-model="japaneseComment" name='japanese' v-focus v-resize></textarea>
-    <textarea id="text-form" class="textarea" rows="5" placeholder="日→英　ボタンを押すと英語訳が表示されます" v-model="comment" name='english' v-resize></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="翻訳ボタンを押すと英語訳が表示されます" v-model="comment" name='english' v-resize></textarea>
     </form>
 
     <div class="bottom-bar" v-if="!this.isIOS">
@@ -25,7 +25,7 @@
       </div>
       <div class="center"></div>
       <div class="right">
-        <span class="toolbar-button post-problem-btn" @click="postResponse" v-bind:disabled="!this.postEnabled"><ons-icon icon="ion-compose" size="25px"></ons-icon> Post</span>
+        <span class="toolbar-button post-problem-btn" @click="postResponse" v-bind:disabled="!this.postEnabled"><ons-icon icon="ion-compose" size="25px"></ons-icon> 投稿</span>
       </div>
     </v-ons-toolbar>
   </v-ons-page>

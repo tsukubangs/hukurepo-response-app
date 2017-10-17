@@ -7,10 +7,10 @@
       <div class="center">詳細</div>
       <div class="right">
         <v-ons-toolbar-button v-if="isJapanese==true" class="toolbar-button post-problem-btn" @click="translate">
-          英語原文
+          英語
         </v-ons-toolbar-button>
         <v-ons-toolbar-button v-else class="toolbar-button post-problem-btn" @click="translate">
-          日本語文
+          日本語
         </v-ons-toolbar-button>
       </div>
     </v-ons-toolbar>
@@ -62,7 +62,6 @@ import { WEB_API_URL } from '../../.env';
 import { FETCH_SELECT_PROBLEM_RESPONSES } from '../vuex/mutation-types';
 
 function translate() {
-  console.log('translate');
   this.isJapanese = !this.isJapanese;
 }
 
@@ -153,9 +152,10 @@ main {
 .post-problem-btn {
   background-color: #FFF;
   color: #2bb46e;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin: auto 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 15px;
+  /*margin: auto 8px;*/
   border-radius: 15px;
 }
 .thumbnail {
