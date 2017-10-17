@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">サインアップ</div>
+      <div class="center">ユーザ登録</div>
       <div class="right"><v-ons-toolbar-button class="white-btn" modifier="outline" @click="toLogin">ログイン</v-ons-toolbar-button></div>
     </v-ons-toolbar>
     <v-ons-list>
@@ -92,7 +92,7 @@
     </section>
     <v-ons-alert-dialog modifier="rowfooter" title="以下の情報で登録しますか？" :visible.sync="confirmDialogVisible">
       Email: {{this.email}}<br />
-      性別: {{this.selectedGender==="male"?"男":"女"}}<br />
+      性別: {{this.selectedGender==="male"?"男性":"女性"}}<br />
       年代: {{this.selectedAge.slice(1)}}<br />
       居住国: {{this.selectedCountryOfResidence}}
 
@@ -133,7 +133,7 @@ function postSignUp() {
           window.localStorage.setItem('access_token', response.data.access_token);
           ons.notification.alert({
             title: '',
-            message: 'サインアップは完了しました',
+            message: 'ユーザ登録が完了しました',
             callback: () => {
               router.push('/');
             },
