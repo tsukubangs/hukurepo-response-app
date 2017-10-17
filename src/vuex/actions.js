@@ -136,7 +136,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10&sort=-created_at`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10`, config)
                .then((response) => {
                  commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
                  resolve(response.data);
