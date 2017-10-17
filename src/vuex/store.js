@@ -32,6 +32,17 @@ export default new Vuex.Store({
       loading: false,
       isError: false,
     },
+    highPriorityProblems: {
+      data: [],
+      loading: false,
+      isError: false,
+    },
+    problemsRequiredResponse: {
+      data: [],
+      page: 0,
+      loading: false,
+      isError: false,
+    },
   },
   getters: {
     problems: state => state.problems,
@@ -40,6 +51,8 @@ export default new Vuex.Store({
     fetchAllProblemsStatus: state => state.fetchAllProblemsStatus,
     selectedProblem: state => state.selectedProblem,
     myResponsesProblems: state => state.myResponsesProblems,
+    highPriorityProblems: state => state.highPriorityProblems,
+    problemsRequiredResponse: state => state.problemsRequiredResponse,
   },
   actions,
   mutations,

@@ -37,7 +37,11 @@ import axios from 'axios';
 import ons from 'onsenui';
 import CustomToolbar from './CustomToolbar';
 import { WEB_API_URL, GOOGLE_TRANSLATE_API_KEY } from '../../.env';
-import { FETCH_SELECT_PROBLEM_RESPONSES } from '../vuex/mutation-types';
+import {
+  FETCH_SELECT_PROBLEM_RESPONSES, REFETCH_MY_RESPONSES_PROBLEMS,
+  REFETCH_PROBLEMS_REQUIRED_RESPONSE, REFETCH_ALL_PROBLEMS,
+  FETCH_HIGH_PRIORITY_PROBLEMS,
+} from '../vuex/mutation-types';
 
 const focus = {
   inserted(el) {
@@ -95,6 +99,10 @@ function postResponse() {
         message: '投稿が完了しました．',
         callback: () => {
           this.FETCH_SELECT_PROBLEM_RESPONSES();
+          this.REFETCH_MY_RESPONSES_PROBLEMS();
+          this.REFETCH_PROBLEMS_REQUIRED_RESPONSE();
+          this.REFETCH_ALL_PROBLEMS();
+          this.FETCH_HIGH_PRIORITY_PROBLEMS();
           this.pageStack.pop();
         },
       });
@@ -145,6 +153,10 @@ export default {
   methods: {
     ...mapActions([
       FETCH_SELECT_PROBLEM_RESPONSES,
+      REFETCH_MY_RESPONSES_PROBLEMS,
+      REFETCH_PROBLEMS_REQUIRED_RESPONSE,
+      REFETCH_ALL_PROBLEMS,
+      FETCH_HIGH_PRIORITY_PROBLEMS,
     ]),
     postResponse,
     translate,

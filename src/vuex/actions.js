@@ -9,6 +9,11 @@ import {
   FETCH_MY_RESPONSES_PROBLEMS,
   FETCH_MY_RESPONSES_PROBLEMS_START, FETCH_MY_RESPONSES_PROBLEMS_FINISH,
   FETCH_MY_RESPONSES_PROBLEMS_ERROR, REFETCH_MY_RESPONSES_PROBLEMS,
+  FETCH_HIGH_PRIORITY_PROBLEMS, FETCH_HIGH_PRIORITY_PROBLEMS_START,
+  FETCH_HIGH_PRIORITY_PROBLEMS_FINISH, FETCH_HIGH_PRIORITY_PROBLEMS_ERROR,
+  FETCH_PROBLEMS_REQUIRED_RESPONSE,
+  FETCH_PROBLEMS_REQUIRED_RESPONSE_START, FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH,
+  FETCH_PROBLEMS_REQUIRED_RESPONSE_ERROR, REFETCH_PROBLEMS_REQUIRED_RESPONSE,
   SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
@@ -46,7 +51,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.allProblems.page + 1;
-      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(FETCH_ALL_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
@@ -62,7 +67,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(REFETCH_ALL_PROBLEMS, response.data);
                  resolve(response.data);
@@ -115,7 +120,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.allProblems.page + 1;
-      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(FETCH_MY_RESPONSES_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
@@ -131,9 +136,59 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 reject(error);
+               });
+    });
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS]({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit(FETCH_HIGH_PRIORITY_PROBLEMS_START);
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      axios.get(`${WEB_API_URL}/v1/problems/?by_response_priority=high&responded=false`, config)
+               .then((response) => {
+                 commit(FETCH_HIGH_PRIORITY_PROBLEMS_FINISH, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 commit(FETCH_HIGH_PRIORITY_PROBLEMS_ERROR);
+                 reject(error);
+               });
+    });
+  },
+  [FETCH_PROBLEMS_REQUIRED_RESPONSE]({ commit, state }, option = {}) {
+    return new Promise((resolve, reject) => {
+      commit(FETCH_PROBLEMS_REQUIRED_RESPONSE_START);
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      const queryPage = option.page || state.problemsRequiredResponse.page + 1;
+      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&by_response_priority=high,default&sort=-created_at`, config)
+               .then((response) => {
+                 commit(FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH, response.data);
+                 resolve(response.data);
+               }).catch((error) => {
+                 commit(FETCH_PROBLEMS_REQUIRED_RESPONSE_ERROR);
+                 reject(error);
+               });
+    });
+  },
+  [REFETCH_PROBLEMS_REQUIRED_RESPONSE]({ commit }) {
+    return new Promise((resolve, reject) => {
+      const token = window.localStorage.getItem('access_token');
+      const config = {
+        headers: { Authorization: token },
+      };
+      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&by_response_priority=high,default&sort=-created_at`, config)
+               .then((response) => {
+                 commit(REFETCH_PROBLEMS_REQUIRED_RESPONSE, response.data);
                  resolve(response.data);
                }).catch((error) => {
                  reject(error);
