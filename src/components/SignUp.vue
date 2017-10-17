@@ -132,8 +132,8 @@ function postSignUp() {
         .then((response) => {
           window.localStorage.setItem('access_token', response.data.access_token);
           ons.notification.alert({
-            title: '',
-            message: 'ユーザ登録が完了しました',
+            title: 'ユーザ登録が完了しました',
+            message: '外国人から送られてくる困りごとを解決しましょう！',
             callback: () => {
               router.push('/');
             },
