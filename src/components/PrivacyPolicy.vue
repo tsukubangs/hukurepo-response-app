@@ -2,65 +2,110 @@
   <v-ons-page>
     <custom-toolbar></custom-toolbar>
     <div id="privacy" style="margin: 5%">
-      <h1>Fukurepo Privacy Policy</h1>
-        <p>Our service is for collecting problems in the city. The problems gathered will be used to improve the city.</p>
-        <p>The problem you posted is useful for the city and for people.You are a hero!<br></p>
-        <p>This Privacy Policy describes how and when we collect, use, and
-          share your information across our APIs, email notifications, applications, and from our partners and other third parties.
-          For example, you send us information when you use our Services on Fukurepo for Android or iOS.
-          When using any of our Services you consent to the collection, transfer, storage, disclosure, and use of your information as described in this Privacy Policy.
-          This includes any information you choose to provide that is deemed sensitive under applicable law.
-        </p>
-      <p>If you have any questions or comments about this privacy policy, please email to tsukuba.ngs#gmail.com(please convert # to @)</a>.<br>
-      </p>
-
-      <h3>Information Collection and Use</h3>
-      <p>We collect and use your information below to provide, understand, and improve our Services.</p>
-      <p><b>Basic Account Information:</b>&nbsp;
-        When creating a Fukurepo account, you need to provide us with personal information such as password, e-mail address, gender, nationality, age.
-        On Fukurepo, your posted problem are always listed publicly,including on your profile (not included email address).
-      </p>
-
-      <p><b>Location Information:</b>&nbsp;
-         Location Information: We receive your location when you post a problem.
-         We may also determine location by using other data from your device, such as precise location information from GPS, information
-         about wireless networks or cell towers near your mobile device, or your IP address.
-      </p>
-
-      <h3>Information Sharing and Disclosure</h3>
-      <p>We do not disclose your private personal information except in the limited circumstances described here.<br>
-      </p>
-      <p><b>Law and Harm:</b>&nbsp;
-        Notwithstanding anything to the contrary in this Privacy Policy,
-        we may preserve or disclose your information if we believe that it is reasonably necessary to comply with a law,
-        regulation, legal process, or governmental request;
-        to protect the safety of any person; to address fraud, security or technical issues; or to protect our or our users’ rights or property.
-        However, nothing in this Privacy Policy is intended to limit any legal defenses or objections
-        that you may have to a third party’s, including a government’s, request to disclose your information.
-      </p>
-      <p><b style="font-family: inherit;font-style: inherit;">Non-Personal, Aggregated, or Device-Level Information:</b>&nbsp;
-        We may share or disclose non-personal, aggregated, or device-level information.This information does not include your profile.<br>
-      </p>
-
-      <h3>Changes to this Policy</h3>
-      <p>We may revise this Privacy Policy from time to time. The most current version of the policy will govern our use of your information and will always be at this page.
-         If we make a change to this policy that, in our sole discretion, is material, we will notify you via an email or push notification.
-         By continuing to access or use the Services after those changes become effective, you agree to be bound by the revised Privacy Policy.
-      </p>
-
-      <p><b>Effective</b>: August 25, 2017</p>
-
-      <!-- <p><a href="previous">Archive of Previous Privacy Policies</a></p> -->
-
-      <p>Thoughts or questions about this Privacy Policy?&nbsp;Please, let us know by contacting us&nbsp; tsukuba.ngs#gmail.com(please convert # to @) &nbsp;or  the appropriate address below</p>
-
-      <p><b style="font-family: inherit;font-style: inherit;">For accounts based in Japan</b><br></p>
-
-      <p>Team. NGS<br> Attn: Privacy Policy Inquiry<br> 1-1-1 3F817, Tennoudai<br> Tsukuba, Ibaraki,Japan</p>
-
-      <p>Kitagawa and Amagasa Data Engineering Lab<br> Attn: Privacy Policy Inquiry<br> 1-1-1 SB0912, Tennoudai<br> Tsukuba, Ibaraki,Japan</p>
-
-      <div class="">© 2017 Kitagawa and Amagasa Data Enginieering Lab</div>
+      <h1>「ふくレポ」利用規約</h1>
+      <p>本アプリケーション「ふくレポ」は，筑波大学<a href="http://www.kde.cs.tsukuba.ac.jp/">北川・天笠データ工学研究室</a>が，高度通信・放送研究開発委託研究（NICT）「欧州との連携による公共ビッグデータの利活用基盤に関する研究開発事業」BigClouTプロジェクトにおける実証実験の一環として，以下の記載事項に基づき提供します．ご利用の際には本利用規約が適用されますので，ご利用の前に必ずお読みになり，ご了承の上でご利用ください．また，利用規約は必要に応じて変更される場合があります．</p>
+      <h2>第1条（目的）</h2>
+      <ol>
+      <li>本規約は，筑波大学北川・天笠データ工学研究室（以下本アプリケーショ
+         ン提供側）が，高度通信・放送研究開発委託研究（NICT）「欧州との連携
+         による公共ビッグデータの利活用基盤に関する研究開発事業」BigClouTプ
+         ロジェクトにおける参加型センシング実証実験にて提供するアプリケー
+         ションを利用者が利用し，その機能を享受するにあたっての必要な事項を
+         定めるものです．</li>
+      <li>本アプリケーション提供側は，本規約に同意した利用者に対し，本アプリ
+         ケーションの機能を提供します．本規約に同意できない場合はご利用にな
+         れません．</li>
+      </ol>
+      <h2>第2条（個人情報の取扱い）</h2>
+      <ol>
+      <li>本アプリケーションの利用に当たり，初回起動時には 1) 居住国，2) 性
+         別，3) 年代，4) 連絡先（e-mailアドレス）を取得し，サーバに送信しま
+         す．また通常の使用時には，困りごとを登録（以下タスク回答）する際
+         に，1)インターネットドメイン名，2) IPアドレス，3) 利用者が本アプリ
+         ケーション開始時に入力したユーザ名，4) パスワード，5) 写真，6) タス
+         ク回答時の位置情報，6) タスク回答内容が取得され，本アプリケーション
+         のサーバへ送信されます．</li>
+      <li>本アプリケーションの利用に関連して取得した情報は，別途定める「プラ
+         イバシーポリシー」に則り取扱います．</li>
+      </ol>
+      <h2>第3条（著作権）</h2>
+      <ol>
+      <li>本アプリケーション利用時に取得された画像やテキストの著作権は原著作
+         者が所有し，日本国の法律及び国際条約等によって保護されます．</li>
+      </ol>
+      <h2>第4条（免責事項）</h2>
+      <ol>
+      <li>本アプリケーション提供側は，利用者が本アプリケーションの情報を用い
+         て行う一切の行為について，本アプリケーション提供側の責めに帰すべき
+         場合を除きいかなる責任も負いません．</li>
+      <li>本アプリケーション提供側は，利用者が本アプリケーションのアクセス等
+         に起因する損害，損失に対して一切の責任を負いません．</li>
+      <li>本アプリケーションに登録されたコンテンツ（写真およびテキスト）は，
+         以下に該当する場合，本アプリケーション提供者の判断の下，予告無しに
+         削除する場合があります：1) 公序良俗に反するもの，2) 本アプリケー
+         ションの趣旨に関係ないもの，3) 有害なプログラムまたはスクリプト等を
+         含むもの，4)営利を目的としたものや個人的な売買・譲渡を持ちかける内
+         容，宣伝行為に関するもの，5) その他，本アプリケーションの管理運営を
+         妨げる等，本アプリケーション提供者が不適切と判断したもの．これらの
+         コンテンツの削除，運用の中断または中止によって生じた損害について，
+         本アプリケーション提供側は一切責任を負いません．</li>
+      （最終更新日：2017年10月16日）
+      </ol>
+      <hr width="100%">
+      <!-- ---------------------------------------------------------------------- -->
+      <h1>プライバシーポリシー</h1>
+      <p>筑波大学北川・天笠データ工学研究室（http://www.kde.cs.tsukuba.ac.jp/）
+      （以下「本アプリケーション提供者」）は，「ふくレポ」（以下「本アプリ
+      ケーション」）利用者のプライバシー保護に配慮し，以下のとおりプライバ
+      シーポリシーを規定します．</p>
+      <h2>第1条（基本方針）</h2>
+      本アプリケーション提供者は，本アプリケーションを利用される皆様のプライ
+      バシーを尊重し，安心してご利用いただけるよう努めます．収集したデータに
+      ついては，関連する法令およびその他の規範を遵守し，適正な取り扱いを行い
+      ます．
+      <h2>第2条（収集情報の範囲）</h2>
+      本アプリケーションでは，参加型センシングに参加される場合皆様に，困りご
+      とに関する情報（写真，テキスト，選択式のタグ等）をご提供いただきます．
+      <h2>第3条（利用目的）</h2>
+      <p>収集した情報は，学術研究のためにのみ使用し，それ以外の目的には使用しま
+      せん．収集した情報に個人情報が含まれる場合は，個人が特定できない形に加
+      工した上で，研究の目的に必要な部分に限って使用します．また，個人が特定
+      できない形に加工したデータは，同一研究プロジェクト内の別の団体
+      （Commissariat á l‘énergie atomique et aux energies alternatives -
+      Laboratoire d’électronique des technologies de
+      l‘information（CEA-Leti）（フランス）、Engineering Ingegneria
+      Informatica SpA（イタリア）、ABSISKEY Collaborative Project（フラン
+      ス）、School of Computing and Communications, Lancaster University（イ
+      ギリス）、Institute of Communication and Computer System, National
+      Technical University of Athens（ギリシャ）、Grenoble市（フランス）、
+      Bristol市（イギリス）、東日本電信電話株式会社、学校法人　慶應義塾大学
+      SFC研究所、大学共同利用機関法人情報・システム研究機構 国立情報学研究
+      所、日本電信電話株式会社（未来ねっと研究所），茨城県つくば市，神奈川県
+      藤沢市）に提供される場合があります．
+      第4条（個人情報の利用および提供）
+      収集した個人情報は，あらかじめ明示した利用目的の範囲内で利用し，利用者
+      本人の承諾を得ている場合，あるいは法令または条例の定めがある場合等を除
+      き，目的以外の利用及び第三者への提供は行いません．なお，本アプリケー
+      ション提供者は，研究を目的とした範囲内で，それらの情報を自由に選択，修
+      正，編集，削除し，統計的に処理した上で，本人の承諾なしに，開示・公表す
+      ることがあります．</p>
+      <h2>第5条（個人情報の管理）</h2>
+      <p>収集した個人情報は，本アプリケーション提供者が厳重に管理し，漏えい，滅
+      失，改ざん等の防止措置を講じます．個人情報は，研究プロジェクト（高度通
+      信・放送研究開発委託研究（NICT）「欧州との連携による公共ビッグデータの
+      利活用基盤に関する研究開発事業」BigClouTプロジェクト）終了の1年後
+      （2020年6月30日）をもって本アプリケーション提供者が責任を持って削除し
+      ます．</p>
+      <h2>第6条（個人情報の開示）</h2>
+      <p>収集した個人情報は，本人または本人が指定する代理人からの求めに応じて開
+      示します．</p>
+      <h2>第7条（プライバシーポリシーの変更）</h2>
+      <p>本プライバシーポリシーの内容を変更する場合は，アプリケーション内でその
+      内容を事前に掲載し，利用者に個別の連絡はいたしません．
+      第8条（個人情報に関する問合せ）
+      個人情報およびその取扱い，削除に関するお問合せは，
+      <a href="mailto:bigclout@kde.cs.tsukuba.ac.jp">bigclout@kde.cs.tsukuba.ac.jp</a>までご連絡下さい</p>
+      （最終更新日：2017年10月16日）
     </div>
   </v-ons-page>
 </template>
