@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">サインアップ</div>
-      <div class="right"><v-ons-toolbar-button class="white-btn" modifier="outline" @click="toLogin">ログイン</v-ons-toolbar-button></div>
+      <div class="center">ユーザ登録</div>
+      <div class="right"><v-ons-toolbar-button class="white-btn login-btn" modifier="outline" @click="toLogin">ログイン</v-ons-toolbar-button></div>
     </v-ons-toolbar>
     <v-ons-list>
       <v-ons-list-header>
@@ -64,7 +64,7 @@
         <label class="left">
           <v-ons-radio :input-id="'radio-' + $index" :value="gender" v-model="selectedGender"></v-ons-radio>
         </label>
-        <label :for="'radio-' + $index" class="center">{{ gender==="male"?"男":"女" }}</label>
+        <label :for="'radio-' + $index" class="center">{{ gender==="male"?"男性":"女性" }}</label>
       </v-ons-list-item>
       <v-ons-list-header>
         年代
@@ -92,7 +92,7 @@
     </section>
     <v-ons-alert-dialog modifier="rowfooter" title="以下の情報で登録しますか？" :visible.sync="confirmDialogVisible">
       Email: {{this.email}}<br />
-      性別: {{this.selectedGender==="male"?"男":"女"}}<br />
+      性別: {{this.selectedGender==="male"?"男性":"女性"}}<br />
       年代: {{this.selectedAge.slice(1)}}<br />
       居住国: {{this.selectedCountryOfResidence}}
 
@@ -132,8 +132,8 @@ function postSignUp() {
         .then((response) => {
           window.localStorage.setItem('access_token', response.data.access_token);
           ons.notification.alert({
-            title: '',
-            message: 'サインアップは完了しました',
+            title: 'ユーザ登録が完了しました',
+            message: '外国人から送られてくる困りごとを解決しましょう！',
             callback: () => {
               router.push('/');
             },
@@ -236,5 +236,9 @@ export default {
 .white-btn {
   color: #fff;
   border-color: #fff;
+}
+.login-btn {
+  font-size: small;
+  margin-right: 5px;
 }
 </style>

@@ -7,7 +7,7 @@
       <p style="margin-top: 30px;">
         <v-ons-button @click="login()">ログイン</v-ons-button>
       </p>
-      <p><v-ons-button modifier="quiet" @click="toSignUp()">サインアップ</v-ons-button></p>
+      <p><v-ons-button modifier="quiet" @click="toSignUp()">ユーザ登録</v-ons-button></p>
     </div>
   </v-ons-page>
 </template>
