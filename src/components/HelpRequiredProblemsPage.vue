@@ -1,5 +1,10 @@
 <template>
   <v-ons-page :infinite-scroll="loadMore">
+    <v-ons-pull-hook :action="loadItem" @changestate="state = $event.state">
+      <span v-show="state === 'initial'"> Pull to refresh </span>
+      <span v-show="state === 'preaction'"> Release </span>
+      <span v-show="state === 'action'"> Loading... </span>
+    </v-ons-pull-hook>
     <main class="h100">
       <div class="problems-list"  v-if="this.highPriorityProblems.data.length">
         <span class="underline">すぐに返信が必要な困りごと</span>
@@ -9,7 +14,9 @@
           </li>
         </ul>
       </div>
-      <v-ons-progress-circular indeterminate v-show="highPriorityProblems.loading"></v-ons-progress-circular>
+      <div v-show="highPriorityProblems.loading && !highPriorityProblems.data.length">
+        <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
+      </div>
       <div class="problems-list"  v-if="this.problemsRequiredResponse.data.length">
         <span class="underline">返信が必要な困りごと</span>
         <ul class="card-list">
@@ -18,8 +25,13 @@
           </li>
         </ul>
       </div>
-      <v-ons-progress-circular indeterminate v-show="problemsRequiredResponse.loading"></v-ons-progress-circular>
-      <div v-show="!this.highPriorityProblems.data.length && !this.problemsRequiredResponse.data.length">
+      <div v-show="problemsRequiredResponse.loading">
+        <v-ons-progress-circular indeterminate ></v-ons-progress-circular>
+      </div>
+      <div v-show="!this.highPriorityProblems.data.length &&
+        !this.highPriorityProblems.loading &&
+        !this.problemsRequiredResponse.data.length &&
+        !this.problemsRequiredResponse.loading">
         <p>返信が必要な困りごとはありません</p>
       </div>
     </main>
@@ -67,6 +79,13 @@ export default {
         this.FETCH_PROBLEMS_REQUIRED_RESPONSE()
           .then(() => { done(); }).catch(() => { done(); });
       }
+    },
+    loadItem(done) {
+      setTimeout(() => {
+        this.FETCH_HIGH_PRIORITY_PROBLEMS();
+        this.FETCH_PROBLEMS_REQUIRED_RESPONSE({ page: 1 });
+        done();
+      }, 400);
     },
   },
 };
