@@ -51,7 +51,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.allProblems.page + 1;
-      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(FETCH_ALL_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
@@ -67,7 +67,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(REFETCH_ALL_PROBLEMS, response.data);
                  resolve(response.data);
@@ -120,7 +120,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.allProblems.page + 1;
-      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(FETCH_MY_RESPONSES_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
@@ -136,7 +136,7 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10&sort=-created_at`, config)
                .then((response) => {
                  commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
                  resolve(response.data);
@@ -170,7 +170,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.problemsRequiredResponse.page + 1;
-      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&by_response_priority=high,default`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&by_response_priority=high,default&sort=-created_at`, config)
                .then((response) => {
                  commit(FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH, response.data);
                  resolve(response.data);
@@ -186,9 +186,9 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&by_response_priority=high,default`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&by_response_priority=high,default&sort=-created_at`, config)
                .then((response) => {
-                 commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
+                 commit(REFETCH_PROBLEMS_REQUIRED_RESPONSE, response.data);
                  resolve(response.data);
                }).catch((error) => {
                  reject(error);

@@ -30,7 +30,7 @@ export default {
       return !this.problem.thumbnail_url ? null : WEB_API_URL + this.problem.thumbnail_url;
     },
     isUnSeen() {
-      return this.useUnReadNotification && !this.problem.responses_seen;
+      return !this.problem.responded;
     },
     shortComment() {
       const limitLength = 60;
