@@ -4,7 +4,7 @@
 
     <form name="js">
     <textarea id="text-form" class="textarea" rows="5" placeholder="日本語で入力してください" v-model="japaneseComment" name='japanese' v-focus v-resize></textarea>
-    <textarea id="text-form" class="textarea" rows="5" placeholder="日→英　ボタンを押すと英語訳が表示されます" v-model="comment" name='english' v-resize></textarea>
+    <textarea id="text-form" class="textarea" rows="5" placeholder="翻訳ボタンを押すと英語訳が表示されます" v-model="comment" name='english' v-resize></textarea>
     </form>
 
     <div class="bottom-bar" v-if="!this.isIOS">
@@ -162,7 +162,7 @@ export default {
  #post-btn{
    display: block;
    width: 80px;
-   margin-left: auto;
+   margin-right: 10%;
    margin-bottom: 10px;
  }
 .bottom-bar{
@@ -186,6 +186,7 @@ export default {
 .post-problem-btn {
   background-color: #2bb46e;
   color: #fff;
+  margin-right: 10%;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 15px;
@@ -193,6 +194,7 @@ export default {
 .translate-btn {
   background-color: #2bb46e;
   color: #fff;
+  margin-left: 10%;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 15px;
