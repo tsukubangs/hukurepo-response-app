@@ -7,6 +7,10 @@ import {
   FETCH_SELECT_PROBLEM_RESPONSES_ERROR,
   FETCH_MY_RESPONSES_PROBLEMS_START, FETCH_MY_RESPONSES_PROBLEMS_FINISH,
   FETCH_MY_RESPONSES_PROBLEMS_ERROR, REFETCH_MY_RESPONSES_PROBLEMS,
+  FETCH_HIGH_PRIORITY_PROBLEMS_START,
+  FETCH_HIGH_PRIORITY_PROBLEMS_FINISH, FETCH_HIGH_PRIORITY_PROBLEMS_ERROR,
+  FETCH_PROBLEMS_REQUIRED_RESPONSE_START, FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH,
+  FETCH_PROBLEMS_REQUIRED_RESPONSE_ERROR, REFETCH_PROBLEMS_REQUIRED_RESPONSE,
   SAW_RESPONSES_OF_PROBLEM,
 } from './mutation-types';
 
@@ -89,6 +93,40 @@ export default {
     state.myResponsesProblems.isError = false;
     state.myResponsesProblems.loading = false;
     state.myResponsesProblems.page = 1;
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS_START](state) {
+    state.highPriorityProblems.isError = false;
+    state.highPriorityProblems.loading = true;
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS_FINISH](state, allProblemsData) {
+    state.highPriorityProblems.data = allProblemsData;
+    state.highPriorityProblems.isError = false;
+    state.highPriorityProblems.loading = false;
+  },
+  [FETCH_HIGH_PRIORITY_PROBLEMS_ERROR](state) {
+    state.highPriorityProblems.isError = true;
+    state.highPriorityProblems.loading = false;
+  },
+  [FETCH_PROBLEMS_REQUIRED_RESPONSE_START](state) {
+    state.problemsRequiredResponse.isError = false;
+    state.problemsRequiredResponse.loading = true;
+  },
+  [FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH](state, allProblemsData) {
+    state.problemsRequiredResponse.data =
+        state.problemsRequiredResponse.data.concat(allProblemsData);
+    state.problemsRequiredResponse.page += 1;
+    state.problemsRequiredResponse.isError = false;
+    state.problemsRequiredResponse.loading = false;
+  },
+  [FETCH_PROBLEMS_REQUIRED_RESPONSE_ERROR](state) {
+    state.problemsRequiredResponse.isError = true;
+    state.problemsRequiredResponse.loading = false;
+  },
+  [REFETCH_PROBLEMS_REQUIRED_RESPONSE](state, allProblemsData) {
+    state.problemsRequiredResponse.data = allProblemsData;
+    state.problemsRequiredResponse.isError = false;
+    state.problemsRequiredResponse.loading = false;
+    state.problemsRequiredResponse.page = 1;
   },
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {
     const problemsNumber = state.problems.indexOf(problem);

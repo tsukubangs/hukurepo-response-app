@@ -29,6 +29,7 @@ export default {
         {
           icon: 'ion-reply',
           page: HelpRequiredProblemsPage,
+          label: '要返信',
           props: {
             pageStack: this.pageStack,
           },
@@ -36,6 +37,7 @@ export default {
         {
           icon: 'ion-ios-person',
           page: MyResposesPage,
+          label: '自分の投稿',
           props: {
             pageStack: this.pageStack,
           },
@@ -43,6 +45,7 @@ export default {
         {
           icon: 'ion-ios-people-outline',
           page: AllProblemsPage,
+          label: 'みんなの投稿',
           props: {
             pageStack: this.pageStack,
           },
