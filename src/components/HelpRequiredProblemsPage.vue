@@ -83,7 +83,7 @@ export default {
     loadItem(done) {
       setTimeout(() => {
         this.FETCH_HIGH_PRIORITY_PROBLEMS();
-        this.FETCH_PROBLEMS_REQUIRED_RESPONSE({ page: 1 });
+        this.REFETCH_PROBLEMS_REQUIRED_RESPONSE();
         done();
       }, 400);
     },
