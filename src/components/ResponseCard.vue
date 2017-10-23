@@ -1,7 +1,7 @@
 <template>
   <div v-bind:class="{ reverce: !isMyResponse }" class="response-card">
     <div class="icon-container">
-      <div class="tsukuba-icon right-justified" v-if="!isMyResponse">
+      <div class="tsukuba-icon right-justified" v-bind:style="{'background-color': this.getBackGroundColor}" v-if="!isMyResponse">
         <img src="../assets/s_logo.png" />
       </div>
       <img src="../assets/response_icon.png" v-else />
@@ -32,6 +32,11 @@ export default {
     activateLinkComment() {
       const comment = this.isJapanese ? this.response.japanese_comment : this.response.comment;
       return autolinker.link(comment, { truncate: { length: 32, location: 'smart' } });
+    },
+    getBackGroundColor() {
+      const patternNum = 20;
+      const hue = (this.response.user_id % patternNum) * (360 / patternNum) * 3;
+      return `hsl(${hue}, 50%, 50%)`;
     },
   },
 };

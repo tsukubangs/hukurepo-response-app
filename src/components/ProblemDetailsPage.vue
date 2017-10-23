@@ -33,7 +33,7 @@
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses.data" modifier="nodivider">
-          <response-card :response="response" :is-my-response="true" :is-japanese="isJapanese" class="w100">
+          <response-card :response="response" :is-my-response="selectedProblem.user_id == response.user_id" :is-japanese="isJapanese" class="w100">
           </response-card>
         </v-ons-list-item>
       </v-ons-list>
