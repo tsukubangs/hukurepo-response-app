@@ -53,6 +53,9 @@ export default {
       const queryPage = option.page || state.allProblems.page + 1;
       axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&sort=-created_at`, config)
                .then((response) => {
+                 if (!response.data.length) {
+                   response.data.isFinished = true;
+                 }
                  commit(FETCH_ALL_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
                }).catch((error) => {

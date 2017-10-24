@@ -47,6 +47,7 @@ export default {
     state.allProblems.page += 1;
     state.allProblems.isError = false;
     state.allProblems.loading = false;
+    state.allProblems.isFinished = allProblemsData.isFinished;
   },
   [FETCH_ALL_PROBLEMS_ERROR](state) {
     state.allProblems.isError = true;
