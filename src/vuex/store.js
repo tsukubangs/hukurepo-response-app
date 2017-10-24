@@ -32,6 +32,7 @@ export default new Vuex.Store({
       page: 0,
       loading: false,
       isError: false,
+      isFinished: false,
     },
     highPriorityProblems: {
       data: [],
@@ -43,6 +44,7 @@ export default new Vuex.Store({
       page: 0,
       loading: false,
       isError: false,
+      isFinished: false,
     },
   },
   getters: {

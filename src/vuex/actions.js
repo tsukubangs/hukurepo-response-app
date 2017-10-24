@@ -72,6 +72,7 @@ export default {
       };
       axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&sort=-created_at`, config)
                .then((response) => {
+                 response.data.isFinished = false;
                  commit(REFETCH_ALL_PROBLEMS, response.data);
                  resolve(response.data);
                }).catch((error) => {
@@ -122,9 +123,12 @@ export default {
       const config = {
         headers: { Authorization: token },
       };
-      const queryPage = option.page || state.allProblems.page + 1;
+      const queryPage = option.page || state.myResponsesProblems.page + 1;
       axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10&sort=-created_at`, config)
                .then((response) => {
+                 if (!response.data.length) {
+                   response.data.isFinished = true;
+                 }
                  commit(FETCH_MY_RESPONSES_PROBLEMS_FINISH, response.data);
                  resolve(response.data);
                }).catch((error) => {
@@ -141,6 +145,7 @@ export default {
       };
       axios.get(`${WEB_API_URL}/v1/problems/responded/?page=1&per=10`, config)
                .then((response) => {
+                 response.data.isFinished = false;
                  commit(REFETCH_MY_RESPONSES_PROBLEMS, response.data);
                  resolve(response.data);
                }).catch((error) => {
@@ -175,6 +180,9 @@ export default {
       const queryPage = option.page || state.problemsRequiredResponse.page + 1;
       axios.get(`${WEB_API_URL}/v1/problems/?page=${queryPage}&per=10&by_response_priority=high,default&sort=-created_at`, config)
                .then((response) => {
+                 if (!response.data.length) {
+                   response.data.isFinished = true;
+                 }
                  commit(FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH, response.data);
                  resolve(response.data);
                }).catch((error) => {
@@ -191,6 +199,7 @@ export default {
       };
       axios.get(`${WEB_API_URL}/v1/problems/?page=1&per=10&by_response_priority=high,default&sort=-created_at`, config)
                .then((response) => {
+                 response.data.isFinished = false;
                  commit(REFETCH_PROBLEMS_REQUIRED_RESPONSE, response.data);
                  resolve(response.data);
                }).catch((error) => {

@@ -59,6 +59,8 @@ export default {
       if (!this.allProblems.loading && !this.allProblems.isFinished) {
         this.FETCH_ALL_PROBLEMS()
           .then(() => { done(); }).catch(() => { done(); });
+      } else {
+        done();
       }
     } },
 };

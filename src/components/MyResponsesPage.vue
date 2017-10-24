@@ -62,9 +62,11 @@ export default {
         .then(() => { done(); }).catch(() => { done(); });
     },
     loadMore(done) {
-      if (!this.myResponsesProblems.loading) {
+      if (!this.myResponsesProblems.loading && !this.myResponsesProblems.isFinished) {
         this.FETCH_MY_RESPONSES_PROBLEMS()
           .then(() => { done(); }).catch(() => { done(); });
+      } else {
+        done();
       }
     } },
 };

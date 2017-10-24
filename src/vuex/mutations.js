@@ -58,6 +58,7 @@ export default {
     state.allProblems.isError = false;
     state.allProblems.loading = false;
     state.allProblems.page = 1;
+    state.allProblems.isFinished = allProblemsData.isFinished;
   },
   [SELECT_PROBLEM](state, problem) {
     state.selectedProblem.data = problem;
@@ -79,11 +80,12 @@ export default {
     state.myResponsesProblems.isError = false;
     state.myResponsesProblems.loading = true;
   },
-  [FETCH_MY_RESPONSES_PROBLEMS_FINISH](state, allProblemsData) {
-    state.myResponsesProblems.data = state.myResponsesProblems.data.concat(allProblemsData);
+  [FETCH_MY_RESPONSES_PROBLEMS_FINISH](state, problems) {
+    state.myResponsesProblems.data = state.myResponsesProblems.data.concat(problems);
     state.myResponsesProblems.page += 1;
     state.myResponsesProblems.isError = false;
     state.myResponsesProblems.loading = false;
+    state.myResponsesProblems.isFinished = problems.isFinished;
   },
   [FETCH_MY_RESPONSES_PROBLEMS_ERROR](state) {
     state.myResponsesProblems.isError = true;
@@ -94,6 +96,7 @@ export default {
     state.myResponsesProblems.isError = false;
     state.myResponsesProblems.loading = false;
     state.myResponsesProblems.page = 1;
+    state.myResponsesProblems.isFinished = false;
   },
   [FETCH_HIGH_PRIORITY_PROBLEMS_START](state) {
     state.highPriorityProblems.isError = false;
@@ -112,22 +115,24 @@ export default {
     state.problemsRequiredResponse.isError = false;
     state.problemsRequiredResponse.loading = true;
   },
-  [FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH](state, allProblemsData) {
+  [FETCH_PROBLEMS_REQUIRED_RESPONSE_FINISH](state, problems) {
     state.problemsRequiredResponse.data =
-        state.problemsRequiredResponse.data.concat(allProblemsData);
+        state.problemsRequiredResponse.data.concat(problems);
     state.problemsRequiredResponse.page += 1;
     state.problemsRequiredResponse.isError = false;
     state.problemsRequiredResponse.loading = false;
+    state.problemsRequiredResponse.isFinished = problems.isFinished;
   },
   [FETCH_PROBLEMS_REQUIRED_RESPONSE_ERROR](state) {
     state.problemsRequiredResponse.isError = true;
     state.problemsRequiredResponse.loading = false;
   },
-  [REFETCH_PROBLEMS_REQUIRED_RESPONSE](state, allProblemsData) {
-    state.problemsRequiredResponse.data = allProblemsData;
+  [REFETCH_PROBLEMS_REQUIRED_RESPONSE](state, problems) {
+    state.problemsRequiredResponse.data = problems;
     state.problemsRequiredResponse.isError = false;
     state.problemsRequiredResponse.loading = false;
     state.problemsRequiredResponse.page = 1;
+    state.problemsRequiredResponse.isFinished = false;
   },
   [SAW_RESPONSES_OF_PROBLEM](state, problem) {
     const problemsNumber = state.problems.indexOf(problem);
