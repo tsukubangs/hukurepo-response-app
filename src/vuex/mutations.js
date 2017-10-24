@@ -58,7 +58,7 @@ export default {
     state.allProblems.isError = false;
     state.allProblems.loading = false;
     state.allProblems.page = 1;
-    state.allProblems.isFinished = allProblemsData.isFinished;
+    state.allProblems.isFinished = false;
   },
   [SELECT_PROBLEM](state, problem) {
     state.selectedProblem.data = problem;
