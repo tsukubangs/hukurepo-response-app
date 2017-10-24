@@ -53,6 +53,11 @@ export default {
     ProblemCard,
   },
   props: ['pageStack'],
+  data() {
+    return {
+      state: 'initial',
+    };
+  },
   created() {
     this.FETCH_HIGH_PRIORITY_PROBLEMS();
     this.FETCH_PROBLEMS_REQUIRED_RESPONSE({ page: 1 });
