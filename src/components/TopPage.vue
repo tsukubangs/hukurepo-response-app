@@ -45,7 +45,7 @@ export default {
         {
           icon: 'ion-ios-people-outline',
           page: AllProblemsPage,
-          label: '全ての投稿',
+          label: 'すべての投稿',
           props: {
             pageStack: this.pageStack,
           },
