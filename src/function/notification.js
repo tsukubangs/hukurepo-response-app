@@ -34,7 +34,7 @@ const app = {
           // Notification was received on device tray and tapped by the user.
         } else {
           // Notification was received in foreground. Maybe the user needs to be notified.
-          ons.notification.toast('メッセージが届きました, リロードしてください.', { timeout: 2000 });
+          ons.notification.toast('メッセージが届きました, 更新してください.', { timeout: 2000 });
         }
         this.REFETCH_PROBLEMS();
       },
