@@ -121,7 +121,7 @@ export default {
         headers: { Authorization: token },
       };
       const queryPage = option.page || state.myResponsesProblems.page + 1;
-      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10&sort=-created_at`, config)
+      axios.get(`${WEB_API_URL}/v1/problems/responded/?page=${queryPage}&per=10`, config)
                .then((response) => {
                  response.data.isFinished = !response.data.length;
                  commit(FETCH_MY_RESPONSES_PROBLEMS_FINISH, response.data);
