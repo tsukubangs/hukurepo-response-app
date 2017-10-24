@@ -80,9 +80,11 @@ export default {
       this.pageStack.push(ProblemDetailsPage);
     },
     loadMore(done) {
-      if (!this.problemsRequiredResponse.loading) {
+      if (!this.problemsRequiredResponse.loading && !this.problemsRequiredResponse.isFinished) {
         this.FETCH_PROBLEMS_REQUIRED_RESPONSE()
           .then(() => { done(); }).catch(() => { done(); });
+      } else {
+        done();
       }
     },
     loadItem(done) {
