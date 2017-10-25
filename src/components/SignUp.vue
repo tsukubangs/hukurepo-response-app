@@ -2,10 +2,9 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="center">ユーザ登録</div>
-      <div class="right"><v-ons-toolbar-button class="white-btn login-btn" modifier="outline" @click="toLogin">ログイン</v-ons-toolbar-button></div>
+      <div class="right"><v-ons-toolbar-button class="white-btn login-btn" modifier="outline" @click="toLogin">ログイン
+    </v-ons-toolbar-button></div>
     </v-ons-toolbar>
-    <ons-progress-bar indeterminate  v-show="this.signUpPosting === true"></ons-progress-bar>
-    <ons-progress-bar indeterminate  v-show="this.signUpPosting === true"></ons-progress-bar>
     <v-ons-list>
       <v-ons-list-header>
           Email
@@ -103,6 +102,8 @@
         <button class="alert-dialog-button" @click="postSignUp">ユーザ登録</button>
       </template>
     </v-ons-alert-dialog>
+    <ons-progress-bar indeterminate  v-show="this.signUpPosting === true"></ons-progress-bar>
+    <ons-progress-bar indeterminate  v-show="this.signUpPosting === true"></ons-progress-bar>
   </v-ons-page>
 </template>
 
