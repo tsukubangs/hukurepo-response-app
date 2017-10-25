@@ -29,7 +29,8 @@
         <v-ons-list-item modifier="nodivider">
           <response-card :response="selectedProblem.data" :is-my-response="true" :isJapanese="isJapanese" class="w100">
             <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.data.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
-            <google-map :latitude="selectedProblem.data.latitude" :longitude="selectedProblem.data.longitude" v-if="selectedProblem.data.longitude && selectedProblem.data.latitude" class="thumbnail"></google-map>
+            <google-map :latitude="selectedProblem.data.latitude" :longitude="selectedProblem.data.longitude" v-if="hasLatLng" class="thumbnail"></google-map>
+            <p v-if="hasLatLng" class="map-link"><a v-bind:href="getGoogleMapUrl">Google Mapsで開く</a></p>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses.data" modifier="nodivider">
@@ -94,6 +95,14 @@ export default {
     },
     responses() {
       return this.selectedProblem.responses;
+    },
+    hasLatLng() {
+      return this.selectedProblem.data.longitude && this.selectedProblem.data.latitude;
+    },
+    getGoogleMapUrl() {
+      const lat = this.selectedProblem.data.latitude;
+      const lng = this.selectedProblem.data.longitude;
+      return `https://maps.google.com/maps?q=${lat},${lng}`;
     },
   },
   methods: {
@@ -166,5 +175,9 @@ main {
 .modal-image {
   width: 100%;
   object-fit: contain;
+}
+.map-link {
+  margin: 0;
+  font-size: 0.9em;
 }
 </style>
