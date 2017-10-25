@@ -1,6 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar></custom-toolbar>
+    <ons-progress-bar indeterminate  v-show="this.isTranslating === true || this.isPosting === true"></ons-progress-bar>
+    <ons-progress-bar indeterminate  v-show="this.isTranslating === true || this.isPosting === true"></ons-progress-bar>
 
     <form name="js">
     <textarea id="text-form" class="textarea" rows="5" placeholder="日本語で入力してください" v-model="japaneseComment" name='japanese' v-focus v-resize></textarea>
@@ -66,14 +68,14 @@ function translate() {
   data.append('format', 'text');
   data.append('key', GOOGLE_TRANSLATE_API_KEY);
 
-  this.isPosting = true;
+  this.isTranslating = true;
   axios.post('https://translation.googleapis.com/language/translate/v2', data)
       .then((response) => {
-        this.isPosting = false;
+        this.isTranslating = false;
         console.log(`翻訳後:${response.data.data.translations[0].translatedText}`);
         this.comment = response.data.data.translations[0].translatedText;
       }).catch((error) => {
-        this.isPosting = false;
+        this.isTranslating = false;
         console.log(error);
         ons.notification.alert({
           title: '',
@@ -129,6 +131,7 @@ export default {
       comment: '',
       japaneseComment: '',
       isPosting: false,
+      isTranslating: false,
     };
   },
   computed: {
