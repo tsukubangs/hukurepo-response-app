@@ -30,7 +30,7 @@
           <response-card :response="selectedProblem.data" :is-my-response="true" :isJapanese="isJapanese" class="w100">
             <photo-thumbnail :thumbnailUrl="selectedProblemThumbnailImage" v-if="!!selectedProblem.data.image_url" class="thumbnail" @click.native="photoModalVisible = true"></photo-thumbnail>
             <google-map :latitude="selectedProblem.data.latitude" :longitude="selectedProblem.data.longitude" v-if="hasLatLng" class="thumbnail"></google-map>
-            <p v-if="hasLatLng" class="map-link"><a v-bind:href="getGoogleMapUrl">Google Mapで見る</a></p>
+            <p v-if="hasLatLng" class="map-link"><a v-bind:href="getGoogleMapUrl">Google Mapsで開く</a></p>
           </response-card>
         </v-ons-list-item>
         <v-ons-list-item v-for="response in responses.data" modifier="nodivider">
