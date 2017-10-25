@@ -4,6 +4,8 @@
       <div class="center">ユーザ登録</div>
       <div class="right"><v-ons-toolbar-button class="white-btn login-btn" modifier="outline" @click="toLogin">ログイン</v-ons-toolbar-button></div>
     </v-ons-toolbar>
+    <ons-progress-bar indeterminate  v-show="this.signUpPosting === true"></ons-progress-bar>
+    <ons-progress-bar indeterminate  v-show="this.signUpPosting === true"></ons-progress-bar>
     <v-ons-list>
       <v-ons-list-header>
           Email
@@ -131,6 +133,7 @@ function postSignUp() {
   axios.post(`${WEB_API_URL}/v1/users`, data)
         .then((response) => {
           window.localStorage.setItem('access_token', response.data.access_token);
+          this.signUpPosting = false;
           ons.notification.alert({
             title: 'ユーザ登録が完了しました',
             message: '外国人から送られてくる困りごとを解決しましょう！',
