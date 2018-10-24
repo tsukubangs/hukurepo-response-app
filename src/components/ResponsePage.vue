@@ -60,16 +60,39 @@ const resize = {
   },
 };
 
-function translate() {
-  const data = new FormData();
-  data.append('q', this.japaneseComment);
-  data.append('source', 'ja');
-  data.append('target', 'en');
-  data.append('format', 'text');
-  data.append('key', GOOGLE_TRANSLATE_API_KEY);
-
+async function translate() {
   this.isTranslating = true;
-  axios.post('https://translation.googleapis.com/language/translate/v2', data)
+
+  /* 質問文の言語判定 */
+  var targetLang;
+  const question = new FormData();
+  question.append('q', this.selectedProblem.data.comment);
+  question.append('key', GOOGLE_TRANSLATE_API_KEY);
+
+  await axios.post('https://translation.googleapis.com/language/translate/v2/detect', question)
+    .then((response) => {
+      this.isTranslating = false;
+      const targetLanguage = response.data.data.detections[0][0].language;
+      targetLang = targetLanguage;
+    }).catch((error) => {
+      this.isTranslating = false;
+      console.log(error);
+      ons.notification.alert({
+        title: '翻訳後の言語取得に失敗しました。',
+        message: '回答文は英語で翻訳されます。',
+      });
+    });
+
+  if (targetLang != 'ja'){
+    /* 翻訳APIをリクエスト */
+    const data = new FormData();
+    data.append('q', this.japaneseComment);
+    data.append('source', 'ja');
+    data.append('target', targetLang);
+    data.append('format', 'text');
+    data.append('key', GOOGLE_TRANSLATE_API_KEY);
+
+    axios.post('https://translation.googleapis.com/language/translate/v2', data)
       .then((response) => {
         this.isTranslating = false;
         console.log(`翻訳後:${response.data.data.translations[0].translatedText}`);
@@ -82,6 +105,14 @@ function translate() {
           message: '翻訳に失敗しました',
         });
       });
+    }
+  else{
+    /* 質問が日本語の場合は翻訳しない*/
+    this.comment = this.japaneseComment;
+  }
+
+this.isTranslating = false;
+
 }
 
 function postResponse() {
